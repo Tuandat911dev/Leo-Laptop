@@ -7,3 +7,7 @@ spring:
     user:
       name: root
       password: root
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
