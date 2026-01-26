@@ -5,6 +5,7 @@ import com.shop.leolaptop.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,18 @@ public class UserController {
         return "redirect:/admin/users";
     }
 
-    @GetMapping("/{email}")
-    public String getUserByEmail(@PathVariable String email) {
-        User user = userService.getUserByEmail(email);
-        System.out.println(user.toString());
-        return "admin/user/table";
+//    @GetMapping("/{email}")
+//    public String getUserByEmail(@PathVariable String email) {
+//        User user = userService.getUserByEmail(email);
+//        System.out.println(user.toString());
+//        return "admin/user/table";
+//    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<User> getUserDetail(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping

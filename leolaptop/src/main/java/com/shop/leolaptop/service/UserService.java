@@ -23,6 +23,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public User getUserById(long id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+    }
+
     public List<User> getAllUser() {
         return userRepository.findAll();
     }

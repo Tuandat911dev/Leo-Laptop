@@ -1,0 +1,97 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.admin-container {
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.table-title {
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-action {
+    padding: 5px 10px;
+}
+
+.user-id-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.user-id-link:hover {
+    text-decoration: underline;
+}
+
+/* Offcanvas */
+#offcanvasUserDetails {
+    width: 400px;
+    border-left: none;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.offcanvas-header {
+    padding: 1.5rem;
+    background: linear-gradient(45deg, #212529, #343a40);
+}
+
+.offcanvas-body {
+    padding: 2rem 1.5rem;
+}
+
+.user-profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed #dee2e6;
+}
+
+.user-avatar-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #e9ecef;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #adb5bd;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-size: 1rem;
+    color: #212529;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.detail-value i {
+    width: 25px;
+    color: #0d6efd;
+}
