@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/users")
@@ -28,6 +25,13 @@ public class UserController {
     @PostMapping("/create")
     public String createUser(@ModelAttribute("newUser")User user) {
         User newUser = userService.createUser(user);
+        return "home";
+    }
+
+    @GetMapping("/{email}")
+    public String getUserByEmail(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        System.out.println(user.toString());
         return "home";
     }
 }
