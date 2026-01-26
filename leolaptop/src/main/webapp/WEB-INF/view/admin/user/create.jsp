@@ -37,7 +37,7 @@
                             <p class="text-secondary">Khám phá thế giới laptop cấu hình khủng</p>
                         </div>
 
-                        <form:form action="/admin/users/submit" method="POST" modelAttribute="newUser">
+                        <form:form action="/admin/users/create" method="POST" modelAttribute="newUser">
                             <div class="floating-label-group">
                                 <form:label class="form-label small fw-semibold" path="fullName">HỌ VÀ
                                     TÊN</form:label>

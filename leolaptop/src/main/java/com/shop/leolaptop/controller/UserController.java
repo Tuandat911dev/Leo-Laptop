@@ -24,7 +24,7 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @PostMapping("/submit")
+    @PostMapping("/create")
     public String createUser(@ModelAttribute("newUser")User user) {
         User newUser = userService.createUser(user);
         return "home";
@@ -34,13 +34,13 @@ public class UserController {
     public String getUserByEmail(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
         System.out.println(user.toString());
-        return "home";
+        return "admin/user/table";
     }
 
     @GetMapping
-    public String getAllUser() {
+    public String getAllUser(Model model) {
         List<User> user = userService.getAllUser();
-        System.out.println(user.toString());
-        return "home";
+        model.addAttribute("userList", user);
+        return "admin/user/table";
     }
 }
