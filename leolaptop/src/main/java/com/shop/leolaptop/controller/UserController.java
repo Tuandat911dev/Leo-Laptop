@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/create")
     public String createUser(@ModelAttribute("newUser")User user) {
         User newUser = userService.createUser(user);
-        return "home";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/{email}")
