@@ -59,7 +59,8 @@
                         <a href="/admin/users/update/${user.id}" class="btn btn-warning btn-sm btn-action" title="Sửa">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm btn-action" title="Xóa">
+                        <a href="javascript:void(0);" class="btn btn-danger btn-sm btn-action" title="Xóa"
+                           onclick="handleDeleteUser(${user.id})">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
@@ -115,9 +116,10 @@
             </div>
 
             <div class="d-grid mt-5">
-                <button class="btn btn-outline-primary shadow-sm" type="button">
-                    <i class="bi bi-pencil-square me-2"></i>Chỉnh sửa hồ sơ
-                </button>
+                <a href="#!" class="btn btn-outline-primary shadow-sm btn-edit"
+                   type="button">
+                    <i class=" bi bi-pencil-square me-2"></i>Chỉnh sửa hồ sơ
+                </a>
             </div>
         </div>
     </div>
@@ -145,6 +147,7 @@
                 document.getElementById('offcanvas-email').innerText = data.email;
                 document.getElementById('offcanvas-phone').innerText = data.phone;
                 document.getElementById('offcanvas-address').innerText = data.address;
+                document.querySelector('.btn-edit').href = "/admin/users/update/" + data.id;
 
                 document.getElementById('loadingSpinner').classList.add('d-none');
                 document.getElementById('userDetailContent').classList.remove('d-none');
@@ -153,6 +156,15 @@
                 console.error('Lỗi:', error);
                 alert('Có lỗi xảy ra khi tải dữ liệu!');
             });
+    }
+
+    function handleDeleteUser(id) {
+        const backendUrl = '/admin/users/delete/' + id;
+        fetch(backendUrl, {
+            method: 'DELETE',
+        })
+            .then(res => res.text())
+            .then(() => window.location.href = "/admin/users");
     }
 </script>
 </body>

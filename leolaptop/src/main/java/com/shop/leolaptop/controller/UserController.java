@@ -65,4 +65,11 @@ public class UserController {
         userService.updateUser(id, user);
         return "redirect:/admin/users";
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("deleted");
+    }
 }
