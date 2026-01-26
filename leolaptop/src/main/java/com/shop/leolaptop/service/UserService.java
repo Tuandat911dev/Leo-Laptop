@@ -19,6 +19,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void updateUser(long id, User user) {
+        User currentUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
+
+        currentUser.setAddress(user.getAddress());
+        currentUser.setPhone(user.getPhone());
+        currentUser.setFullName(user.getFullName());
+
+        userRepository.save(currentUser);
+    }
+
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }

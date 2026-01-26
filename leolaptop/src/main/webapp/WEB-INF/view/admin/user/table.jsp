@@ -20,7 +20,7 @@
         </div>
         <div class="col-sm-6 text-end">
             <a href="/admin/users/create">
-                <span class="btn btn-success">
+                <span class="btn btn-dark">
                     <i class="fa-solid fa-circle-plus"></i> <span>Tạo mới User</span>
                 </span>
             </a>
@@ -56,12 +56,12 @@
                     <td>${user.phone}</td>
                     <td>${user.address}</td>
                     <td class="text-center">
-                        <button class="btn btn-warning btn-sm btn-action" title="Sửa">
+                        <a href="/admin/users/update/${user.id}" class="btn btn-warning btn-sm btn-action" title="Sửa">
                             <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button class="btn btn-danger btn-sm btn-action" title="Xóa">
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm btn-action" title="Xóa">
                             <i class="bi bi-trash"></i>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

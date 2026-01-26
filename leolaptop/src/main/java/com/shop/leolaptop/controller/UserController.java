@@ -5,6 +5,7 @@ import com.shop.leolaptop.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,5 +51,18 @@ public class UserController {
         List<User> user = userService.getAllUser();
         model.addAttribute("userList", user);
         return "admin/user/table";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUpdateUserPage(@PathVariable long id, Model model) {
+        User currentUser = userService.getUserById(id);
+        model.addAttribute("currentUser", currentUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser")User user) {
+        userService.updateUser(id, user);
+        return "redirect:/admin/users";
     }
 }
