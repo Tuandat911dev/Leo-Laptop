@@ -36,6 +36,6 @@ public class User {
     @JoinColumn(name = "role_id")
     Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     Set<Order> orders = new HashSet<>();
 }

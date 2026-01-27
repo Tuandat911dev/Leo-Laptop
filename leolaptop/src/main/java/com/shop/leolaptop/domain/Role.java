@@ -23,6 +23,6 @@ public class Role {
     String name;
     String description;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     Set<User> users = new HashSet<>();
 }
