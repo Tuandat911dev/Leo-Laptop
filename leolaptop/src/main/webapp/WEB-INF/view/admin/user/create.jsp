@@ -1,117 +1,132 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm Người Dùng Mới - LeoLaptop</title>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="<c:url value="/resources/css/admin/user/create.css" />" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-</head>
-<body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-xl-10">
-            <div class="signup-container shadow-lg">
-                <div class="row g-0">
-                    <div class="col-lg-5 brand-section d-none d-lg-flex">
-                        <div class="mb-4">
-                            <i class="bi bi-laptop" style="font-size: 4rem;"></i>
-                        </div>
-                        <h1 class="display-6 fw-bold">LeoLaptop</h1>
-                        <p class="lead opacity-75">Trải nghiệm công nghệ đỉnh cao. Gia nhập cộng đồng của chúng tôi ngay
-                            hôm nay.</p>
-                        <div class="mt-auto">
-                            <small class="opacity-50">Chất lượng - Uy tín - Tận tâm</small>
-                        </div>
-                    </div>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-                    <div class="col-lg-7 form-section">
-                        <div class="mb-4">
-                            <h2 class="fw-bold mb-1">Tạo tài khoản</h2>
-                            <p class="text-secondary">Khám phá thế giới laptop cấu hình khủng</p>
+<link href="/css/admin/user/create.css" rel="stylesheet">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Tạo người dùng mới</h1>
+    <a href="/admin/users" class="btn btn-sm btn-secondary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Quay lại danh sách
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-10">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin cá nhân</h6>
+            </div>
+            <div class="card-body">
+                <form:form action="/admin/users/create" method="POST" modelAttribute="newUser"
+                           enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-md-4 text-center border-right">
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                    <input type='file' id="imageUpload" name="avatarFile" accept=".png, .jpg, .jpeg"/>
+                                    <label for="imageUpload"><i class="fas fa-pencil-alt text-gray-600"></i></label>
+                                </div>
+                                <div class="avatar-preview">
+                                    <div id="imagePreview"></div>
+                                </div>
+                            </div>
+                            <h5 class="font-weight-bold mt-2">Ảnh đại diện</h5>
+                            <p class="small text-muted">Hỗ trợ định dạng JPG, PNG</p>
                         </div>
 
-                        <form:form action="/admin/users/create" method="POST" modelAttribute="newUser">
-                            <div class="floating-label-group">
-                                <form:label class="form-label small fw-semibold" path="fullName">HỌ VÀ
-                                    TÊN</form:label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <form:input type="text" class="form-control" path="fullName"
-                                                placeholder="VD: Leo Messi"/>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="font-weight-bold">Họ và Tên</label>
+                                    <form:input path="fullName" class="form-control" placeholder="Nhập đầy đủ họ tên"/>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 floating-label-group">
-                                    <form:label class="form-label small fw-semibold" path="email">EMAIL</form:label>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Email</label>
+                                    <form:input type="email" path="email" class="form-control"
+                                                placeholder="example@gmail.com"/>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Số điện thoại</label>
+                                    <form:input path="phone" class="form-control" placeholder="090..."/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="font-weight-bold">Mật khẩu</label>
+                                    <form:password path="password" class="form-control"
+                                                   placeholder="Nhập mật khẩu an toàn"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="font-weight-bold">Địa chỉ</label>
+                                    <form:textarea path="address" class="form-control" rows="2"
+                                                   placeholder="Địa chỉ thường trú"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Vai trò hệ thống</label>
                                     <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <form:input type="email" class="form-control" path="email"
-                                                    placeholder="leo@laptop.com"/>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                                        </div>
+                                        <form:select path="role.name" class="form-control">
+                                            <form:option value="USER">Khách hàng (USER)</form:option>
+                                            <form:option value="ADMIN">Quản trị viên (ADMIN)</form:option>
+                                        </form:select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 floating-label-group">
-                                    <form:label class="form-label small fw-semibold"
-                                                path="phone">SỐ ĐIỆN THOẠI</form:label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <form:input type="tel" class="form-control" path="phone"
-                                                    placeholder="0901234xxx"/>
-                                    </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Trạng thái</label>
+                                    <select class="form-control" name="status">
+                                        <option value="ACTIVE">Đang hoạt động</option>
+                                        <option value="LOCKED">Bị khóa</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            <div class="floating-label-group">
-                                <form:label class="form-label small fw-semibold" path="password">MẬT KHẨU</form:label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                                    <form:password class="form-control" path="password"
-                                                   placeholder="Nhập ít nhất 8 ký tự"/>
-                                </div>
+                            <div class="mt-4 text-right">
+                                <button type="reset" class="btn btn-light mr-2">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="fas fa-save mr-1"></i> Lưu người dùng
+                                </button>
                             </div>
-
-                            <div class="floating-label-group">
-                                <form:label class="form-label small fw-semibold"
-                                            path="address">ĐỊA CHỈ GIAO HÀNG</form:label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                    <form:input type="text" class="form-control" path="address"
-                                                placeholder="Địa chỉ nhận hàng của bạn"/>
-                                </div>
-                            </div>
-
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox"/>
-                                <label class="form-check-label small text-secondary">
-                                    Tôi đồng ý với các
-                                    <a href="#" class="text-decoration-none">Điều khoản & Chính sách</a> của LeoLaptop.
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-submit w-100 mb-3">
-                                ĐĂNG KÝ NGAY
-                            </button>
-
-                            <div class="text-center">
-                                <span class="small text-secondary">Đã có tài khoản?
-                                    <a href="/login" class="fw-bold text-decoration-none text-primary">Đăng nhập</a>
-                                </span>
-                            </div>
-                        </form:form>
+                        </div>
                     </div>
-                </div>
+                </form:form>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</body>
-</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const uploadInput = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (uploadInput) {
+            uploadInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        imagePreview.style.backgroundImage = "url('" + event.target.result + "')";
+                        imagePreview.style.display = 'none';
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+</script>

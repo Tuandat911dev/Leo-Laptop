@@ -1,11 +1,10 @@
-package com.shop.leolaptop.controller;
+package com.shop.leolaptop.controller.admin;
 
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,8 @@ public class UserController {
     @GetMapping("/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
-        return "admin/user/create";
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
+        return "/admin/layout/layout";
     }
 
     @PostMapping("/create")
@@ -31,13 +31,6 @@ public class UserController {
         User newUser = userService.createUser(user);
         return "redirect:/admin/users";
     }
-
-//    @GetMapping("/{email}")
-//    public String getUserByEmail(@PathVariable String email) {
-//        User user = userService.getUserByEmail(email);
-//        System.out.println(user.toString());
-//        return "admin/user/table";
-//    }
 
     @GetMapping("/{id}")
     @ResponseBody
@@ -47,17 +40,19 @@ public class UserController {
     }
 
     @GetMapping
-    public String getAllUser(Model model) {
+    public String getUserPage(Model model) {
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/user/table.jsp");
         List<User> user = userService.getAllUser();
         model.addAttribute("userList", user);
-        return "admin/user/table";
+        return "/admin/layout/layout";
     }
 
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(@PathVariable long id, Model model) {
         User currentUser = userService.getUserById(id);
         model.addAttribute("currentUser", currentUser);
-        return "admin/user/update";
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/user/update.jsp");
+        return "/admin/layout/layout";
     }
 
     @PostMapping("/update/{id}")

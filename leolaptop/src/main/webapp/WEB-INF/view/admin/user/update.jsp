@@ -2,71 +2,123 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Cập nhật người dùng - Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link href="<c:url value="/resources/css/admin/user/update.css" />" rel="stylesheet">
-</head>
-<body>
+<link href="/css/admin/user/create.css" rel="stylesheet">
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card card-form">
-                <div class="card-header bg-primary text-white p-3">
-                    <h5 class="mb-0"><i class="bi bi-person-gear me-2"></i>Cập nhật thông tin User</h5>
-                </div>
-                <div class="card-body p-4">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Chỉnh sửa thông tin người dùng</h1>
+    <a href="/admin/users" class="btn btn-sm btn-secondary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Quay lại danh sách
+    </a>
+</div>
 
-                    <form:form action="/admin/users/update/${id}" method="POST" modelAttribute="currentUser">
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <form:input path="email" class="form-control" type="email"
-                                        placeholder="example@gmail.com" disabled="true"/>
-                            <form:errors path="email" cssClass="error-message"/>
-                        </div>
+<div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-10">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin cá nhân</h6>
+            </div>
+            <div class="card-body">
+                <form:form action="/admin/users/update/${currentUser.id}" method="POST" modelAttribute="currentUser"
+                           enctype="multipart/form-data">
 
-                        <div class="mb-3">
-                            <label class="form-label">Họ và Tên</label>
-                            <form:input path="fullName" class="form-control" placeholder="Nhập họ tên..."/>
-                            <form:errors path="fullName" cssClass="error-message"/>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Số điện thoại</label>
-                                <form:input path="phone" class="form-control" placeholder="09xxx..."/>
-                                <form:errors path="phone" cssClass="error-message"/>
+                    <div class="row">
+                        <div class="col-md-4 text-center border-right">
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                    <input type='file' id="imageUpload" name="avatarFile" accept=".png, .jpg, .jpeg"/>
+                                    <label for="imageUpload"><i class="fas fa-pencil-alt text-gray-600"></i></label>
+                                </div>
+                                <div class="avatar-preview">
+                                    <div id="imagePreview"></div>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Địa chỉ</label>
-                                <form:input path="address" class="form-control"/>
-                                <form:errors path="address" cssClass="error-message"/>
+                            <h5 class="font-weight-bold mt-2">Ảnh đại diện</h5>
+                            <p class="small text-muted">Hỗ trợ định dạng JPG, PNG</p>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="font-weight-bold">Họ và Tên</label>
+                                    <form:input path="fullName" class="form-control" placeholder="Nhập đầy đủ họ tên"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Email</label>
+                                    <form:input type="email" path="email" class="form-control"
+                                                placeholder="example@gmail.com" disabled="true"/>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Số điện thoại</label>
+                                    <form:input path="phone" class="form-control" placeholder="090..."/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="font-weight-bold">Địa chỉ</label>
+                                    <form:textarea path="address" class="form-control" rows="2"
+                                                   placeholder="Địa chỉ thường trú"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Vai trò hệ thống</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                                        </div>
+                                        <form:select path="role.name" class="form-control">
+                                            <form:option value="USER">Khách hàng (USER)</form:option>
+                                            <form:option value="ADMIN">Quản trị viên (ADMIN)</form:option>
+                                        </form:select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="font-weight-bold">Trạng thái</label>
+                                    <select class="form-control" name="status">
+                                        <option value="ACTIVE">Đang hoạt động</option>
+                                        <option value="LOCKED">Bị khóa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-right">
+                                <button type="reset" class="btn btn-light mr-2">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="fas fa-save mr-1"></i> Lưu người dùng
+                                </button>
                             </div>
                         </div>
-
-                        <hr class="my-4">
-
-                        <div class="d-flex justify-content-between">
-                            <a href="/admin/users" class="btn btn-light border">
-                                <i class="bi bi-arrow-left me-1"></i> Quay lại
-                            </a>
-                            <button type="submit" class="btn btn-primary px-4">
-                                <i class="bi bi-save me-1"></i> Lưu thay đổi
-                            </button>
-                        </div>
-
-                    </form:form>
-                </div>
+                    </div>
+                </form:form>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const uploadInput = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (uploadInput) {
+            uploadInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        imagePreview.style.backgroundImage = "url('" + event.target.result + "')";
+                        imagePreview.style.display = 'none';
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+</script>

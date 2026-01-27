@@ -1,171 +1,147 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Quản lý User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="<c:url value="/resources/css/admin/user/table.css" />" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container admin-container">
-    <div class="row table-title align-items-center">
-        <div class="col-sm-6">
-            <h2 class="m-0">Quản lý <b>Người dùng</b></h2>
-        </div>
-        <div class="col-sm-6 text-end">
-            <a href="/admin/users/create">
-                <span class="btn btn-dark">
-                    <i class="fa-solid fa-circle-plus"></i> <span>Tạo mới User</span>
-                </span>
-            </a>
+<link href="/css/admin/user/table.css" rel="stylesheet">
 
-        </div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Quản lý người dùng</h1>
+    <a href="/admin/users/create" class="btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Tạo mới User
+    </a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng</h6>
     </div>
-
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered align-middle">
-            <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Họ và Tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th class="text-center">Thao tác</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="user" items="${userList}">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-light">
                 <tr>
-                    <td>
-                        <a href="javascript:void(0);"
-                           class="user-id-link"
-                           onclick="showUserDetail(${user.id})">
-                                ${user.id}
-                        </a>
-                    </td>
-
-                    <td>${user.fullName}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone}</td>
-                    <td>${user.address}</td>
-                    <td class="text-center">
-                        <a href="/admin/users/update/${user.id}" class="btn btn-warning btn-sm btn-action" title="Sửa">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="btn btn-danger btn-sm btn-action" title="Xóa"
-                           onclick="handleDeleteUser(${user.id})">
-                            <i class="bi bi-trash"></i>
-                        </a>
-                    </td>
+                    <th>ID</th>
+                    <th>Họ và Tên</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th class="text-center">Thao tác</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <c:forEach var="user" items="${userList}">
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-link p-0 font-weight-bold"
+                                    onclick="showUserDetail(${user.id})">
+                                #${user.id}
+                            </button>
+                        </td>
+                        <td>${user.fullName}</td>
+                        <td>${user.email}</td>
+                        <td>${user.phone}</td>
+                        <td>${user.address}</td>
+                        <td class="text-center">
+                            <a href="/admin/users/update/${user.id}" class="btn btn-warning btn-circle-sm mr-1">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <button onclick="handleDeleteUser(${user.id})" class="btn btn-danger btn-circle-sm">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<%--User detail--%>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUserDetails" aria-labelledby="offcanvasLabel">
-    <div class="offcanvas-header bg-dark text-white">
-        <h5 class="offcanvas-title" id="offcanvasLabel">Chi tiết người dùng</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div id="offcanvasOverlay" onclick="closeOffcanvas()"></div>
+
+<div id="offcanvasUserDetails">
+    <div class="off-header">
+        <h5 class="m-0 font-weight-bold">Thông tin người dùng</h5>
+        <button class="close-btn" onclick="closeOffcanvas()">&times;</button>
     </div>
-    <div class="offcanvas-body">
-        <div id="loadingSpinner" class="text-center d-none">
+
+    <div class="off-body">
+        <div id="loadingSpinner" class="text-center d-none my-5">
             <div class="spinner-border text-primary" role="status"></div>
         </div>
 
         <div id="userDetailContent">
-            <div class="user-profile-header">
-                <div class="user-avatar-circle">
-                    <i class="bi bi-person-fill"></i>
+            <div class="user-info-card">
+                <div class="avatar-main">
+                    <i class="fas fa-user-circle"></i>
                 </div>
-                <h4 id="offcanvas-name" class="fw-bold mb-1"></h4>
-                <span class="badge rounded-pill text-primary" style="background-color: #e7f1ff;">Customer</span>
+                <h4 id="off-name" class="font-weight-bold text-gray-900 mb-0"></h4>
+                <p class="text-muted">ID: <span id="off-id"></span></p>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">Email</span>
-                <div class="detail-value">
-                    <i class="bi bi-envelope-at me-2"></i>
-                    <span id="offcanvas-email"></span>
-                </div>
+                <label>Email</label>
+                <div class="value"><i class="fas fa-envelope"></i> <span id="off-email"></span></div>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">Số điện thoại</span>
-                <div class="detail-value">
-                    <i class="bi bi-telephone me-2"></i>
-                    <span id="offcanvas-phone"></span>
-                </div>
+                <label>Số điện thoại</label>
+                <div class="value"><i class="fas fa-phone"></i> <span id="off-phone"></span></div>
             </div>
 
             <div class="detail-item">
-                <span class="detail-label">Địa chỉ</span>
-                <div class="detail-value">
-                    <i class="bi bi-geo-alt me-2"></i>
-                    <span id="offcanvas-address"></span>
-                </div>
+                <label>Địa chỉ</label>
+                <div class="value"><i class="fas fa-map-marker-alt"></i> <span id="off-address"></span></div>
             </div>
 
-            <div class="d-grid mt-5">
-                <a href="#!" class="btn btn-outline-primary shadow-sm btn-edit"
-                   type="button">
-                    <i class=" bi bi-pencil-square me-2"></i>Chỉnh sửa hồ sơ
-                </a>
-            </div>
+            <a href="#" id="off-edit-link" class="btn btn-primary btn-block mt-4 shadow-sm">
+                <i class="fas fa-edit mr-2"></i>Chỉnh sửa thông tin
+            </a>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function showUserDetail(userId) {
-        const myOffcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasUserDetails'));
+        $('#offcanvasOverlay').fadeIn(200);
+        $('#offcanvasUserDetails').addClass('active');
 
-        document.getElementById('loadingSpinner').classList.remove('d-none');
-        document.getElementById('userDetailContent').classList.add('d-none');
+        $('#loadingSpinner').removeClass('d-none');
+        $('#userDetailContent').addClass('d-none');
 
-        myOffcanvas.show();
-        const backendUrl = '/admin/users/' + userId;
-
-        fetch(backendUrl)
-            .then(response => {
-                if (!response.ok) throw new Error('Không thể lấy dữ liệu');
-                return response.json();
+        fetch('/admin/users/' + userId)
+            .then(res => {
+                if (!res.ok) throw new Error("Lỗi mạng");
+                return res.json();
             })
             .then(data => {
-                document.getElementById('offcanvas-name').innerText = data.fullName;
-                document.getElementById('offcanvas-email').innerText = data.email;
-                document.getElementById('offcanvas-phone').innerText = data.phone;
-                document.getElementById('offcanvas-address').innerText = data.address;
-                document.querySelector('.btn-edit').href = "/admin/users/update/" + data.id;
+                $('#off-name').text(data.fullName);
+                $('#off-id').text(data.id);
+                $('#off-email').text(data.email);
+                $('#off-phone').text(data.phone);
+                $('#off-address').text(data.address);
+                $('#off-edit-link').attr('href', '/admin/users/update/' + data.id);
 
-                document.getElementById('loadingSpinner').classList.add('d-none');
-                document.getElementById('userDetailContent').classList.remove('d-none');
+                $('#loadingSpinner').addClass('d-none');
+                $('#userDetailContent').removeClass('d-none');
             })
-            .catch(error => {
-                console.error('Lỗi:', error);
-                alert('Có lỗi xảy ra khi tải dữ liệu!');
+            .catch(err => {
+                console.error(err);
+                alert("Không thể tải thông tin chi tiết!");
+                closeOffcanvas();
             });
     }
 
+    function closeOffcanvas() {
+        $('#offcanvasOverlay').fadeOut(200);
+        $('#offcanvasUserDetails').removeClass('active');
+    }
+
     function handleDeleteUser(id) {
-        const backendUrl = '/admin/users/delete/' + id;
-        fetch(backendUrl, {
-            method: 'DELETE',
-        })
-            .then(res => res.text())
-            .then(() => window.location.href = "/admin/users");
+        if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+            fetch('/admin/users/delete/' + id, {method: 'DELETE'})
+                .then(res => {
+                    window.location.reload();
+                });
+        }
     }
 </script>
-</body>
-</html>
