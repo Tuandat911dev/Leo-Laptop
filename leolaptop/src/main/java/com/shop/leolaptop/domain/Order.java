@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,8 +24,5 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
-
-    @OneToMany(mappedBy = "order")
-    Set<OrderDetail> orderDetails = new HashSet<>();
 }
 
