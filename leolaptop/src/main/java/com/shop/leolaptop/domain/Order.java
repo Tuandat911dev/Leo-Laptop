@@ -16,26 +16,19 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @Column(unique = true)
-    String email;
-    @Size(min = 8)
-    String password;
-    String fullName;
-    String address;
-    @Column(unique = true, length = 11)
-    @Size(min = 10)
-    String phone;
-    String avatar;
+    @Size(min = 0)
+    double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    Role role;
+    @JoinColumn(name = "user_id")
+    User user;
 
-    @OneToMany(mappedBy = "user")
-    Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "order")
+    Set<OrderDetail> orderDetails = new HashSet<>();
 }
+
