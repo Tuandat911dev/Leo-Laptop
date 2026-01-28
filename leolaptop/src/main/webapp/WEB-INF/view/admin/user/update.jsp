@@ -110,13 +110,9 @@
             uploadInput.addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        imagePreview.style.backgroundImage = "url('" + event.target.result + "')";
-                        imagePreview.style.display = 'none';
-                        imagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
+                    imagePreview.style.backgroundImage = "url('" + URL.createObjectURL(file) +"')";
+                    imagePreview.style.display = 'none';
+                    imagePreview.style.display = 'block';
                 }
             });
         }

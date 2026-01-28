@@ -139,7 +139,7 @@
     function handleDeleteUser(id) {
         if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
             fetch('/admin/users/delete/' + id, {method: 'DELETE'})
-                .then(res => {
+                .then(() => {
                     window.location.reload();
                 });
         }
