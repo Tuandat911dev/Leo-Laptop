@@ -1,7 +1,9 @@
 package com.shop.leolaptop.controller.admin;
 
 import com.shop.leolaptop.domain.User;
-import com.shop.leolaptop.service.UserService;
+import com.shop.leolaptop.domain.Role;
+import com.shop.leolaptop.service.admin.RoleService;
+import com.shop.leolaptop.service.admin.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,11 +20,14 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
     UserService userService;
+    RoleService roleService;
 
     @GetMapping("/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
+        List<Role> roles = roleService.getAllRole();
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
+        model.addAttribute("roles", roles);
         return "/admin/layout/layout";
     }
 

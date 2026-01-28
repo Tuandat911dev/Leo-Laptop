@@ -1,4 +1,4 @@
-package com.shop.leolaptop.service;
+package com.shop.leolaptop.service.admin;
 
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.repository.UserRepository;

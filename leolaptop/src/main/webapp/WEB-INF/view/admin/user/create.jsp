@@ -18,8 +18,8 @@
                 <h6 class="m-0 font-weight-bold text-primary">Thông tin cá nhân</h6>
             </div>
             <div class="card-body">
-                <form:form action="/admin/users/create" method="POST" modelAttribute="newUser"
-                           enctype="multipart/form-data">
+                <form:form method="POST" action="/admin/users/create" modelAttribute="newUser"
+                           enctype="multipart/form-data" id="formCreate">
 
                     <div class="row">
                         <div class="col-md-4 text-center border-right">
@@ -79,9 +79,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                         </div>
-                                        <form:select path="role.name" class="form-control">
-                                            <form:option value="USER">Khách hàng (USER)</form:option>
-                                            <form:option value="ADMIN">Quản trị viên (ADMIN)</form:option>
+                                        <form:select path="role" class="form-control">
+                                            <form:options items="${roles}" itemValue="id" itemLabel="name"/>
                                         </form:select>
                                     </div>
                                 </div>
@@ -121,6 +120,25 @@
                     imagePreview.style.backgroundImage = "url('" + URL.createObjectURL(file) + "')";
                     imagePreview.style.display = 'none';
                     imagePreview.style.display = 'block';
+
+                    const formData = new FormData();
+                    formData.append("file", file);
+                    formData.append("folder", "avatar");
+
+                    fetch("/upload/file", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Upload failed");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                        })
+                        .catch(err => console.error(err));
                 }
             });
         }
