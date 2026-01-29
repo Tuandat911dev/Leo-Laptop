@@ -24,6 +24,7 @@
                     <th>Email</th>
                     <th>Số điện thoại</th>
                     <th>Địa chỉ</th>
+                    <th>Vai trò</th>
                     <th class="text-center">Thao tác</th>
                 </tr>
                 </thead>
@@ -40,6 +41,16 @@
                         <td>${user.email}</td>
                         <td>${user.phone}</td>
                         <td>${user.address}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${user.roleName == 'ADMIN'}">
+                                    <span class="badge badge-warning">${user.roleName}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="badge badge-info">${user.roleName}</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td class="text-center">
                             <a href="/admin/users/update/${user.id}" class="btn btn-warning btn-circle-sm mr-1">
                                 <i class="fas fa-pencil-alt"></i>
@@ -79,6 +90,11 @@
             </div>
 
             <div class="detail-item">
+                <label>Vai trò</label>
+                <div class="value"><i class="fas fa-user-tag"></i> <span id="off-role"></span></div>
+            </div>
+
+            <div class="detail-item">
                 <label>Email</label>
                 <div class="value"><i class="fas fa-envelope"></i> <span id="off-email"></span></div>
             </div>
@@ -114,6 +130,7 @@
                 return res.json();
             })
             .then(data => {
+                $('#off-role').text(data.roleName);
                 $('#off-name').text(data.fullName);
                 $('#off-id').text(data.id);
                 $('#off-email').text(data.email);

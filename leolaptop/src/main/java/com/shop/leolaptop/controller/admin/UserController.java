@@ -47,8 +47,12 @@ public class UserController {
     @GetMapping
     public String getUserPage(Model model) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/table.jsp");
-        List<User> user = userService.getAllUser();
-        model.addAttribute("userList", user);
+        List<User> users = userService.getAllUser();
+        List<UserDTO> listUserDTO = users.stream()
+                .map(UserMapper::toUserDTO)
+                .toList();
+        model.addAttribute("userList", listUserDTO);
+
         return "/admin/layout/layout";
     }
 
