@@ -71,9 +71,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                         </div>
-                                        <form:select path="role.name" class="form-control">
-                                            <form:option value="USER">Khách hàng (USER)</form:option>
-                                            <form:option value="ADMIN">Quản trị viên (ADMIN)</form:option>
+                                        <form:select path="roleId" class="form-control">
+                                            <form:options items="${roles}" itemValue="id" itemLabel="name"/>
                                         </form:select>
                                     </div>
                                 </div>

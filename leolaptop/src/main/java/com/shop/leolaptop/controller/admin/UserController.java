@@ -59,14 +59,16 @@ public class UserController {
 
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(@PathVariable long id, Model model) {
-        User currentUser = userService.getUserById(id);
+        UserDTO currentUser = userService.getUserById(id);
+        List<Role> roles = roleService.getAllRole();
         model.addAttribute("currentUser", currentUser);
+        model.addAttribute("roles", roles);
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/update.jsp");
         return "/admin/layout/layout";
     }
 
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser")User user) {
+    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser") UserDTO user) {
         userService.updateUser(id, user);
         return "redirect:/admin/users";
     }
