@@ -79,7 +79,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                         </div>
-                                        <form:select path="role" class="form-control">
+                                        <form:select path="roleId" class="form-control">
                                             <form:options items="${roles}" itemValue="id" itemLabel="name"/>
                                         </form:select>
                                     </div>

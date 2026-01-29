@@ -1,25 +1,20 @@
-package com.shop.leolaptop.dto;
+package com.shop.leolaptop.dto.user;
 
-import com.shop.leolaptop.domain.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.HashMap;
-import java.util.Map;
-
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDTO {
-    long id;
+public class CreateUserDTO {
     String email;
     String fullName;
     String address;
     String phone;
     String avatar;
-    String roleName;
+    String password;
     long roleId;
 }

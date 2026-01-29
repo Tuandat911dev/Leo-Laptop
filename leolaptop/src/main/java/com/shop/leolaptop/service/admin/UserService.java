@@ -2,7 +2,8 @@ package com.shop.leolaptop.service.admin;
 
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
-import com.shop.leolaptop.dto.UserDTO;
+import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.repository.RoleRepository;
 import com.shop.leolaptop.repository.UserRepository;
@@ -20,7 +21,12 @@ public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
 
-    public User createUser(User user) {
+    public User createUser(CreateUserDTO createUserDTO) {
+        User user = UserMapper.createUserDTOtoUser(createUserDTO);
+        Role currentRole = roleRepository.findById(createUserDTO.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Role Not Found!"));
+        user.setRole(currentRole);
+
         return userRepository.save(user);
     }
 

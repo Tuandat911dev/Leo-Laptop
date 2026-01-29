@@ -2,7 +2,8 @@ package com.shop.leolaptop.controller.admin;
 
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
-import com.shop.leolaptop.dto.UserDTO;
+import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.service.admin.RoleService;
 import com.shop.leolaptop.service.admin.UserService;
@@ -26,7 +27,7 @@ public class UserController {
 
     @GetMapping("/create")
     public String getCreateUserPage(Model model) {
-        model.addAttribute("newUser", new User());
+        model.addAttribute("newUser", new CreateUserDTO());
         List<Role> roles = roleService.getAllRole();
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
         model.addAttribute("roles", roles);
@@ -34,8 +35,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute("newUser") User user) {
-        User newUser = userService.createUser(user);
+    public String createUser(@ModelAttribute("newUser") CreateUserDTO createUserDTO) {
+        User newUser = userService.createUser(createUserDTO);
         return "redirect:/admin/users";
     }
 
