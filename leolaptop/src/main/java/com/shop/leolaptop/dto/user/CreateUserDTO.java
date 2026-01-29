@@ -14,7 +14,6 @@ public class CreateUserDTO {
     String fullName;
     String address;
     String phone;
-    String avatar;
     String password;
     long roleId;
 }

@@ -25,7 +25,7 @@
                         <div class="col-md-4 text-center border-right">
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
-                                    <input type='file' id="imageUpload" name="avatarFile" accept=".png, .jpg, .jpeg"/>
+                                    <input type='file' id="imageUpload" name="avatar" accept=".png, .jpg, .jpeg"/>
                                     <label for="imageUpload"><i class="fas fa-pencil-alt text-gray-600"></i></label>
                                 </div>
                                 <div class="avatar-preview">
@@ -120,25 +120,6 @@
                     imagePreview.style.backgroundImage = "url('" + URL.createObjectURL(file) + "')";
                     imagePreview.style.display = 'none';
                     imagePreview.style.display = 'block';
-
-                    const formData = new FormData();
-                    formData.append("file", file);
-                    formData.append("folder", "avatar");
-
-                    fetch("/upload/file", {
-                        method: "POST",
-                        body: formData
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error("Upload failed");
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log(data);
-                        })
-                        .catch(err => console.error(err));
                 }
             });
         }

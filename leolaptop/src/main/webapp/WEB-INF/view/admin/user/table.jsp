@@ -83,7 +83,7 @@
         <div id="userDetailContent">
             <div class="user-info-card">
                 <div class="avatar-main">
-                    <i class="fas fa-user-circle"></i>
+                    <img class="avatar-img" src="/images/avatar/avatar-default.png" alt="">
                 </div>
                 <h4 id="off-name" class="font-weight-bold text-gray-900 mb-0"></h4>
                 <p class="text-muted">ID: <span id="off-id"></span></p>
@@ -130,6 +130,7 @@
                 return res.json();
             })
             .then(data => {
+                document.querySelector(".avatar-img").src = "/images/avatar/" + data.avatar;
                 $('#off-role').text(data.roleName);
                 $('#off-name').text(data.fullName);
                 $('#off-id').text(data.id);

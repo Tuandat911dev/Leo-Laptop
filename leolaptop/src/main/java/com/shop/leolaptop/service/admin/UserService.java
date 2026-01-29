@@ -1,5 +1,6 @@
 package com.shop.leolaptop.service.admin;
 
+import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.user.CreateUserDTO;
@@ -7,12 +8,15 @@ import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.repository.RoleRepository;
 import com.shop.leolaptop.repository.UserRepository;
+import com.shop.leolaptop.service.common.FileUploadService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -20,12 +24,21 @@ import java.util.List;
 public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
+    FileUploadService fileUploadService;
 
-    public User createUser(CreateUserDTO createUserDTO) {
+    private String DEFAULT_AVATAR = "avatar-default.png";
+
+    public User createUser(CreateUserDTO createUserDTO, MultipartFile avatar) {
         User user = UserMapper.createUserDTOtoUser(createUserDTO);
         Role currentRole = roleRepository.findById(createUserDTO.getRoleId())
                 .orElseThrow(() -> new RuntimeException("Role Not Found!"));
         user.setRole(currentRole);
+
+        if(Objects.equals(avatar.getOriginalFilename(), "")) {
+            user.setAvatar(DEFAULT_AVATAR);
+        } else {
+            user.setAvatar(fileUploadService.handleUploadSingleFile(avatar, ImageFolder.avatar));
+        }
 
         return userRepository.save(user);
     }
