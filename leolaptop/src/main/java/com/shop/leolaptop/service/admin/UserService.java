@@ -43,17 +43,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void updateUser(long id, UserDTO user) {
+    public void updateUser(long id, UserDTO userDTO, MultipartFile avatar) {
         User currentUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found!"));
 
-        Role currentRole = roleRepository.findById(user.getRoleId())
+        Role currentRole = roleRepository.findById(userDTO.getRoleId())
                 .orElseThrow(() -> new RuntimeException("Role Not Found!"));
 
-        currentUser.setAddress(user.getAddress());
-        currentUser.setPhone(user.getPhone());
-        currentUser.setFullName(user.getFullName());
+        currentUser.setAddress(userDTO.getAddress());
+        currentUser.setPhone(userDTO.getPhone());
+        currentUser.setFullName(userDTO.getFullName());
         currentUser.setRole(currentRole);
+
+        if(!Objects.equals(avatar.getOriginalFilename(), "")) {
+            currentUser.setAvatar(fileUploadService.handleUploadSingleFile(avatar, ImageFolder.avatar));
+        }
 
         userRepository.save(currentUser);
     }

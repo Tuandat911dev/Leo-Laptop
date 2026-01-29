@@ -29,7 +29,10 @@
                                     <label for="imageUpload"><i class="fas fa-pencil-alt text-gray-600"></i></label>
                                 </div>
                                 <div class="avatar-preview">
-                                    <div id="imagePreview"></div>
+                                    <div id="imagePreview">
+                                        <img class="old-avatar" src="/images/avatar/${currentUser.avatar}" alt=""
+                                             style="display: none">
+                                    </div>
                                 </div>
                             </div>
                             <h5 class="font-weight-bold mt-2">Ảnh đại diện</h5>
@@ -104,12 +107,17 @@
     document.addEventListener("DOMContentLoaded", function () {
         const uploadInput = document.getElementById('imageUpload');
         const imagePreview = document.getElementById('imagePreview');
+        const oldAvatar = document.querySelector('.old-avatar');
+
+        imagePreview.style.backgroundImage = "url('" + oldAvatar.src + "')";
+        imagePreview.style.display = 'none';
+        imagePreview.style.display = 'block';
 
         if (uploadInput) {
             uploadInput.addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 if (file) {
-                    imagePreview.style.backgroundImage = "url('" + URL.createObjectURL(file) +"')";
+                    imagePreview.style.backgroundImage = "url('" + URL.createObjectURL(file) + "')";
                     imagePreview.style.display = 'none';
                     imagePreview.style.display = 'block';
                 }

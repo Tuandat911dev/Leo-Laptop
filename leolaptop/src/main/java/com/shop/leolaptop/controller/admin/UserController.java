@@ -71,8 +71,9 @@ public class UserController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser") UserDTO user) {
-        userService.updateUser(id, user);
+    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser") UserDTO user,
+                             @RequestParam("avatarFile") MultipartFile avatarFile) {
+        userService.updateUser(id, user, avatarFile);
         return "redirect:/admin/users";
     }
 
