@@ -1,7 +1,9 @@
 package com.shop.leolaptop.controller.admin;
 
-import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.domain.Role;
+import com.shop.leolaptop.domain.User;
+import com.shop.leolaptop.dto.UserDTO;
+import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.service.admin.RoleService;
 import com.shop.leolaptop.service.admin.UserService;
 import lombok.AccessLevel;
@@ -32,16 +34,15 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute("newUser")User user) {
+    public String createUser(@ModelAttribute("newUser") User user) {
         User newUser = userService.createUser(user);
         return "redirect:/admin/users";
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<User> getUserDetail(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> getUserDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping
