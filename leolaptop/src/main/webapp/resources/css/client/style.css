@@ -294,12 +294,15 @@
 }
 /*** Page Header end ***/
 
-
 /*** Products Start ***/
 .product .product-item {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.related-product .owl-stage {
+    height: 520px;
 }
 
 .product .product-item .product-item-inner {
@@ -415,6 +418,10 @@
 /*** ProductList Categories Start ***/
 .productList .productList-carousel {
     height: 215px !important;
+}
+
+.productList .owl-stage {
+    height: 240px;
 }
 
 .productList .productList-carousel .productImg-carousel.productList-item .productImg-item {
