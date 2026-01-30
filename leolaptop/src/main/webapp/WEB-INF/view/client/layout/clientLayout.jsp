@@ -35,16 +35,16 @@
 <body>
 
 <!-- Spinner Start -->
-<%@ include file="../component/spinner.jsp" %>
+<%@ include file="../component/common/spinner.jsp" %>
 <!-- Spinner End -->
 
 
 <!-- Topbar Start -->
-<%@ include file="../component/header.jsp" %>
+<%@ include file="../component/common/header.jsp" %>
 <!-- Topbar End -->
 
 <!-- Navbar & Hero Start -->
-<%@ include file="../component/navbar.jsp" %>
+<%@ include file="../component/common/navbar.jsp" %>
 <!-- Navbar & Hero End -->
 
 <%-- Content Start --%>
@@ -53,17 +53,17 @@
 
 
 <!-- Footer Start -->
-<%@ include file="../component/footer.jsp" %>
+<%@ include file="../component/common/footer.jsp" %>
 <!-- Footer End -->
 
 
 <!-- Copyright Start -->
-<%@ include file="../component/copyright.jsp" %>
+<%@ include file="../component/common/copyright.jsp" %>
 <!-- Copyright End -->
 
 
 <!-- Back to Top -->
-<%@ include file="../component/backToTop.jsp" %>
+<%@ include file="../component/common/backToTop.jsp" %>
 
 
 <!-- JavaScript Libraries -->
