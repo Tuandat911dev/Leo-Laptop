@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pdat1
-  Date: 1/30/2026
-  Time: 12:08 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container-fluid nav-bar p-0">
     <div class="row gx-0 bg-primary px-5 align-items-center">
@@ -57,7 +50,6 @@
                 <a href="" class="navbar-brand d-block d-lg-none">
                     <h1 class="display-5 text-secondary m-0"><i
                             class="fas fa-shopping-bag text-white me-2"></i>Electro</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">

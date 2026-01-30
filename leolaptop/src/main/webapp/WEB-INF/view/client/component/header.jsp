@@ -58,7 +58,6 @@
                 <a href="" class="navbar-brand p-0">
                     <h1 class="display-5 text-primary m-0"><i
                             class="fas fa-shopping-bag text-secondary me-2"></i>Electro</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
             </div>
         </div>

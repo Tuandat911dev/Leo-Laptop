@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pdat1
-  Date: 1/30/2026
-  Time: 12:17 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container-fluid bg-light py-5">
     <div class="container">
@@ -17,7 +10,7 @@
                         <h1 class="display-3 text-secondary mb-0">40% <span
                                 class="text-primary fw-normal">Off</span></h1>
                     </div>
-                    <img src="img/product-1.png" class="img-fluid" alt="">
+                    <img src="/images/client/img/product-1.png" class="img-fluid" alt="">
                 </a>
             </div>
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
@@ -28,7 +21,7 @@
                         <h1 class="display-3 text-secondary mb-0">20% <span
                                 class="text-primary fw-normal">Off</span></h1>
                     </div>
-                    <img src="img/product-2.png" class="img-fluid" alt="">
+                    <img src="/images/client/img/product-2.png" class="img-fluid" alt="">
                 </a>
             </div>
         </div>

@@ -15,7 +15,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -43,7 +43,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -71,7 +71,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-6.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-6.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -99,7 +99,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-7.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-7.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -131,7 +131,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-8.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-8.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -159,7 +159,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-9.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-9.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -187,7 +187,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-10.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-10.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -215,7 +215,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-11.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-11.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -247,7 +247,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-12.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-12.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -275,7 +275,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-13.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-13.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -303,7 +303,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-14.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-14.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -331,7 +331,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-15.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-15.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -363,7 +363,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-16.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-16.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -391,7 +391,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-17.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-17.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>
@@ -419,7 +419,7 @@
                     <div class="row g-0">
                         <div class="col-5">
                             <div class="products-mini-img border-end h-100">
-                                <img src="img/product-3.png" class="img-fluid w-100 h-100" alt="Image">
+                                <img src="/images/client/img/product-3.png" class="img-fluid w-100 h-100" alt="Image">
                                 <div class="products-mini-icon rounded-circle bg-primary">
                                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                                 </div>

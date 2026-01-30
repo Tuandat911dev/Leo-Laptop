@@ -41,7 +41,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-3.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-3.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-new">New</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -80,7 +80,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-4.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-4.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-sale">sale</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -119,7 +119,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.5s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-5.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-5.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.7s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-6.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-6.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-new">New</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -196,7 +196,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-7.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-7.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-sale">Sale</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -235,7 +235,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-8.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-8.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
@@ -273,7 +273,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.5s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-9.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-9.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-new">New</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -312,7 +312,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.7s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-10.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-10.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-sale">Sale</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -357,7 +357,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-3.png" class="img-fluid rounded-top" alt="">
+                                        <img src="/images/client/img/product-3.png" class="img-fluid rounded-top" alt="">
                                         <div class="product-new">New</div>
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
@@ -402,7 +402,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-9.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-9.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
@@ -445,7 +445,7 @@
                             <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
-                                        <img src="img/product-14.png" class="img-fluid w-100 rounded-top" alt="">
+                                        <img src="/images/client/img/product-14.png" class="img-fluid w-100 rounded-top" alt="">
                                         <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                         </div>
                                     </div>
