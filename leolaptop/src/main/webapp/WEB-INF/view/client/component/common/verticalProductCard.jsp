@@ -4,12 +4,12 @@
         <div class="product-item-inner-item">
             <img src="/images/client/img/product-3.png" class="img-fluid w-100 rounded-top" alt="">
             <div class="product-new">New</div>
-            <div class="product-details"><a href="#"><i class="fa fa-eye fa-1x"></i></a>
+            <div class="product-details"><a href="/product/1"><i class="fa fa-eye fa-1x"></i></a>
             </div>
         </div>
         <div class="text-center rounded-bottom p-4">
-            <a href="#" class="d-block mb-2">SmartPhone</a>
-            <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+            <a href="/product/1" class="d-block mb-2">SmartPhone</a>
+            <a href="/product/1" class="d-block h4">Apple iPad Mini <br> G2356</a>
             <del class="me-2 fs-5">$1,250.00</del>
             <span class="text-primary fs-5">$1,050.00</span>
         </div>

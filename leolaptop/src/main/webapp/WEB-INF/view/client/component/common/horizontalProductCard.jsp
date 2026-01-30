@@ -11,8 +11,8 @@
         </div>
         <div class="col-7">
             <div class="products-mini-content p-3">
-                <a href="#" class="d-block mb-2">SmartPhone</a>
-                <a href="#" class="d-block h4">Apple iPad Mini <br> G2356</a>
+                <a href="/product/1" class="d-block mb-2">SmartPhone</a>
+                <a href="/product/1" class="d-block h4">Apple iPad Mini <br> G2356</a>
                 <del class="me-2 fs-5">$1,250.00</del>
                 <span class="text-primary fs-5">$1,050.00</span>
             </div>
