@@ -4,6 +4,7 @@ import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.UpdateUserDTO;
 import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.repository.RoleRepository;
@@ -43,7 +44,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void updateUser(long id, UserDTO userDTO, MultipartFile avatar) {
+    public void updateUser(long id, UpdateUserDTO userDTO, MultipartFile avatar) {
         User currentUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found!"));
 

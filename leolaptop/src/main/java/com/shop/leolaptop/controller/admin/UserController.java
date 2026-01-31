@@ -3,6 +3,7 @@ package com.shop.leolaptop.controller.admin;
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.UpdateUserDTO;
 import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.service.admin.RoleService;
@@ -72,7 +73,8 @@ public class UserController {
 
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(@PathVariable long id, Model model) {
-        UserDTO currentUser = userService.getUserById(id);
+        UserDTO user = userService.getUserById(id);
+        UpdateUserDTO currentUser = UserMapper.userDtoToUpdateUserDto(user);
         List<Role> roles = roleService.getAllRole();
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("roles", roles);
@@ -81,10 +83,23 @@ public class UserController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable long id, @ModelAttribute("currentUser") UserDTO user,
-                             @RequestParam("avatarFile") MultipartFile avatarFile) {
-        userService.updateUser(id, user, avatarFile);
-        return "redirect:/admin/users";
+    public String updateUser(@PathVariable long id,
+                             @ModelAttribute("currentUser") @Valid UpdateUserDTO user,
+                             BindingResult bindingResult,
+                             @RequestParam("avatarFile") MultipartFile avatarFile,
+                             Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Role> roles = roleService.getAllRole();
+            UserDTO currentUser = userService.getUserById(id);
+            model.addAttribute("contentPage", "/WEB-INF/view/admin/user/update.jsp");
+            model.addAttribute("roles", roles);
+            user.setAvatar(currentUser.getAvatar());
+            model.addAttribute("currentUser", user);
+            return "/admin/layout/layout";
+        } else {
+            userService.updateUser(id, user, avatarFile);
+            return "redirect:/admin/users";
+        }
     }
 
     @DeleteMapping("/delete/{id}")

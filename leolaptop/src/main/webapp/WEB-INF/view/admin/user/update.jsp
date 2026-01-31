@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <link href="/css/admin/user/create.css" rel="stylesheet">
 
@@ -43,27 +44,48 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="font-weight-bold">Họ và Tên</label>
-                                    <form:input path="fullName" class="form-control" placeholder="Nhập đầy đủ họ tên"/>
+                                    <spring:bind path="currentUser.fullName">
+                                        <form:input path="fullName"
+                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                    placeholder="Nhập đầy đủ họ tên"
+                                                    required="true"/>
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="fullName"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Email</label>
-                                    <form:input type="email" path="email" class="form-control"
-                                                placeholder="example@gmail.com" disabled="true"/>
+                                    <spring:bind path="currentUser.email">
+                                        <form:input type="email" path="email" class="form-control ${status.error ?
+                                    'is-invalid' : ''}"
+                                                    placeholder="example@gmail.com" required="true" disabled="true"/>
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="email"/>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Số điện thoại</label>
-                                    <form:input path="phone" class="form-control" placeholder="090..."/>
+                                    <spring:bind path="currentUser.phone">
+                                        <form:input path="phone"
+                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                    placeholder="090..."
+                                                    required="true"/>
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="phone"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="font-weight-bold">Địa chỉ</label>
-                                    <form:textarea path="address" class="form-control" rows="2"
-                                                   placeholder="Địa chỉ thường trú"/>
+                                    <spring:bind path="currentUser.address">
+                                        <form:textarea path="address" class="form-control ${status.error ? 'is-invalid' :
+                                     ''}"
+                                                       rows="2"
+                                                       placeholder="Địa chỉ thường trú" required="true"/>
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="address"/>
                                 </div>
                             </div>
 
@@ -82,7 +104,7 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Trạng thái</label>
-                                    <select class="form-control" name="status">
+                                    <select class="form-control ${status.error ? 'is-invalid' : ''}" name="status">
                                         <option value="ACTIVE">Đang hoạt động</option>
                                         <option value="LOCKED">Bị khóa</option>
                                     </select>
