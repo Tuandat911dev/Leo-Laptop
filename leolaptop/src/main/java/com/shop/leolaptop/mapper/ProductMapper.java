@@ -31,6 +31,7 @@ public class ProductMapper {
                 .sold(product.getSold())
                 .factory(product.getFactory())
                 .target(product.getTarget())
+                .image(product.getImage())
                 .build();
     }
 }

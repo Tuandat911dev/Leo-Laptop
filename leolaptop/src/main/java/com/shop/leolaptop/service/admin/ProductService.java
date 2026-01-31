@@ -3,6 +3,7 @@ package com.shop.leolaptop.service.admin;
 import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
+import com.shop.leolaptop.dto.product.ResponseProductDTO;
 import com.shop.leolaptop.mapper.ProductMapper;
 import com.shop.leolaptop.repository.ProductRepository;
 import com.shop.leolaptop.service.common.FileUploadService;
@@ -12,8 +13,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Objects;
-
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +35,19 @@ public class ProductService {
         }
 
         productRepository.save(newProduct);
+    }
+
+    public List<ResponseProductDTO> getAllProduct() {
+        List<Product> products = productRepository.findAll();
+
+        return products.stream()
+                .map(productMapper::productToResponseProductDto)
+                .toList();
+    }
+
+    public ResponseProductDTO getProductById(long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
+
+        return productMapper.productToResponseProductDto(product);
     }
 }
