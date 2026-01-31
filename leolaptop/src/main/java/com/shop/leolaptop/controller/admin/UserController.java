@@ -7,12 +7,14 @@ import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.service.admin.RoleService;
 import com.shop.leolaptop.service.admin.UserService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,10 +38,18 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute("newUser") CreateUserDTO createUserDTO,
-                             @RequestParam("avatar") MultipartFile avatar) {
-        User newUser = userService.createUser(createUserDTO, avatar);
-        return "redirect:/admin/users";
+    public String createUser(@ModelAttribute("newUser") @Valid CreateUserDTO createUserDTO,
+                             BindingResult bindingResult,
+                             @RequestParam("avatar") MultipartFile avatar, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Role> roles = roleService.getAllRole();
+            model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
+            model.addAttribute("roles", roles);
+            return "/admin/layout/layout";
+        } else {
+            User newUser = userService.createUser(createUserDTO, avatar);
+            return "redirect:/admin/users";
+        }
     }
 
     @GetMapping("/{id}")

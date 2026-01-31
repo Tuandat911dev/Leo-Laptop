@@ -1,6 +1,9 @@
 package com.shop.leolaptop.domain;
 
+import com.shop.leolaptop.constant.ErrorMessage;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,12 +25,10 @@ public class User {
     long id;
     @Column(unique = true)
     String email;
-    @Size(min = 8)
     String password;
     String fullName;
     String address;
     @Column(unique = true, length = 11)
-    @Size(min = 10)
     String phone;
     String avatar;
 
