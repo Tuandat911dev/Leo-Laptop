@@ -55,7 +55,7 @@
     <div class="row gx-0 align-items-center text-center">
         <div class="col-md-4 col-lg-3 text-center text-lg-start">
             <div class="d-inline-flex align-items-center">
-                <a href="" class="navbar-brand p-0">
+                <a href="/" class="navbar-brand p-0">
                     <h1 class="display-5 text-primary m-0"><i class="fas fa-laptop" style="color: #f92400;"></i>Leolaptop</h1>
                 </a>
             </div>

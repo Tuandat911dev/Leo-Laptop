@@ -58,7 +58,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
                         <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="/" class="nav-item nav-link">Shop</a>
+                        <a href="/shop" class="nav-item nav-link">Shop</a>
                         <a href="single.html" class="nav-item nav-link">Single Page</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
