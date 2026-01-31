@@ -1,11 +1,9 @@
 package com.shop.leolaptop.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
@@ -14,19 +12,20 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "products")
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String name;
-    @Size(min = 0)
+    @PositiveOrZero
     double price;
     String image;
     String detailDesc;
     String shortDesc;
-    @Size(min = 0)
+    @PositiveOrZero
     long quantity;
-    @Size(min = 0)
+    @PositiveOrZero
     long sold;
     String factory;
     String target;

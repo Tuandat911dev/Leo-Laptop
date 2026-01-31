@@ -1,0 +1,21 @@
+package com.shop.leolaptop.dto.product;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class RequestProductDTO {
+    String name;
+    double price;
+    String detailDesc;
+    String shortDesc;
+    long quantity;
+    long sold;
+    String factory;
+    String target;
+}

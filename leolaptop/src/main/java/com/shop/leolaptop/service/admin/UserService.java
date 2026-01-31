@@ -26,7 +26,7 @@ public class UserService {
     RoleRepository roleRepository;
     FileUploadService fileUploadService;
 
-    private String DEFAULT_AVATAR = "avatar-default.png";
+    String DEFAULT_AVATAR = "avatar-default.png";
 
     public User createUser(CreateUserDTO createUserDTO, MultipartFile avatar) {
         User user = UserMapper.createUserDTOtoUser(createUserDTO);
