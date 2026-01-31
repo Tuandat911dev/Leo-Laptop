@@ -1,8 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!-- Single Page Header start -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Banner start -->
+<c:set var="breadcrumb" value="${{'lev1t':'Trang chủ','lev1l':'/', 'lev2t': 'Chi tiết sản phẩm'}}"
+       scope="request"/>
+<c:set var="bannerTitle" value="${'Chi tiết sản phẩm'}"
+       scope="request"/>
 <jsp:include page="/WEB-INF/view/client/component/common/banner.jsp"/>
-<!-- Single Page Header End -->
+<!-- Banner end -->
 
 <!-- Single Products Start -->
 <div class="container-fluid shop py-5">
