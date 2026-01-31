@@ -66,4 +66,11 @@ public class ProductService {
 
         productRepository.save(updateProduct);
     }
+
+    public void deleteProduct(long id) {
+        Product currentProduct = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not " +
+                "Found"));
+
+        productRepository.delete(currentProduct);
+    }
 }

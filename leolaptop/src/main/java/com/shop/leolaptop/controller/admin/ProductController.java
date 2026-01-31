@@ -77,4 +77,11 @@ public class ProductController {
 
         return "redirect:/admin/products";
     }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteProduct(@PathVariable long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.ok("deleted");
+    }
 }
