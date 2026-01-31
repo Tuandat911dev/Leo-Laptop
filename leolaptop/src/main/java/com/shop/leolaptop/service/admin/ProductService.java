@@ -4,6 +4,7 @@ import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
+import com.shop.leolaptop.dto.product.UpdateProductDTO;
 import com.shop.leolaptop.mapper.ProductMapper;
 import com.shop.leolaptop.repository.ProductRepository;
 import com.shop.leolaptop.service.common.FileUploadService;
@@ -28,7 +29,7 @@ public class ProductService {
     public void createNewProduct(RequestProductDTO productDTO, MultipartFile img) {
         Product newProduct = productMapper.requestProductDtoToProduct(productDTO);
         newProduct.setSold(0);
-        if(Objects.equals(img.getOriginalFilename(), "")) {
+        if (Objects.equals(img.getOriginalFilename(), "")) {
             newProduct.setImage(DEFAULT_IMAGE);
         } else {
             newProduct.setImage(fileUploadService.handleUploadSingleFile(img, ImageFolder.product));
@@ -49,5 +50,20 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
 
         return productMapper.productToResponseProductDto(product);
+    }
+
+    public void updateProduct(UpdateProductDTO updateProductDTO, long id, MultipartFile img) {
+        Product currentProduct = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not " +
+                "Found"));
+
+        Product updateProduct = productMapper.updateProductDtoToProduct(updateProductDTO);
+        updateProduct.setId(id);
+        if (Objects.equals(img.getOriginalFilename(), "")) {
+            updateProduct.setImage(currentProduct.getImage());
+        } else {
+            updateProduct.setImage(fileUploadService.handleUploadSingleFile(img, ImageFolder.product));
+        }
+
+        productRepository.save(updateProduct);
     }
 }

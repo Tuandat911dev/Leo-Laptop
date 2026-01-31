@@ -1,8 +1,9 @@
 package com.shop.leolaptop.controller.admin;
 
-import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
+import com.shop.leolaptop.dto.product.UpdateProductDTO;
+import com.shop.leolaptop.mapper.ProductMapper;
 import com.shop.leolaptop.service.admin.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,6 +22,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ProductController {
     ProductService productService;
+    ProductMapper productMapper;
 
     @GetMapping
     public String getProductPage(Model model) {
@@ -54,6 +55,25 @@ public class ProductController {
                                    @RequestParam("productFile") MultipartFile img) {
 
         productService.createNewProduct(newProduct, img);
+
+        return "redirect:/admin/products";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUpdateProductPage(Model model, @PathVariable("id") long id) {
+        ResponseProductDTO product = productService.getProductById(id);
+        UpdateProductDTO currentProduct = productMapper.responseProductToUpdateProduct(product);
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/product/update.jsp");
+        model.addAttribute("currentProduct", currentProduct);
+
+        return "/admin/layout/layout";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateProduct(@ModelAttribute("currentProduct") UpdateProductDTO currentProduct,
+                                @RequestParam("productFile") MultipartFile img, @PathVariable("id") long id) {
+
+        productService.updateProduct(currentProduct, id, img);
 
         return "redirect:/admin/products";
     }

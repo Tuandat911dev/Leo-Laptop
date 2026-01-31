@@ -3,6 +3,7 @@ package com.shop.leolaptop.mapper;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
+import com.shop.leolaptop.dto.product.UpdateProductDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,6 +33,34 @@ public class ProductMapper {
                 .factory(product.getFactory())
                 .target(product.getTarget())
                 .image(product.getImage())
+                .build();
+    }
+
+    public UpdateProductDTO responseProductToUpdateProduct(ResponseProductDTO responseProductDTO) {
+        return UpdateProductDTO.builder()
+                .id(responseProductDTO.getId())
+                .name(responseProductDTO.getName())
+                .price(responseProductDTO.getPrice())
+                .detailDesc(responseProductDTO.getDetailDesc())
+                .shortDesc(responseProductDTO.getShortDesc())
+                .quantity(responseProductDTO.getQuantity())
+                .sold(responseProductDTO.getSold())
+                .factory(responseProductDTO.getFactory())
+                .target(responseProductDTO.getTarget())
+                .image(responseProductDTO.getImage())
+                .build();
+    }
+
+    public Product updateProductDtoToProduct(UpdateProductDTO updateProductDTO) {
+        return Product.builder()
+                .name(updateProductDTO.getName())
+                .price(updateProductDTO.getPrice())
+                .detailDesc(updateProductDTO.getDetailDesc())
+                .shortDesc(updateProductDTO.getShortDesc())
+                .quantity(updateProductDTO.getQuantity())
+                .sold(updateProductDTO.getSold())
+                .factory(updateProductDTO.getFactory())
+                .target(updateProductDTO.getTarget())
                 .build();
     }
 }
