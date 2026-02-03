@@ -82,8 +82,9 @@
                     <div id="tab-5" class="tab-pane fade show p-0 active">
                         <div class="row g-4 product">
                             <!-- vertical product card start -->
-                            <c:forEach begin="0" end="7" varStatus="loop">
+                            <c:forEach items="${productList}" var="item">
                                 <div class="col-lg-4">
+                                    <c:set var="product" value="${item}" scope="request"/>
                                     <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
                                 </div>
                             </c:forEach>
@@ -97,8 +98,9 @@
                     <div id="tab-6" class="products tab-pane fade show p-0">
                         <div class="row g-4 products-mini">
                             <!-- Horizontal card start -->
-                            <c:forEach begin="0" end="7" varStatus="loop">
+                            <c:forEach items="${productList}" var="item">
                                 <div class="col-lg-6">
+                                    <c:set var="product" value="${item}" scope="request"/>
                                     <jsp:include
                                             page="/WEB-INF/view/client/component/common/horizontalProductCard.jsp"/>
                                 </div>
