@@ -10,13 +10,12 @@
                 consectetur?</p>
         </div>
         <div class="row g-4">
-
-            <c:forEach begin="0" end="5" varStatus="loop">
+            <c:forEach items="${productList}" var="item">
                 <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <c:set var="product" value="${item}" scope="request"/>
                     <jsp:include page="/WEB-INF/view/client/component/common/horizontalProductCard.jsp"/>
                 </div>
             </c:forEach>
-
         </div>
     </div>
 </div>
