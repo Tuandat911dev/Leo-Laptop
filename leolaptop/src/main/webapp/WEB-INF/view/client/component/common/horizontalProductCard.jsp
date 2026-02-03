@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="products-mini-item border">
     <div class="row g-0">
         <div class="col-5">
             <div class="products-mini-img border-end h-100">
-                <img src="/images/client/img/product-4.png" class="img-fluid w-100 h-100" alt="Image">
+                <img src="/images/product/${product.image}" class="img-fluid w-100 h-100" alt="Image">
                 <div class="products-mini-icon rounded-circle bg-primary">
                     <a href="#"><i class="fa fa-eye fa-1x text-white"></i></a>
                 </div>
@@ -11,10 +12,11 @@
         </div>
         <div class="col-7">
             <div class="products-mini-content p-3">
-                <a href="/product/1" class="d-block mb-2">SmartPhone</a>
-                <a href="/product/1" class="d-block h4">Apple iPad Mini <br> G2356</a>
-                <del class="me-2 fs-5">$1,250.00</del>
-                <span class="text-primary fs-5">$1,050.00</span>
+                <a href="/product/${product.id}" class="d-block mb-2">${product.target}</a>
+                <a href="/product/${product.id}" class="d-block h4">${product.name}</a>
+                <span class="text-primary fs-5">
+                    <fmt:formatNumber value="${product.price}" pattern="#,### ₫"/>
+                </span>
             </div>
         </div>
     </div>

@@ -8,7 +8,8 @@
             <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s">All Product Items</h1>
         </div>
         <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
-            <c:forEach begin="0" end="5" varStatus="loop">
+            <c:forEach items="${productList}" var="item">
+                <c:set var="product" value="${item}" scope="request"/>
                 <jsp:include page="/WEB-INF/view/client/component/common/horizontalProductCard.jsp"/>
             </c:forEach>
         </div>

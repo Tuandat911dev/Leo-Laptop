@@ -40,16 +40,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const toVND = (value) => {
-        value = value.toString().replace(/\./g, "");
-        return new Intl.NumberFormat("it-IT", {
-            style: "currency",
-            currency: "VND",
-        })
-            .format(value)
-            .replace("₫", "")
-            .trim();
-    }
-</script>
