@@ -15,7 +15,6 @@ public class ProductMapper {
                 .detailDesc(productDTO.getDetailDesc())
                 .shortDesc(productDTO.getShortDesc())
                 .quantity(productDTO.getQuantity())
-                .sold(productDTO.getSold())
                 .factory(productDTO.getFactory())
                 .target(productDTO.getTarget())
                 .build();

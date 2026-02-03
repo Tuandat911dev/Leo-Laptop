@@ -15,16 +15,14 @@ import lombok.experimental.FieldDefaults;
 public class RequestProductDTO {
     @NotEmpty(message = ErrorMessage.NAME_NOT_EMPTY)
     String name;
-    @Min(0)
+    @Min(value = 0, message = ErrorMessage.PRICE_INVALID)
     double price;
     @NotEmpty(message = ErrorMessage.DESC_NOT_EMPTY)
     String detailDesc;
     @NotEmpty(message = ErrorMessage.DESC_NOT_EMPTY)
     String shortDesc;
-    @Min(0)
+    @Min(value = 0, message = ErrorMessage.QUANTITY_INVALID)
     long quantity;
-    @Min(0)
-    long sold;
     @NotEmpty(message = ErrorMessage.FACTORY_NOT_EMPTY)
     String factory;
     @NotEmpty(message = ErrorMessage.TARGET_NOT_EMPTY)
