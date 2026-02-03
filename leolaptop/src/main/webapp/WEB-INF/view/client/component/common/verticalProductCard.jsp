@@ -5,12 +5,12 @@
         <div class="product-item-inner-item">
             <img src="/images/product/${product.image}" class="img-fluid w-100 rounded-top" alt="">
             <div class="product-new">New</div>
-            <div class="product-details"><a href="/product/1"><i class="fa fa-eye fa-1x"></i></a>
+            <div class="product-details"><a href="/product/${product.id}"><i class="fa fa-eye fa-1x"></i></a>
             </div>
         </div>
         <div class="text-center rounded-bottom p-4">
-            <a href="/product/1" class="d-block mb-2">${product.target}</a>
-            <a href="/product/1" class="d-block h4">${product.name}</a>
+            <a href="/product/${product.id}" class="d-block mb-2">${product.target}</a>
+            <a href="/product/${product.id}" class="d-block h4">${product.name}</a>
             <del class="me-2 fs-5" class>
                 <fmt:formatNumber value="${product.price + 99999}" pattern="#,### ₫"/>
             </del>
