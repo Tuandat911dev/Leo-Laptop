@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Carousel Start -->
 <%@ include file="../component/home/carousel.jsp" %>
@@ -14,7 +15,7 @@
 
 
 <!-- Our Products Start -->
-<%@ include file="../component/home/ourProduct.jsp" %>
+<jsp:include page="/WEB-INF/view/client/component/home/ourProduct.jsp"/>
 <!-- Our Products End -->
 
 <!-- Product Banner Start -->
@@ -22,9 +23,9 @@
 <!-- Product Banner End -->
 
 <!-- Product List Start -->
-<%@ include file="../component/home/productList.jsp" %>
+<jsp:include page="/WEB-INF/view/client/component/home/productList.jsp"/>
 <!-- Product List End -->
 
 <!-- Bestseller Products Start -->
-<%@ include file="../component/home/bestSellerProduct.jsp" %>
+<jsp:include page="/WEB-INF/view/client/component/home/bestSellerProduct.jsp"/>
 <!-- Bestseller Products End -->

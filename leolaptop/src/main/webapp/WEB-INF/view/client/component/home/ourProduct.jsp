@@ -37,8 +37,9 @@
                 <!-- Tab 1: All Products (8 Items) -->
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
-                        <c:forEach begin="0" end="7" varStatus="loop">
+                        <c:forEach items="${productList}" var="item">
                             <div class="col-md-6 col-lg-4 col-xl-3">
+                                <c:set var="product" value="${item}" scope="request"/>
                                 <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
                             </div>
                         </c:forEach>
@@ -48,8 +49,9 @@
                 <!-- Tab 2: New Arrivals -->
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <div class="row g-4">
-                        <c:forEach begin="0" end="2" varStatus="loop">
+                        <c:forEach items="${productList}" var="item">
                             <div class="col-md-6 col-lg-4 col-xl-3">
+                                <c:set var="product" value="${item}" scope="request"/>
                                 <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
                             </div>
                         </c:forEach>
@@ -59,8 +61,9 @@
                 <!-- Tab 3: Featured -->
                 <div id="tab-3" class="tab-pane fade show p-0">
                     <div class="row g-4">
-                        <c:forEach begin="0" end="4" varStatus="loop">
+                        <c:forEach items="${productList}" var="item">
                             <div class="col-md-6 col-lg-4 col-xl-3">
+                                <c:set var="product" value="${item}" scope="request"/>
                                 <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
                             </div>
                         </c:forEach>
@@ -70,8 +73,9 @@
                 <!-- Tab 4: Top Selling -->
                 <div id="tab-4" class="tab-pane fade show p-0">
                     <div class="row g-4">
-                        <c:forEach begin="0" end="5" varStatus="loop">
+                        <c:forEach items="${productList}" var="item">
                             <div class="col-md-6 col-lg-4 col-xl-3">
+                                <c:set var="product" value="${item}" scope="request"/>
                                 <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
                             </div>
                         </c:forEach>
