@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <link href="/css/admin/user/create.css" rel="stylesheet">
 
@@ -10,15 +11,18 @@
         max-width: 300px;
         margin: 0 auto 20px auto;
     }
+
     .product-image-edit {
         position: absolute;
         right: 10px;
         z-index: 1;
         top: 10px;
     }
+
     .product-image-edit input {
         display: none;
     }
+
     .product-image-edit label {
         display: inline-flex;
         width: 34px;
@@ -34,10 +38,12 @@
         align-items: center;
         justify-content: center;
     }
+
     .product-image-edit label:hover {
         background: #f1f1f1;
         border-color: #d2d6de;
     }
+
     .product-image-preview {
         width: 100%;
         height: 300px;
@@ -49,6 +55,7 @@
         background-repeat: no-repeat;
         background-position: center;
     }
+
     .product-image-preview > div {
         width: 100%;
         height: 100%;
@@ -80,7 +87,8 @@
                         <div class="col-md-5 text-center border-right">
                             <div class="product-image-upload">
                                 <div class="product-image-edit">
-                                    <input type='file' id="imageUpload" name="productFile" accept=".png, .jpg, .jpeg"/>
+                                    <input type='file' id="imageUpload" name="productFile"
+                                           accept=".png, .jpg, .jpeg"/>
                                     <label for="imageUpload"><i class="fas fa-camera text-gray-600"></i></label>
                                 </div>
                                 <div class="product-image-preview">
@@ -91,7 +99,8 @@
                             <p class="small text-muted">Kích thước khuyến nghị: 800x800px (Tỷ lệ 1:1)</p>
 
                             <div class="alert alert-info text-left small mt-4">
-                                <i class="fas fa-info-circle"></i> <b>Lưu ý:</b> Hãy chọn hình ảnh rõ ràng, nền trắng để sản phẩm trông chuyên nghiệp hơn trên website.
+                                <i class="fas fa-info-circle"></i> <b>Lưu ý:</b> Hãy chọn hình ảnh rõ ràng, nền trắng để
+                                sản phẩm trông chuyên nghiệp hơn trên website.
                             </div>
                         </div>
 
@@ -99,33 +108,53 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="font-weight-bold">Tên sản phẩm</label>
-                                    <form:input path="name" class="form-control" placeholder="Ví dụ: iPhone 15 Pro Max"/>
+                                    <spring:bind path="name">
+                                        <form:input path="name" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}"
+                                                    placeholder="Ví dụ: iPhone 15 Pro Max"/>
+                                        <form:errors path="name" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Giá bán (VNĐ)</label>
-                                    <form:input type="number" path="price" class="form-control" placeholder="0"/>
+                                    <spring:bind path="price">
+                                        <form:input type="number" path="price" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}"
+                                                    placeholder="0"/>
+                                        <form:errors path="price" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Số lượng trong kho</label>
-                                    <form:input type="number" path="quantity" class="form-control" placeholder="0"/>
+                                    <spring:bind path="quantity">
+                                        <form:input type="number" path="quantity" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}"
+                                                    placeholder="0"/>
+                                        <form:errors path="quantity" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold">Hãng sản xuất (Factory)</label>
-                                    <form:input path="factory" class="form-control" placeholder="Ví dụ: Apple, Samsung..."/>
+                                    <label class="font-weight-bold">Hãng sản xuất</label>
+                                    <form:select path="factory" class="form-control">
+                                        <option value="Dell">Dell</option>
+                                        <option value="LG">LG</option>
+                                        <option value="Asus">Asus</option>
+                                        <option value="Acer">Acer</option>
+                                    </form:select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="font-weight-bold">Đối tượng (Target)</label>
+                                    <label class="font-weight-bold">Mục đích sử dụng</label>
                                     <form:select path="target" class="form-control">
-                                        <option value="Tất cả">Tất cả</option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                        <option value="Trẻ em">Trẻ em</option>
+                                        <option value="Văn phòng">Văn phòng</option>
+                                        <option value="Gaming">Gaming</option>
+                                        <option value="Đồ hoạ">Đồ hoạ</option>
+                                        <option value="Lập trình">Lập trình</option>
                                     </form:select>
                                 </div>
                             </div>
@@ -133,16 +162,24 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="font-weight-bold">Mô tả ngắn</label>
-                                    <form:textarea path="shortDesc" class="form-control" rows="2"
-                                                   placeholder="Tóm tắt đặc điểm nổi bật..."/>
+                                    <spring:bind path="shortDesc">
+                                        <form:textarea path="shortDesc" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}" rows="2"
+                                                       placeholder="Tóm tắt đặc điểm nổi bật..."/>
+                                        <form:errors path="shortDesc" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="font-weight-bold">Mô tả chi tiết</label>
-                                    <form:textarea path="detailDesc" class="form-control" rows="5"
-                                                   placeholder="Nhập thông số kỹ thuật, bài viết giới thiệu..."/>
+                                    <spring:bind path="detailDesc">
+                                        <form:textarea path="detailDesc" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}" rows="5"
+                                                       placeholder="Nhập thông số kỹ thuật, bài viết giới thiệu..."/>
+                                        <form:errors path="detailDesc" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
@@ -170,7 +207,7 @@
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(event) {
+                    reader.onload = function (event) {
                         imagePreview.style.backgroundImage = "url('" + event.target.result + "')";
                         imagePreview.style.display = 'block';
                     }

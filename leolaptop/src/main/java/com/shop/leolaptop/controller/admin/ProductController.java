@@ -5,12 +5,14 @@ import com.shop.leolaptop.dto.product.ResponseProductDTO;
 import com.shop.leolaptop.dto.product.UpdateProductDTO;
 import com.shop.leolaptop.mapper.ProductMapper;
 import com.shop.leolaptop.service.admin.ProductService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,9 +53,14 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String createNewProduct(@ModelAttribute("newProduct") RequestProductDTO newProduct,
-                                   @RequestParam("productFile") MultipartFile img) {
-
+    public String createNewProduct(@ModelAttribute("newProduct") @Valid RequestProductDTO newProduct,
+                                   BindingResult bindingResult,
+                                   @RequestParam("productFile") MultipartFile img,
+                                   Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "/WEB-INF/view/admin/product/create.jsp");
+            return "/admin/layout/layout";
+        }
         productService.createNewProduct(newProduct, img);
 
         return "redirect:/admin/products";
