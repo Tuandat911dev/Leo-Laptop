@@ -1,5 +1,8 @@
 package com.shop.leolaptop.dto.product;
 
+import com.shop.leolaptop.constant.ErrorMessage;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,13 +14,19 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateProductDTO {
     long id;
+    @NotEmpty(message = ErrorMessage.NAME_NOT_EMPTY)
     String name;
+    @Min(value = 0, message = ErrorMessage.PRICE_INVALID)
     double price;
     String image;
+    @NotEmpty(message = ErrorMessage.DESC_NOT_EMPTY)
     String detailDesc;
+    @NotEmpty(message = ErrorMessage.DESC_NOT_EMPTY)
     String shortDesc;
+    @Min(value = 0, message = ErrorMessage.QUANTITY_INVALID)
     long quantity;
-    long sold;
+    @NotEmpty(message = ErrorMessage.FACTORY_NOT_EMPTY)
     String factory;
+    @NotEmpty(message = ErrorMessage.TARGET_NOT_EMPTY)
     String target;
 }

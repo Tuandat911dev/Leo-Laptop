@@ -44,7 +44,6 @@ public class ProductMapper {
                 .detailDesc(responseProductDTO.getDetailDesc())
                 .shortDesc(responseProductDTO.getShortDesc())
                 .quantity(responseProductDTO.getQuantity())
-                .sold(responseProductDTO.getSold())
                 .factory(responseProductDTO.getFactory())
                 .target(responseProductDTO.getTarget())
                 .image(responseProductDTO.getImage())
@@ -58,7 +57,6 @@ public class ProductMapper {
                 .detailDesc(updateProductDTO.getDetailDesc())
                 .shortDesc(updateProductDTO.getShortDesc())
                 .quantity(updateProductDTO.getQuantity())
-                .sold(updateProductDTO.getSold())
                 .factory(updateProductDTO.getFactory())
                 .target(updateProductDTO.getTarget())
                 .build();

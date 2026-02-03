@@ -11,4 +11,6 @@ public class ErrorMessage {
     public final static String DESC_NOT_EMPTY = "Mô tả sản phẩm không được để trống";
     public final static String FACTORY_NOT_EMPTY = "Nhà sản xuất không được để trống";
     public final static String TARGET_NOT_EMPTY = "Mục đích sử dụng không được để trống";
+    public final static String PRICE_INVALID = "Giá tiền không hợp lệ";
+    public final static String QUANTITY_INVALID = "Số lượng không hợp lệ";
 }

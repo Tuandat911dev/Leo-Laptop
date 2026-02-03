@@ -57,7 +57,7 @@ public class ProductController {
                                    BindingResult bindingResult,
                                    @RequestParam("productFile") MultipartFile img,
                                    Model model) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "/WEB-INF/view/admin/product/create.jsp");
             return "/admin/layout/layout";
         }
@@ -77,9 +77,20 @@ public class ProductController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateProduct(@ModelAttribute("currentProduct") UpdateProductDTO currentProduct,
-                                @RequestParam("productFile") MultipartFile img, @PathVariable("id") long id) {
+    public String updateProduct(@ModelAttribute("currentProduct") @Valid UpdateProductDTO currentProduct,
+                                BindingResult bindingResult,
+                                @RequestParam("productFile") MultipartFile img,
+                                @PathVariable("id") long id,
+                                Model model) {
 
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "/WEB-INF/view/admin/product/update.jsp");
+            ResponseProductDTO product = productService.getProductById(id);
+            UpdateProductDTO updateProductDTO = productMapper.responseProductToUpdateProduct(product);
+            currentProduct.setImage(updateProductDTO.getImage());
+
+            return "/admin/layout/layout";
+        }
         productService.updateProduct(currentProduct, id, img);
 
         return "redirect:/admin/products";
