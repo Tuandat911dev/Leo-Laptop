@@ -2,6 +2,7 @@ package com.shop.leolaptop.mapper;
 
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.RegisterDTO;
 import com.shop.leolaptop.dto.user.UpdateUserDTO;
 import com.shop.leolaptop.dto.user.UserDTO;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,16 @@ public class UserMapper {
                 .fullName(userDTO.getFullName())
                 .avatar(userDTO.getAvatar())
                 .id(userDTO.getId())
+                .build();
+    }
+
+    public static User registerDtoToUser(RegisterDTO registerDTO) {
+        return User.builder()
+                .email(registerDTO.getEmail())
+                .phone(registerDTO.getPhone())
+                .address(registerDTO.getAddress())
+                .fullName(registerDTO.getFullName())
+                .password(registerDTO.getPassword())
                 .build();
     }
 }

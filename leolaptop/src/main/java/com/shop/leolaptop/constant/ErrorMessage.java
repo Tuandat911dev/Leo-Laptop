@@ -5,6 +5,8 @@ public class ErrorMessage {
     public final static String EMAIL_INVALID = "Định dạng email không hợp lệ";
     public final static String PASSWORD_INVALID = "Mật khẩu tối thiểu 8 ký tự";
     public final static String PHONE_INVALID = "Số điện thoại không hợp lệ";
+    public final static String EMAIL_EXISTED = "Email đã tồn tại trong hệ thống";
+    public final static String EMAIL_NOT_EXISTED = "Email không tồn tại trong hệ thống";
 
     // Product
     public final static String NAME_NOT_EMPTY = "Tên sản phẩm không được để trống";

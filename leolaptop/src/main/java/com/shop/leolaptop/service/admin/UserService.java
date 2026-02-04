@@ -63,7 +63,7 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
