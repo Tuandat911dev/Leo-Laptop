@@ -1,0 +1,112 @@
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.signup-container {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: none;
+}
+
+.brand-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #003d99 100%);
+    color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.brand-section .bi-laptop {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.form-section {
+    padding: 3rem;
+}
+
+.floating-label-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #495057;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+    color: #0d6efd;
+}
+
+.form-control {
+    border-left: none;
+    padding: 0.6rem 1rem;
+    border-color: #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+    background-color: #fcfcfc;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: #0d6efd;
+    background-color: #e7f1ff;
+}
+
+.input-group:focus-within .form-control {
+    border-color: #0d6efd;
+}
+
+.btn-submit {
+    padding: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #0d6efd, #0b5ed7);
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+.text-primary {
+    color: #0d6efd !important;
+    transition: 0.3s;
+}
+
+.text-primary:hover {
+    text-decoration: underline !important;
+    color: #003d99 !important;
+}
+
+@media (max-width: 991.98px) {
+    .form-section {
+        padding: 2rem;
+    }
+
+    .signup-container {
+        margin: 1rem;
+    }
+}

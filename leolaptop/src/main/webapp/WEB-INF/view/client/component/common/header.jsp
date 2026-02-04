@@ -10,41 +10,18 @@
             </div>
         </div>
         <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
-            <small class="text-dark">Call Us:</small>
-            <a href="#" class="text-muted">(+012) 1234 567890</a>
+            <small class="text-dark">Tel:</small>
+            <a href="#" class="text-muted">(+84) 1234 567890</a>
         </div>
 
         <div class="col-lg-4 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle text-muted me-2" data-bs-toggle="dropdown"><small>
-                        USD</small></a>
-                    <div class="dropdown-menu rounded">
-                        <a href="#" class="dropdown-item"> Euro</a>
-                        <a href="#" class="dropdown-item"> Dolar</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>
-                        English</small></a>
-                    <div class="dropdown-menu rounded">
-                        <a href="#" class="dropdown-item"> English</a>
-                        <a href="#" class="dropdown-item"> Turkish</a>
-                        <a href="#" class="dropdown-item"> Spanol</a>
-                        <a href="#" class="dropdown-item"> Italiano</a>
-                    </div>
-                </div>
-                <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
-                            class="fa fa-home me-2"></i> My Dashboard</small></a>
+                            class="fas fa-user" style="margin-right: 10px"></i>Đăng nhập</small></a>
                     <div class="dropdown-menu rounded">
-                        <a href="#" class="dropdown-item"> Login</a>
-                        <a href="#" class="dropdown-item"> Wishlist</a>
-                        <a href="#" class="dropdown-item"> My Card</a>
-                        <a href="#" class="dropdown-item"> Notifications</a>
-                        <a href="#" class="dropdown-item"> Account Settings</a>
-                        <a href="#" class="dropdown-item"> My Account</a>
-                        <a href="#" class="dropdown-item"> Log Out</a>
+                        <a href="/register" class="dropdown-item">Đăng ký tài khoản</a>
+                        <a href="#" class="dropdown-item">Trang quản trị</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +33,8 @@
         <div class="col-md-4 col-lg-3 text-center text-lg-start">
             <div class="d-inline-flex align-items-center">
                 <a href="/" class="navbar-brand p-0">
-                    <h1 class="display-5 text-primary m-0"><i class="fas fa-laptop" style="color: #f92400;"></i>Leolaptop</h1>
+                    <h1 class="display-5 text-primary m-0"><i class="fas fa-laptop" style="color: #f92400;"></i>Leolaptop
+                    </h1>
                 </a>
             </div>
         </div>
