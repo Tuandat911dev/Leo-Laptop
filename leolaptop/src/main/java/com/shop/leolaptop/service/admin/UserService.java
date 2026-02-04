@@ -1,9 +1,11 @@
 package com.shop.leolaptop.service.admin;
 
 import com.shop.leolaptop.constant.ImageFolder;
+import com.shop.leolaptop.constant.RoleName;
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.user.CreateUserDTO;
+import com.shop.leolaptop.dto.user.RegisterDTO;
 import com.shop.leolaptop.dto.user.UpdateUserDTO;
 import com.shop.leolaptop.dto.user.UserDTO;
 import com.shop.leolaptop.mapper.UserMapper;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,11 +38,21 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Role Not Found!"));
         user.setRole(currentRole);
 
-        if(Objects.equals(avatar.getOriginalFilename(), "")) {
+        if (Objects.equals(avatar.getOriginalFilename(), "")) {
             user.setAvatar(DEFAULT_AVATAR);
         } else {
             user.setAvatar(fileUploadService.handleUploadSingleFile(avatar, ImageFolder.avatar));
         }
+
+        return userRepository.save(user);
+    }
+
+    public User registerNewClient(RegisterDTO registerDTO) {
+        User user = UserMapper.registerDtoToUser(registerDTO);
+        Role currentRole = roleRepository.findRoleByName(RoleName.CLIENT)
+                .orElseThrow(() -> new RuntimeException("Role Not Found!"));
+        user.setRole(currentRole);
+        user.setAvatar(DEFAULT_AVATAR);
 
         return userRepository.save(user);
     }
@@ -56,7 +69,7 @@ public class UserService {
         currentUser.setFullName(userDTO.getFullName());
         currentUser.setRole(currentRole);
 
-        if(!Objects.equals(avatar.getOriginalFilename(), "")) {
+        if (!Objects.equals(avatar.getOriginalFilename(), "")) {
             currentUser.setAvatar(fileUploadService.handleUploadSingleFile(avatar, ImageFolder.avatar));
         }
 

@@ -25,7 +25,8 @@
                             <i class="bi bi-laptop" style="font-size: 4rem;"></i>
                         </div>
                         <h1 class="display-6 fw-bold">LeoLaptop</h1>
-                        <p class="lead opacity-75">Mừng bạn quay trở lại. Tiếp tục hành trình công nghệ cùng chúng tôi.</p>
+                        <p class="lead opacity-75">Mừng bạn quay trở lại. Tiếp tục hành trình công nghệ cùng chúng
+                            tôi.</p>
                         <div class="mt-auto">
                             <small class="opacity-50">Chất lượng - Uy tín - Tận tâm</small>
                         </div>
@@ -49,7 +50,8 @@
 
                             <div class="floating-label-group">
                                 <div class="d-flex justify-content-between">
-                                    <form:label class="form-label small fw-semibold" path="password">MẬT KHẨU</form:label>
+                                    <form:label class="form-label small fw-semibold"
+                                                path="password">MẬT KHẨU</form:label>
                                     <a href="/forgot-password" class="small text-decoration-none">Quên mật khẩu?</a>
                                 </div>
                                 <div class="input-group">
@@ -70,9 +72,18 @@
                                 ĐĂNG NHẬP
                             </button>
 
-                            <div class="text-center">
+                            <div class="d-flex justify-content-between">
+                                <span class="small text-secondary">
+                                    <a href="/"
+                                       class="fw-bold text-decoration-none text-primary d-flex align-items-center"
+                                       style="gap: 5px">
+                                        <i class="bi bi-house-door-fill"></i>
+                                        Trang chủ
+                                    </a>
+                                </span>
                                 <span class="small text-secondary">Chưa có tài khoản?
-                                    <a href="/register" class="fw-bold text-decoration-none text-primary">Đăng ký ngay</a>
+                                    <a href="/register"
+                                       class="fw-bold text-decoration-none text-primary">Đăng ký ngay</a>
                                 </span>
                             </div>
                         </form:form>

@@ -17,7 +17,7 @@
         <div class="col-lg-4 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
+                    <a href="/login" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                             class="fas fa-user" style="margin-right: 10px"></i>Đăng nhập</small></a>
                     <div class="dropdown-menu rounded">
                         <a href="/register" class="dropdown-item">Đăng ký tài khoản</a>

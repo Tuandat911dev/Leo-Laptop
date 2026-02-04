@@ -1,11 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Người Dùng Mới - LeoLaptop</title>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet">
@@ -37,14 +38,18 @@
                             <p class="text-secondary">Khám phá thế giới laptop cấu hình khủng</p>
                         </div>
 
-                        <form:form action="/admin/users/create" method="POST" modelAttribute="newUser">
+                        <form:form action="/register" method="POST" modelAttribute="newUser">
                             <div class="floating-label-group">
                                 <form:label class="form-label small fw-semibold" path="fullName">HỌ VÀ
                                     TÊN</form:label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <form:input type="text" class="form-control" path="fullName"
-                                                placeholder="VD: Leo Messi"/>
+                                    <spring:bind path="fullName">
+                                        <form:input path="fullName" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}"
+                                                    placeholder="VD: Lionel Messi"/>
+                                        <form:errors path="fullName" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
@@ -53,8 +58,12 @@
                                     <form:label class="form-label small fw-semibold" path="email">EMAIL</form:label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <form:input type="email" class="form-control" path="email"
-                                                    placeholder="leo@laptop.com"/>
+                                        <spring:bind path="email">
+                                            <form:input path="email" class="form-control ${status.error ? 'is-invalid' :
+                                        ''}"
+                                                        placeholder="VD: goatsi@gmail.com"/>
+                                            <form:errors path="email" cssClass="invalid-feedback"/>
+                                        </spring:bind>
                                     </div>
                                 </div>
                                 <div class="col-md-6 floating-label-group">
@@ -62,8 +71,13 @@
                                                 path="phone">SỐ ĐIỆN THOẠI</form:label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                        <form:input type="tel" class="form-control" path="phone"
-                                                    placeholder="0901234xxx"/>
+                                        <spring:bind path="phone">
+                                            <form:input type="tel" path="phone" class="form-control ${status.error ?
+                                            'is-invalid' :
+                                        ''}"
+                                                        placeholder="VD: 0901234xxx"/>
+                                            <form:errors path="phone" cssClass="invalid-feedback"/>
+                                        </spring:bind>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +86,28 @@
                                 <form:label class="form-label small fw-semibold" path="password">MẬT KHẨU</form:label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                                    <form:password class="form-control" path="password"
-                                                   placeholder="Nhập ít nhất 8 ký tự"/>
+                                    <spring:bind path="password">
+                                        <form:input path="password" class="form-control ${status.error ?
+                                            'is-invalid' :
+                                        ''}"
+                                                    placeholder="Nhập ít nhất 8 ký tự"/>
+                                        <form:errors path="password" cssClass="invalid-feedback"/>
+                                    </spring:bind>
+                                </div>
+                            </div>
+
+                            <div class="floating-label-group">
+                                <form:label class="form-label small fw-semibold" path="password">NHẬP LẠI MẬT
+                                    KHẨU</form:label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                                    <spring:bind path="rePassword">
+                                        <form:input path="rePassword" class="form-control ${status.error ?
+                                            'is-invalid' :
+                                        ''}"
+                                                    placeholder="Nhập lại mật khẩu"/>
+                                        <form:errors path="rePassword" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
@@ -82,8 +116,13 @@
                                             path="address">ĐỊA CHỈ GIAO HÀNG</form:label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                    <form:input type="text" class="form-control" path="address"
-                                                placeholder="Địa chỉ nhận hàng của bạn"/>
+                                    <spring:bind path="address">
+                                        <form:input path="address" class="form-control ${status.error ?
+                                            'is-invalid' :
+                                        ''}"
+                                                    placeholder="Địa chỉ nhận hàng"/>
+                                        <form:errors path="address" cssClass="invalid-feedback"/>
+                                    </spring:bind>
                                 </div>
                             </div>
 
