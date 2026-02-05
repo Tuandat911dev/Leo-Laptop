@@ -6,11 +6,11 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet">
+    <link href="/css/reset.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="<c:url value="/resources/css/client/auth/register.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/client/auth/login.css" />" rel="stylesheet">
+    <link href="/css/client/auth/register.css" rel="stylesheet">
+    <link href="/css/client/auth/login.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
@@ -40,24 +40,31 @@
 
                         <form:form action="/login" method="POST" modelAttribute="loginUser">
                             <div class="floating-label-group">
-                                <form:label class="form-label small fw-semibold" path="email">EMAIL</form:label>
+                                <c:if test="${param.error != null}">
+                                    <div class="my-2" style="color: red;">Email hoặc mật khẩu không đúng</div>
+                                </c:if>
+                            </div>
+
+                            <div class="floating-label-group">
+                                <label class="form-label small fw-semibold" for="email">EMAIL
+                                </label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                    <form:input type="email" class="form-control" path="email"
-                                                placeholder="example@gmail.com"/>
+                                    <input type="email" id="email" class="form-control"
+                                                placeholder="example@gmail.com" name="username"/>
                                 </div>
                             </div>
 
                             <div class="floating-label-group">
                                 <div class="d-flex justify-content-between">
-                                    <form:label class="form-label small fw-semibold"
-                                                path="password">MẬT KHẨU</form:label>
-                                    <a href="/forgot-password" class="small text-decoration-none">Quên mật khẩu?</a>
+                                    <label class="form-label small fw-semibold"
+                                                for="password">MẬT KHẨU</label>
+                                    <a href="#!" class="small text-decoration-none">Quên mật khẩu?</a>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                                    <form:password class="form-control" path="password"
-                                                   placeholder="Nhập mật khẩu của bạn"/>
+                                    <input type="password" class="form-control" id="password"
+                                                   placeholder="Nhập mật khẩu của bạn" name="password"/>
                                 </div>
                             </div>
 
@@ -67,6 +74,8 @@
                                     Ghi nhớ đăng nhập
                                 </label>
                             </div>
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                             <button type="submit" class="btn btn-primary btn-submit w-100 mb-4">
                                 ĐĂNG NHẬP

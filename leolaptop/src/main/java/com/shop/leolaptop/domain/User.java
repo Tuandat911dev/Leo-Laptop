@@ -1,10 +1,6 @@
 package com.shop.leolaptop.domain;
 
-import com.shop.leolaptop.constant.ErrorMessage;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -36,6 +32,7 @@ public class User {
     @JoinColumn(name = "role_id")
     Role role;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     Set<Order> orders = new HashSet<>();
 }
