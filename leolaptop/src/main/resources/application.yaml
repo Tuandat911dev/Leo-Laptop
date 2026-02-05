@@ -3,10 +3,6 @@ spring:
     name: leo-laptop
   profiles:
     active: dev
-  security:
-    user:
-      name: root
-      password: root
   servlet:
     multipart:
       max-file-size: 50MB

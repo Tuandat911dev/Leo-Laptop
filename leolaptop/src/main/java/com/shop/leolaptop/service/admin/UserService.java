@@ -15,6 +15,7 @@ import com.shop.leolaptop.service.common.FileUploadService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,7 @@ public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
     FileUploadService fileUploadService;
+    PasswordEncoder passwordEncoder;
 
     String DEFAULT_AVATAR = "avatar-default.png";
 
@@ -44,6 +46,8 @@ public class UserService {
             user.setAvatar(fileUploadService.handleUploadSingleFile(avatar, ImageFolder.avatar));
         }
 
+        user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
+
         return userRepository.save(user);
     }
 
@@ -53,6 +57,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Role Not Found!"));
         user.setRole(currentRole);
         user.setAvatar(DEFAULT_AVATAR);
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         return userRepository.save(user);
     }
