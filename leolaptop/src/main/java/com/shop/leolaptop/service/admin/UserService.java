@@ -4,10 +4,7 @@ import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.constant.RoleName;
 import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
-import com.shop.leolaptop.dto.user.CreateUserDTO;
-import com.shop.leolaptop.dto.user.RegisterDTO;
-import com.shop.leolaptop.dto.user.UpdateUserDTO;
-import com.shop.leolaptop.dto.user.UserDTO;
+import com.shop.leolaptop.dto.user.*;
 import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.repository.RoleRepository;
 import com.shop.leolaptop.repository.UserRepository;
@@ -98,5 +95,16 @@ public class UserService {
     public void deleteUser(long id) {
         User currentUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found!"));
         userRepository.delete(currentUser);
+    }
+
+    public SecurityUserDTO getUserToAuthenticate(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        return SecurityUserDTO.builder()
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .roleName(user.getRole().getName())
+                .build();
     }
 }
