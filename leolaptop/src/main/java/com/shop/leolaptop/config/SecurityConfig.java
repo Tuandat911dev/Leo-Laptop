@@ -1,5 +1,6 @@
 package com.shop.leolaptop.config;
 
+import com.shop.leolaptop.constant.RoleName;
 import com.shop.leolaptop.service.admin.UserService;
 import com.shop.leolaptop.service.common.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -22,11 +24,17 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
+    }
+
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(
                                 DispatcherType.FORWARD,
+                                DispatcherType.ERROR,
                                 DispatcherType.INCLUDE
                         ).permitAll()
 
@@ -38,14 +46,18 @@ public class SecurityConfig {
                                         "/client/**",
                                         "/css/**",
                                         "/js/**",
-                                        "/images/**"
+                                        "/images/**",
+                                        "/.well-known/**"
                                 ).permitAll()
+                        .requestMatchers(
+                                "/admin/**"
+                        ).hasRole(RoleName.ADMIN)
                         .anyRequest().authenticated())
 
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
                         .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
                         .permitAll());
         return http.build();
     }
