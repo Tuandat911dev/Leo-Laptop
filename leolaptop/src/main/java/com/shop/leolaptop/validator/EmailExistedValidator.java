@@ -6,9 +6,11 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Component
 public class EmailExistedValidator implements ConstraintValidator<EmailExistedConstraint, String> {
     UserService userService;
 
