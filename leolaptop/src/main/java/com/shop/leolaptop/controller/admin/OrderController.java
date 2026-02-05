@@ -17,6 +17,6 @@ public class OrderController {
     @GetMapping
     public String getOrderPage(Model model) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/order/table.jsp");
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 }

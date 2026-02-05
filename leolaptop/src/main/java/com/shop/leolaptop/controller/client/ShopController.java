@@ -25,6 +25,6 @@ public class ShopController {
         model.addAttribute("productList", productList);
         model.addAttribute("contentPage", "/WEB-INF/view/client/page/shop.jsp");
 
-        return "/client/layout/clientLayout";
+        return "client/layout/clientLayout";
     }
 }

@@ -25,14 +25,14 @@ public class AuthClientController {
     public String getRegisterPage(Model model) {
         RegisterDTO newUser = new RegisterDTO();
         model.addAttribute("newUser", newUser);
-        return "/client/auth/register";
+        return "client/auth/register";
     }
 
     @PostMapping("/register")
     public String registerNewAccount(@ModelAttribute("newUser") @Valid RegisterDTO registerDTO,
                                      BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "/client/auth/register";
+            return "client/auth/register";
         } else {
            User user = userService.registerNewClient(registerDTO);
            return "redirect:/login";
@@ -43,6 +43,6 @@ public class AuthClientController {
     public String getLoginPage(Model model) {
         CreateUserDTO loginUser = new CreateUserDTO();
         model.addAttribute("loginUser", loginUser);
-        return "/client/auth/login";
+        return "client/auth/login";
     }
 }

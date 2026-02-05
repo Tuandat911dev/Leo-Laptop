@@ -11,6 +11,6 @@ public class DashboardController {
     @GetMapping
     public String getDashboardPage(Model model) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/dashboard/show.jsp");
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 }

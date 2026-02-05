@@ -28,6 +28,6 @@ public class ProductDetailController {
         model.addAttribute("contentPage", "/WEB-INF/view/client/page/productDetail.jsp");
         model.addAttribute("product", product);
 
-        return "/client/layout/clientLayout";
+        return "client/layout/clientLayout";
     }
 }

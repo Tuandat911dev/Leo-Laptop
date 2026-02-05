@@ -35,7 +35,7 @@ public class UserController {
         List<Role> roles = roleService.getAllRole();
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
         model.addAttribute("roles", roles);
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @PostMapping("/create")
@@ -46,7 +46,7 @@ public class UserController {
             List<Role> roles = roleService.getAllRole();
             model.addAttribute("contentPage", "/WEB-INF/view/admin/user/create.jsp");
             model.addAttribute("roles", roles);
-            return "/admin/layout/layout";
+            return "admin/layout/layout";
         } else {
             User newUser = userService.createUser(createUserDTO, avatar);
             return "redirect:/admin/users";
@@ -68,7 +68,7 @@ public class UserController {
                 .toList();
         model.addAttribute("userList", listUserDTO);
 
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @GetMapping("/update/{id}")
@@ -79,7 +79,7 @@ public class UserController {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("roles", roles);
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/update.jsp");
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @PostMapping("/update/{id}")
@@ -95,7 +95,7 @@ public class UserController {
             model.addAttribute("roles", roles);
             user.setAvatar(currentUser.getAvatar());
             model.addAttribute("currentUser", user);
-            return "/admin/layout/layout";
+            return "admin/layout/layout";
         } else {
             userService.updateUser(id, user, avatarFile);
             return "redirect:/admin/users";

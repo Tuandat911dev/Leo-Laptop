@@ -33,7 +33,7 @@ public class ProductController {
 
         model.addAttribute("productList", productList);
 
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @GetMapping("/{id}")
@@ -49,7 +49,7 @@ public class ProductController {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/product/create.jsp");
         model.addAttribute("newProduct", new RequestProductDTO());
 
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @PostMapping("/create")
@@ -59,7 +59,7 @@ public class ProductController {
                                    Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("contentPage", "/WEB-INF/view/admin/product/create.jsp");
-            return "/admin/layout/layout";
+            return "admin/layout/layout";
         }
         productService.createNewProduct(newProduct, img);
 
@@ -73,7 +73,7 @@ public class ProductController {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/product/update.jsp");
         model.addAttribute("currentProduct", currentProduct);
 
-        return "/admin/layout/layout";
+        return "admin/layout/layout";
     }
 
     @PostMapping("/update/{id}")
@@ -89,7 +89,7 @@ public class ProductController {
             UpdateProductDTO updateProductDTO = productMapper.responseProductToUpdateProduct(product);
             currentProduct.setImage(updateProductDTO.getImage());
 
-            return "/admin/layout/layout";
+            return "admin/layout/layout";
         }
         productService.updateProduct(currentProduct, id, img);
 
