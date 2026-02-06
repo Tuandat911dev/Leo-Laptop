@@ -12,5 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class SecurityUserDTO {
     String email;
     String password;
+    String fullName;
+    String avatar;
     String roleName;
 }

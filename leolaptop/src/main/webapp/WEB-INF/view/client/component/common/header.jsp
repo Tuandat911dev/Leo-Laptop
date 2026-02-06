@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container-fluid px-5 d-none border-bottom d-lg-block">
     <div class="row gx-0 align-items-center">
@@ -17,12 +18,44 @@
         <div class="col-lg-4 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
                 <div class="dropdown">
-                    <a href="/login" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
-                            class="fas fa-user" style="margin-right: 10px"></i>Đăng nhập</small></a>
-                    <div class="dropdown-menu rounded">
-                        <a href="/register" class="dropdown-item">Đăng ký tài khoản</a>
-                        <a href="#" class="dropdown-item">Trang quản trị</a>
-                    </div>
+                    <c:if test="${not empty pageContext.request.userPrincipal}">
+                        <a href="#" class="dropdown-toggle text-muted ms-2 d-flex align-items-center" style="gap:
+                         5px" data-bs-toggle="dropdown">
+                            <small class="d-flex align-items-center" style="gap: 5px">
+                                <img style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%"
+                                     src="/images/avatar/${pageContext.request.userPrincipal.principal.avatar}" alt="a">
+                                <c:out value="${pageContext.request.userPrincipal.principal.fullName}"/>
+                            </small>
+                        </a>
+
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item">Quản lý tài khoản</a>
+                            <a href="#" class="dropdown-item">Giỏ hàng</a>
+                            <a href="#" class="dropdown-item">Lịch sử mua hàng</a>
+                            <form action="/logout" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <button type="submit" class="dropdown-item">Đăng xuất</button>
+                            </form>
+
+                            <c:if test="${pageContext.request.userPrincipal.principal.roleName == 'ADMIN'}">
+                                <a href="/admin/dashboard" class="dropdown-item">Trang quản trị</a>
+                            </c:if>
+                        </div>
+                    </c:if>
+
+                    <c:if test="${empty pageContext.request.userPrincipal}">
+                        <a href="/login" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown">
+                            <small>
+                                <i class="fas fa-user" style="margin-right: 10px"></i>
+                                Đăng nhập
+                            </small>
+                        </a>
+
+                        <div class="dropdown-menu rounded">
+                            <a href="/login" class="dropdown-item">Đăng nhập</a>
+                            <a href="/register" class="dropdown-item">Đăng ký tài khoản</a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>

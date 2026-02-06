@@ -105,6 +105,8 @@ public class UserService {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .roleName(user.getRole().getName())
+                .fullName(user.getFullName())
+                .avatar(user.getAvatar())
                 .build();
     }
 }

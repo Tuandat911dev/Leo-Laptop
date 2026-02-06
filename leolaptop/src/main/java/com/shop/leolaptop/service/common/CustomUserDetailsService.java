@@ -1,5 +1,6 @@
 package com.shop.leolaptop.service.common;
 
+import com.shop.leolaptop.dto.user.CustomUserDetails;
 import com.shop.leolaptop.dto.user.SecurityUserDTO;
 import com.shop.leolaptop.service.admin.UserService;
 import lombok.AccessLevel;
@@ -11,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +24,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SecurityUserDTO userDb = userService.getUserToAuthenticate(username);
 
-        return new org.springframework.security.core.userdetails.User(
-                userDb.getEmail(),
-                userDb.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userDb.getRoleName()))
-        );
+        return CustomUserDetails.builder()
+                .username(userDb.getEmail())
+                .password(userDb.getPassword())
+                .fullName(userDb.getFullName())
+                .avatar(userDb.getAvatar())
+                .roleName(userDb.getRoleName())
+                .authorities(Set.of(
+                        new SimpleGrantedAuthority("ROLE_" + userDb.getRoleName())
+                ))
+                .build();
     }
 }
