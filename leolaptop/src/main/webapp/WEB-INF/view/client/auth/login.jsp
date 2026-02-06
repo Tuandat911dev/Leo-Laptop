@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="rememberMe"/>
+                                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me"/>
                                 <label class="form-check-label small text-secondary" for="rememberMe">
                                     Ghi nhớ đăng nhập
                                 </label>

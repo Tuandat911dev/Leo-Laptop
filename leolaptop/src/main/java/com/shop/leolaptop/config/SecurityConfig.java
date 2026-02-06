@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 @Configuration
 @EnableWebSecurity
@@ -62,9 +64,29 @@ public class SecurityConfig {
                         .failureUrl("/login?error")
                         .successHandler(customSuccessHandler())
                         .permitAll())
+
                 .logout((logout) -> logout.logoutSuccessUrl("/"))
-                .exceptionHandling((ex) -> ex.accessDeniedPage("/access-deny"));
+
+                .exceptionHandling((ex) -> ex.accessDeniedPage("/access-deny"))
+
+                .rememberMe((rememberMe) -> rememberMe
+                        .rememberMeServices(rememberMeServices())
+                )
+
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true));
+
         return http.build();
+    }
+
+
+    @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+        return new SpringSessionRememberMeServices();
     }
 
     @Bean
