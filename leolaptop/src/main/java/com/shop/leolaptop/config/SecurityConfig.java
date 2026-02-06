@@ -42,6 +42,9 @@ public class SecurityConfig {
                                 (
                                         "/",
                                         "/login",
+                                        "/logout",
+                                        "/access-deny",
+                                        "/not-found",
                                         "/register",
                                         "/client/**",
                                         "/css/**",
@@ -58,7 +61,9 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .failureUrl("/login?error")
                         .successHandler(customSuccessHandler())
-                        .permitAll());
+                        .permitAll())
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
+                .exceptionHandling((ex) -> ex.accessDeniedPage("/access-deny"));
         return http.build();
     }
 
