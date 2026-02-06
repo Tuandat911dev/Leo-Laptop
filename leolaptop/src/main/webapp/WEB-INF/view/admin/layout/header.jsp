@@ -117,9 +117,9 @@
                     aria-expanded="false"
             >
                 <span class="mr-2 d-none d-lg-inline text-gray-600
-                small">${pageContext.request.userPrincipal.principal.fullName}</span>
+                small">${sessionScope.fullName}</span>
                 <img class="img-profile rounded-circle"
-                     src="/images/avatar/${pageContext.request.userPrincipal.principal.avatar}" alt="avatar"/>
+                     src="/images/avatar/${sessionScope.avatar}" alt="avatar"/>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -135,6 +135,10 @@
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log
+                </a>
+                <a class="dropdown-item" href="/">
+                    <i class="fas fa-store fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cửa hàng
                 </a>
                 <div class="dropdown-divider"></div>
 
