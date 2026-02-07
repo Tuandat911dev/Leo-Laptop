@@ -1,5 +1,6 @@
 package com.shop.leolaptop.service.admin;
 
+import com.shop.leolaptop.constant.AuthProvider;
 import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.constant.RoleName;
 import com.shop.leolaptop.domain.Role;
@@ -108,5 +109,21 @@ public class UserService {
                 .fullName(user.getFullName())
                 .avatar(user.getAvatar())
                 .build();
+    }
+
+    public void processOAuthPostLogin(String email, String fullName, AuthProvider provider, String avatar) {
+        if (!userRepository.existsByEmail(email)) {
+            User user = User.builder()
+                    .email(email)
+                    .fullName(fullName)
+                    .provider(provider)
+                    .avatar(avatar)
+                    .build();
+
+            Role currentRole = roleRepository.findRoleByName(RoleName.CLIENT)
+                    .orElseThrow(() -> new RuntimeException("Role Not Found!"));
+            user.setRole(currentRole);
+            userRepository.save(user);
+        }
     }
 }

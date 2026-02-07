@@ -1,5 +1,6 @@
 package com.shop.leolaptop.domain;
 
+import com.shop.leolaptop.constant.AuthProvider;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -35,4 +36,8 @@ public class User {
     @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     Set<Order> orders = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private AuthProvider provider = AuthProvider.LOCAL;
 }

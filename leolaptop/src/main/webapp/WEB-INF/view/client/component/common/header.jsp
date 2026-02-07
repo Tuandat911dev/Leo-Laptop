@@ -22,8 +22,19 @@
                         <a href="#" class="dropdown-toggle text-muted ms-2 d-flex align-items-center" style="gap:
                          5px" data-bs-toggle="dropdown">
                             <small class="d-flex align-items-center" style="gap: 5px">
-                                <img style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%"
-                                     src="/images/avatar/${sessionScope.avatar}" alt="a">
+                                <img
+                                    style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%;"
+                                    src="
+                                        <c:choose>
+                                            <c:when test='${not empty sessionScope.avatar and sessionScope.avatar.startsWith("https")}'>
+                                                ${sessionScope.avatar}
+                                            </c:when>
+                                            <c:otherwise>
+                                                /images/avatar/${sessionScope.avatar}
+                                            </c:otherwise>
+                                        </c:choose>"
+                                    alt="avatar"
+                                />
                                 <c:out value="${sessionScope.fullName}"/>
                             </small>
                         </a>

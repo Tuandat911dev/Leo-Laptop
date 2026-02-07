@@ -81,6 +81,26 @@
                                 ĐĂNG NHẬP
                             </button>
 
+
+                            <div class="divider d-flex align-items-center my-4">
+                                <p class="text-center fw-bold mx-3 mb-0 text-muted small">HOẶC</p>
+                            </div>
+
+                            <div class="row g-2 mb-4">
+                                <div class="col-6">
+                                    <a href="/oauth2/authorization/google" class="btn btn-social btn-google w-100 py-2">
+                                        <i class="bi bi-google text-danger"></i>
+                                        <span class="small fw-semibold">Google</span>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="/oauth2/authorization/github" class="btn btn-social btn-github w-100 py-2">
+                                        <i class="bi bi-github"></i>
+                                        <span class="small fw-semibold">GitHub</span>
+                                    </a>
+                                </div>
+                            </div>
+
                             <div class="d-flex justify-content-between">
                                 <span class="small text-secondary">
                                     <a href="/"

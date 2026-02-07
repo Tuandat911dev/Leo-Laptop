@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 where u.email = :email
             """)
     Optional<User> findByEmail(String email);
+
+    Boolean existsByEmail(String email);
 }
