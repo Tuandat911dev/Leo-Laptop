@@ -111,19 +111,22 @@ public class UserService {
                 .build();
     }
 
-    public void processOAuthPostLogin(String email, String fullName, AuthProvider provider, String avatar) {
-        if (!userRepository.existsByEmail(email)) {
+    public User processOAuthPostLogin(String fullName, AuthProvider provider, String providerId, String avatar) {
+        if (!userRepository.existsByProviderAndProviderId(provider, providerId)) {
             User user = User.builder()
-                    .email(email)
                     .fullName(fullName)
                     .provider(provider)
                     .avatar(avatar)
+                    .providerId(providerId)
                     .build();
 
             Role currentRole = roleRepository.findRoleByName(RoleName.CLIENT)
                     .orElseThrow(() -> new RuntimeException("Role Not Found!"));
             user.setRole(currentRole);
-            userRepository.save(user);
+
+            return userRepository.save(user);
+        } else {
+            return userRepository.findByProviderAndProviderId(provider, providerId).orElseThrow(() -> new RuntimeException("User Not Found"));
         }
     }
 }

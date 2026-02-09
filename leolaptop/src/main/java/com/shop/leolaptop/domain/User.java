@@ -39,5 +39,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private AuthProvider provider = AuthProvider.LOCAL;
+    AuthProvider provider = AuthProvider.LOCAL;
+
+    String providerId;
 }

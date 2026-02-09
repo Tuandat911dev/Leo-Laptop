@@ -1,8 +1,8 @@
 package com.shop.leolaptop.config;
 
 import com.shop.leolaptop.constant.RoleName;
-import com.shop.leolaptop.domain.CustomOAuth2User;
 import com.shop.leolaptop.service.admin.UserService;
+import com.shop.leolaptop.service.client.CustomOAuth2UserService;
 import com.shop.leolaptop.service.common.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
@@ -27,20 +23,12 @@ import org.springframework.session.security.web.authentication.SpringSessionReme
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final OauthCustomSuccessHandler oauthCustomSuccessHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public AuthenticationSuccessHandler formLoginSuccessHandler() {
         return new CustomSuccessHandler();
     }
-
-    private OAuth2UserService<OidcUserRequest, OidcUser> customOidcUserService() {
-        OidcUserService delegate = new OidcUserService();
-        return (userRequest) -> {
-            OidcUser oidcUser = delegate.loadUser(userRequest);
-            return new CustomOAuth2User(oidcUser);
-        };
-    }
-
 
     @Bean
     public SecurityFilterChain filterChain(
@@ -85,10 +73,11 @@ public class SecurityConfig {
 
                 .oauth2Login(oauth -> oauth
                         .loginPage("/login")
-                        .userInfoEndpoint(user -> user
-                                .oidcUserService(customOidcUserService())
-                        )
+                        .failureUrl("/login?error")
                         .defaultSuccessUrl("/", true)
+                        .userInfoEndpoint(user -> user
+                                .userService(customOAuth2UserService)
+                        )
                         .successHandler(oauthCustomSuccessHandler)
                 )
 
