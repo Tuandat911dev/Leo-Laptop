@@ -20,8 +20,16 @@
         </div>
     </div>
     <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
-        <a href="#" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i
-                class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+        <form action="/cart" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <input type="number" name="productId" value="${product.id}" hidden>
+            <input type="number" name="userId" value="${sessionScope.userId}" hidden>
+            <input type="number" name="quantity" value="1" hidden>
+
+            <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
+                <i class="fas fa-shopping-cart me-2">Add To Cart</i>
+            </button>
+        </form>
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex"><i class="fas fa-star text-primary"></i><i
                     class="fas fa-star text-primary"></i><i

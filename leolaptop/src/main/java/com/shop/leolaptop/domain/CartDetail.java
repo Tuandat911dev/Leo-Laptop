@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@Builder
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
