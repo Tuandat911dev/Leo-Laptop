@@ -25,6 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         SecurityUserDTO userDb = userService.getUserToAuthenticate(username);
 
         return CustomUserDetails.builder()
+                .id(userDb.getId())
                 .username(userDb.getEmail())
                 .password(userDb.getPassword())
                 .fullName(userDb.getFullName())

@@ -2,7 +2,6 @@ package com.shop.leolaptop.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

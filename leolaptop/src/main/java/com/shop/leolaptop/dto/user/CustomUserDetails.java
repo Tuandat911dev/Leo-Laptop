@@ -13,6 +13,8 @@ import java.util.Set;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomUserDetails implements UserDetails {
+    @Getter
+    long id;
     String password;
     String username;
     @Getter

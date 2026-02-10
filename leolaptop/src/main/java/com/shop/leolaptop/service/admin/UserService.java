@@ -103,6 +103,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
 
         return SecurityUserDTO.builder()
+                .id(user.getId())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .roleName(user.getRole().getName())
@@ -128,5 +129,9 @@ public class UserService {
         } else {
             return userRepository.findByProviderAndProviderId(provider, providerId).orElseThrow(() -> new RuntimeException("User Not Found"));
         }
+    }
+
+    public User getUserByProviderAndProviderId(AuthProvider provider, String providerId) {
+        return userRepository.findByProviderAndProviderId(provider, providerId).orElseThrow(() -> new RuntimeException("User Not Found"));
     }
 }

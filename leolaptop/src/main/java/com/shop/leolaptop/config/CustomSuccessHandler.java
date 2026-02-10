@@ -64,6 +64,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("avatar", user.getAvatar());
             session.setAttribute("roleName", user.getRoleName());
+            session.setAttribute("userId", user.getId());
         }
 
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
