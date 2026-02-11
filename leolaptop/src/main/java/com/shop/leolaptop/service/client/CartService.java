@@ -4,14 +4,19 @@ import com.shop.leolaptop.domain.Cart;
 import com.shop.leolaptop.domain.CartDetail;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.domain.User;
+import com.shop.leolaptop.dto.cart.CartResponseDTO;
 import com.shop.leolaptop.repository.CartDetailRepository;
 import com.shop.leolaptop.repository.CartRepository;
 import com.shop.leolaptop.repository.ProductRepository;
 import com.shop.leolaptop.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
@@ -22,7 +27,7 @@ public class CartService {
     UserRepository userRepository;
     ProductRepository productRepository;
 
-    private Cart getCartByUser(long userId) {
+    private Cart getCartByUserId(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found!"));
         if (!cartRepository.existsByUser(user)) {
             Cart newCart = Cart.builder()
@@ -37,7 +42,7 @@ public class CartService {
     }
 
     public void addToCart(long productId, long userId, long quantity) {
-        Cart currentCart = this.getCartByUser(userId);
+        Cart currentCart = this.getCartByUserId(userId);
         Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product Not " +
                 "Found!"));
 
@@ -57,4 +62,28 @@ public class CartService {
             cartDetailRepository.save(newCartDetail);
         }
     }
+
+    public List<CartResponseDTO> getCartList(HttpSession session) {
+        long userId = (Long) session.getAttribute("userId");
+        Cart currentCart = this.getCartByUserId(userId);
+        List<CartResponseDTO> cartList = new ArrayList<>();
+        List<CartDetail> cartDetailList = cartDetailRepository.getCartDetailByCart(currentCart);
+
+        for (CartDetail item : cartDetailList) {
+            CartResponseDTO cartResponseDTO = CartResponseDTO.builder()
+                    .productId(item.getProduct().getId())
+                    .productImg(item.getProduct().getImage())
+                    .productName(item.getProduct().getName())
+                    .productPrice(item.getProduct().getPrice())
+                    .quantity(item.getQuantity())
+                    .totalPrice(item.getPrice())
+                    .build();
+
+            cartList.add(cartResponseDTO);
+        }
+
+        return cartList;
+    }
+
+    
 }
