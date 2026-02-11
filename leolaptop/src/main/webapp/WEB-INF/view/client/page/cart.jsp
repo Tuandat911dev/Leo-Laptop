@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!-- Banner start -->
 <c:set var="breadcrumb" value="${{'lev1t':'Trang chủ','lev1l':'/', 'lev2t': 'Giỏ hàng'}}"
        scope="request"/>
@@ -43,7 +45,7 @@
                             </p>
                         </td>
                         <td>
-                            <div class="input-group quantity py-4" style="width: 100px;">
+                            <div class="input-group quantity py-4" style="width: 125px;">
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-minus rounded-circle bg-light border">
                                         <i class="fa fa-minus"></i>
@@ -52,7 +54,6 @@
                                 <input type="number"
                                        class="form-control form-control-sm text-center border-0 cart-quantity"
                                        value="${item.quantity}"
-                                       min="1"
                                        data-product-id="${item.productId}"
                                        data-price="${item.productPrice}">
                                 <div class="input-group-btn">
@@ -84,25 +85,24 @@
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded">
                     <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                        <h1 class="display-6 mb-4"><span class="fw-normal">Đơn Hàng</span></h1>
                         <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">$96.00</p>
+                            <h5 class="mb-0 me-4">Tiền hàng:</h5>
+                            <p class="mb-0 cart-subtotal">0đ</p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Shipping</h5>
+                            <h5 class="mb-0 me-4">Phí vận chuyển</h5>
                             <div>
-                                <p class="mb-0">Flat rate: $3.00</p>
+                                <p class="mb-0">30.000đ</p>
                             </div>
                         </div>
-                        <p class="mb-0 text-end">Shipping to Ukraine.</p>
                     </div>
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">$99.00</p>
+                        <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
+                        <p class="mb-0 pe-4 cart-total">0đ</p>
                     </div>
                     <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4"
-                            type="button">Proceed Checkout
+                            type="button">Thanh Toán
                     </button>
                 </div>
             </div>
@@ -110,3 +110,72 @@
     </div>
 </div>
 <!-- Cart End -->
+
+<script>
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+
+    function updateRowTotal(input) {
+        const price = Number(input.dataset.price);
+        const quantity = Number(input.value);
+        const row = input.closest("tr");
+        const totalEl = row.querySelector(".cart-totalPrice");
+
+        const total = price * quantity;
+
+        totalEl.dataset.total = total;
+
+        totalEl.textContent = formatter.format(total);
+    }
+
+    function updateBill() {
+        let subtotal = 0;
+
+        document.querySelectorAll(".cart-totalPrice").forEach(item => {
+            subtotal += Number(item.dataset.total || 0);
+        });
+
+        const shipping = 30000;
+        const total = subtotal + shipping;
+
+        document.querySelector(".cart-subtotal").textContent = formatter.format(subtotal);
+        document.querySelector(".cart-total").textContent = formatter.format(total);
+    }
+
+    function handleQuantityChange(input) {
+        if (input.value < 1) input.value = 1;
+
+        updateRowTotal(input);
+        updateBill();
+    }
+
+    document.querySelectorAll(".cart-quantity").forEach(input => {
+
+        input.addEventListener("input", () => {
+            handleQuantityChange(input);
+        });
+
+        input.closest("tr").querySelector(".btn-plus")
+            .addEventListener("click", () => {
+                input.value++;
+                handleQuantityChange(input);
+            });
+
+        input.closest("tr").querySelector(".btn-minus")
+            .addEventListener("click", () => {
+                if (input.value > 1) {
+                    input.value--;
+                    handleQuantityChange(input);
+                }
+            });
+    });
+
+    document.querySelectorAll(".cart-quantity").forEach(input => {
+        updateRowTotal(input);
+    });
+    updateBill();
+</script>
+
+

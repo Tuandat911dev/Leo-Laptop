@@ -5,6 +5,7 @@ import com.shop.leolaptop.domain.CartDetail;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.cart.CartResponseDTO;
+import com.shop.leolaptop.dto.cart.CartUpdateDTO;
 import com.shop.leolaptop.repository.CartDetailRepository;
 import com.shop.leolaptop.repository.CartRepository;
 import com.shop.leolaptop.repository.ProductRepository;
@@ -85,5 +86,15 @@ public class CartService {
         return cartList;
     }
 
-    
+    public void updateCart(CartUpdateDTO request, HttpSession session) {
+        long userId = (Long) session.getAttribute("userId");
+        Cart currentCart = this.getCartByUserId(userId);
+        Product product = productRepository.findById(request.getProductId()).orElseThrow(() -> new RuntimeException("Product Not " +
+                "Found!"));
+
+        CartDetail cartDetail = cartDetailRepository.getCartDetailByProductAndCart(product, currentCart);
+        cartDetail.setQuantity(request.getQuantity());
+        cartDetail.setPrice(request.getQuantity() * product.getPrice());
+        cartDetailRepository.save(cartDetail);
+    }
 }

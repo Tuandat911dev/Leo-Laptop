@@ -38,4 +38,10 @@ public class CartController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/update")
+    public String updateCart(@RequestBody CartUpdateDTO request, HttpSession session) {
+        cartService.updateCart(request, session);
+        return "redirect:/cart";
+    }
 }
