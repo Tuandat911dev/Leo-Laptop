@@ -44,4 +44,11 @@ public class CartController {
         cartService.updateCart(request, session);
         return "redirect:/cart";
     }
+
+    @PostMapping("/delete/{productId}")
+    public String deleteCart(@PathVariable("productId") long productId, HttpSession session) {
+        cartService.deleteCart(session, productId);
+
+        return "redirect:/cart";
+    }
 }

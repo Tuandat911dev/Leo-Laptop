@@ -97,4 +97,13 @@ public class CartService {
         cartDetail.setPrice(request.getQuantity() * product.getPrice());
         cartDetailRepository.save(cartDetail);
     }
+
+    public void deleteCart(HttpSession session, long productId) {
+        long userId = (Long) session.getAttribute("userId");
+        Cart currentCart = this.getCartByUserId(userId);
+        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product Not " +
+                "Found!"));
+        CartDetail cartDetail = cartDetailRepository.getCartDetailByProductAndCart(product, currentCart);
+        cartDetailRepository.delete(cartDetail);
+    }
 }
