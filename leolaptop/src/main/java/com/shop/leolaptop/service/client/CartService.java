@@ -28,7 +28,7 @@ public class CartService {
     UserRepository userRepository;
     ProductRepository productRepository;
 
-    private Cart getCartByUserId(long userId) {
+    public Cart getCartByUserId(long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found!"));
         if (!cartRepository.existsByUser(user)) {
             Cart newCart = Cart.builder()
@@ -105,5 +105,11 @@ public class CartService {
                 "Found!"));
         CartDetail cartDetail = cartDetailRepository.getCartDetailByProductAndCart(product, currentCart);
         cartDetailRepository.delete(cartDetail);
+    }
+
+    public void deleteAllCart(Cart cart) {
+        List<CartDetail> cartDetailList = cartDetailRepository.getCartDetailByCart(cart);
+
+        cartDetailRepository.deleteAll(cartDetailList);
     }
 }

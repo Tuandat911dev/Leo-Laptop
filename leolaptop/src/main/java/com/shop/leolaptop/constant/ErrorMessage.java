@@ -19,4 +19,10 @@ public class ErrorMessage {
     public final static String TARGET_NOT_EMPTY = "Mục đích sử dụng không được để trống";
     public final static String PRICE_INVALID = "Giá tiền không hợp lệ";
     public final static String QUANTITY_INVALID = "Số lượng không hợp lệ";
+
+    // Checkout
+    public final static String CHECKOUT_RECEIVER_NAME_NOT_BLANK = "Tên người nhận không được để trống";
+    public final static String CHECKOUT_RECEIVER_ADDRESS_NOT_BLANK = "Địa chỉ nhận hàng không được để trống";
+    public final static String CHECKOUT_RECEIVER_PHONE_NOT_BLANK = "Số điện thoại không được để trống";
+    public final static String CHECKOUT_PAYMENT_METHOD_NOT_BLANK = "Vui lòng chọn phương thức thanh toán";
 }

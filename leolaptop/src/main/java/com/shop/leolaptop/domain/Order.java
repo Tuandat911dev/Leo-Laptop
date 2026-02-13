@@ -1,11 +1,10 @@
 package com.shop.leolaptop.domain;
 
+import com.shop.leolaptop.constant.PaymentMethod;
+import com.shop.leolaptop.constant.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
@@ -14,15 +13,28 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "orders")
+@Builder
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @Size(min = 0)
     double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    PaymentMethod paymentMethod = PaymentMethod.COD;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    PaymentStatus paymentStatus = PaymentStatus.UN_PAID;
+
+    String receiverName;
+    String receiverAddress;
+    String receiverPhone;
+    String orderNotes;
 }
 

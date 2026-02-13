@@ -2,10 +2,7 @@ package com.shop.leolaptop.domain;
 
 import com.shop.leolaptop.domain.custom_id.OrderDetailId;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
@@ -14,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class OrderDetail {
     @EmbeddedId
     OrderDetailId id;
