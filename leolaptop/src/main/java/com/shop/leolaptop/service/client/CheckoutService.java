@@ -1,6 +1,7 @@
 package com.shop.leolaptop.service.client;
 
 import com.shop.leolaptop.constant.PaymentMethod;
+import com.shop.leolaptop.constant.PaymentStatus;
 import com.shop.leolaptop.domain.*;
 import com.shop.leolaptop.domain.custom_id.OrderDetailId;
 import com.shop.leolaptop.dto.checkout.CheckoutDTO;
@@ -25,26 +26,19 @@ public class CheckoutService {
     CartDetailRepository cartDetailRepository;
     UserRepository userRepository;
     OrderDetailRepository orderDetailRepository;
+    VNPayService vnPayService;
 
     double SHIPPING_FEE = 30000;
 
-    public void creatNewOrder(CheckoutDTO checkoutDTO, HttpSession session) {
+    public Order creatNewOrder(CheckoutDTO checkoutDTO, HttpSession session) {
         long userId = (Long) session.getAttribute("userId");
-        User currentUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User Not Found!"));
+        User currentUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found!"));
         PaymentMethod paymentMethod = PaymentMethod.valueOf(checkoutDTO.getPaymentMethod());
 
         Cart currentCart = cartService.getCartByUserId(userId);
         List<CartDetail> cartDetailList = cartDetailRepository.getCartDetailByCart(currentCart);
 
-        Order order = Order.builder()
-                .receiverName(checkoutDTO.getReceiverName())
-                .receiverAddress(checkoutDTO.getReceiverAddress())
-                .receiverPhone(checkoutDTO.getReceiverPhone())
-                .orderNotes(checkoutDTO.getOrderNotes())
-                .paymentMethod(paymentMethod)
-                .user(currentUser)
-                .build();
+        Order order = Order.builder().receiverName(checkoutDTO.getReceiverName()).receiverAddress(checkoutDTO.getReceiverAddress()).receiverPhone(checkoutDTO.getReceiverPhone()).orderNotes(checkoutDTO.getOrderNotes()).paymentMethod(paymentMethod).user(currentUser).build();
 
         Order newOrder = orderRepository.save(order);
 
@@ -52,12 +46,7 @@ public class CheckoutService {
         for (CartDetail item : cartDetailList) {
             totalBill += item.getPrice();
             OrderDetailId orderDetailId = new OrderDetailId(newOrder.getId(), item.getProduct().getId());
-            OrderDetail orderDetail = OrderDetail.builder()
-                    .id(orderDetailId)
-                    .order(newOrder)
-                    .product(item.getProduct())
-                    .quantity(item.getQuantity())
-                    .build();
+            OrderDetail orderDetail = OrderDetail.builder().id(orderDetailId).order(newOrder).product(item.getProduct()).quantity(item.getQuantity()).build();
 
             orderDetailRepository.save(orderDetail);
         }
@@ -65,5 +54,19 @@ public class CheckoutService {
         newOrder.setTotalPrice(totalBill);
         orderRepository.save(newOrder);
         cartService.deleteAllCart(currentCart);
+
+        return newOrder;
+    }
+
+    public void updatePaymentOrder(long orderId, int paymentStatus) {
+        Order currentOrder = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order Not Found!"));
+        if (paymentStatus == 1) {
+            currentOrder.setPaymentStatus(PaymentStatus.PAID);
+
+        } else {
+            currentOrder.setPaymentMethod(PaymentMethod.COD);
+        }
+
+        orderRepository.save(currentOrder);
     }
 }

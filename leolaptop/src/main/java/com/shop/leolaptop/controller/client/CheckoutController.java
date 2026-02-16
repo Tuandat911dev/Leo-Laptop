@@ -1,9 +1,13 @@
 package com.shop.leolaptop.controller.client;
 
+import com.shop.leolaptop.constant.PaymentMethod;
+import com.shop.leolaptop.domain.Order;
 import com.shop.leolaptop.dto.cart.CartResponseDTO;
 import com.shop.leolaptop.dto.checkout.CheckoutDTO;
 import com.shop.leolaptop.service.client.CartService;
 import com.shop.leolaptop.service.client.CheckoutService;
+import com.shop.leolaptop.service.client.VNPayService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -26,6 +30,7 @@ import java.util.List;
 public class CheckoutController {
     CartService cartService;
     CheckoutService checkoutService;
+    VNPayService vnPayService;
 
     @GetMapping
     public String getCheckoutPage(Model model, HttpSession session) {
@@ -48,9 +53,42 @@ public class CheckoutController {
             model.addAttribute("contentPage", "/WEB-INF/view/client/page/checkout.jsp");
             return "client/layout/clientLayout";
         } else {
-            checkoutService.creatNewOrder(checkoutDTO, session);
+            Order newOrder = checkoutService.creatNewOrder(checkoutDTO, session);
+            PaymentMethod paymentMethod = PaymentMethod.valueOf(checkoutDTO.getPaymentMethod());
+            if (paymentMethod == PaymentMethod.VNPAY) {
+                String baseUrl = "http://localhost:8080";
+                String vnpayUrl = vnPayService.createOrder(
+                        (int) newOrder.getTotalPrice(),
+                        Long.toString(newOrder.getId()),
+                        baseUrl);
 
+                return "redirect:" + vnpayUrl;
+            }
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/vnpay-payment")
+    public String GetMapping(HttpServletRequest request, Model model) {
+        int paymentStatus = vnPayService.orderReturn(request);
+
+        String orderInfo = request.getParameter("vnp_OrderInfo");
+        String paymentTime = request.getParameter("vnp_PayDate");
+        String transactionId = request.getParameter("vnp_TransactionNo");
+        String totalPrice = request.getParameter("vnp_Amount");
+
+        model.addAttribute("orderId", orderInfo);
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("paymentTime", paymentTime);
+        model.addAttribute("transactionId", transactionId);
+
+        if (paymentStatus == 1) {
+            model.addAttribute("contentPage", "/WEB-INF/view/client/page/paymentSuccess.jsp");
+        } else {
+            model.addAttribute("contentPage", "/WEB-INF/view/client/page/paymentFail.jsp");
+        }
+        checkoutService.updatePaymentOrder(Long.parseLong(orderInfo), paymentStatus);
+
+        return "client/layout/clientLayout";
     }
 }
