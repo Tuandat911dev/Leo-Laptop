@@ -1,9 +1,9 @@
 package com.shop.leolaptop.domain;
 
+import com.shop.leolaptop.constant.OrderStatus;
 import com.shop.leolaptop.constant.PaymentMethod;
 import com.shop.leolaptop.constant.PaymentStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -31,6 +31,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     PaymentStatus paymentStatus = PaymentStatus.UN_PAID;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    OrderStatus orderStatus = OrderStatus.PENDING;
 
     String receiverName;
     String receiverAddress;
