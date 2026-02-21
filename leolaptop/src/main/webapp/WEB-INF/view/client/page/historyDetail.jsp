@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="card-footer bg-white">
-            <a href="/order/history" class="btn btn-outline-primary">Quay lại lịch sử</a>
+            <a href="/history" class="btn btn-outline-primary">Quay lại lịch sử</a>
         </div>
     </div>
 </div>

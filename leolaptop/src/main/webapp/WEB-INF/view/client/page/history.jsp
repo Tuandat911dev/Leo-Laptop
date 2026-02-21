@@ -52,7 +52,6 @@
                     <a href="/order/edit/${order.id}" class="btn btn-sm btn-outline-primary ml-2">
                         <i class="fas fa-edit"></i> Sửa thông tin
                     </a>
-
                     <button class="btn btn-sm btn-outline-danger ml-2"
                             onclick="confirmCancel(${order.id})">
                         <i class="fas fa-times"></i> Hủy đơn
@@ -75,6 +74,8 @@
                     Bạn có chắc chắn muốn hủy đơn hàng <strong id="cancelOrderIdText"></strong> không?
                     Hành động này không thể hoàn tác.
                 </div>
+                <input type="text" value="CANCELLED" name="CANCELLED" hidden>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
@@ -87,7 +88,7 @@
 <script>
     function confirmCancel(orderId) {
         document.getElementById('cancelOrderIdText').innerText = '#ORD-' + orderId;
-        document.getElementById('cancelForm').action = '/order/cancel/' + orderId;
+        document.getElementById('cancelForm').action = '/history/cancel/' + orderId;
         $('#cancelModal').modal('show');
     }
 </script>
