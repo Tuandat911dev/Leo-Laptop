@@ -48,9 +48,10 @@ public class OrderController {
     @PostMapping("/update/{id}")
     public String updateOrder(Model model,
                               @PathVariable("id") long id,
-                              @RequestParam("orderStatus") String orderStatus
+                              @RequestParam("orderStatus") String orderStatus,
+                              @RequestParam("paymentStatus") String paymentStatus
     ) {
-        orderService.updateOrder(id, orderStatus);
+        orderService.updateOrder(id, orderStatus, paymentStatus);
         model.addAttribute("contentPage", "/WEB-INF/view/admin/order/table.jsp");
 
         return "redirect:/admin/orders";

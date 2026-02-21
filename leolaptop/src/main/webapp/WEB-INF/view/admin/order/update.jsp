@@ -19,8 +19,6 @@
                 </div>
                 <div class="card-body">
                     <form:form action="/admin/orders/update/${order.id}" method="post" modelAttribute="order">
-                        <form:hidden path="id" />
-
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="font-weight-bold text-muted">Tên người nhận</label>
@@ -69,9 +67,30 @@
                                 <form:option value="DELIVERED">Đã giao hàng</form:option>
                                 <form:option value="CANCELLED">Đã hủy đơn</form:option>
                             </form:select>
+                            <c:if test="${order.orderStatus == 'DELIVERED' || order.orderStatus == 'CANCELLED'}">
+                                <form:hidden path="orderStatus" />
+                            </c:if>
                             <small class="form-text text-muted mt-2">
                                 * Lưu ý: Việc thay đổi trạng thái sẽ ảnh hưởng đến quy trình vận hành và thông báo cho khách hàng.
                             </small>
+                        </div>
+
+                        <div class="form-group bg-light p-4 rounded border">
+                            <label for="paymentStatus" class="font-weight-bold text-primary">
+                                <i class="fas fa-truck-loading mr-2"></i>Trạng thái thanh toán
+                            </label>
+                            <form:select path="paymentStatus"
+                                         class="form-control custom-select shadow-sm ${order.paymentStatus == 'PAID' ? 'bg-light' : ''}"
+                                         id="orderStatus"
+                                         disabled="${order.orderStatus == 'DELIVERED'
+                                         || order.orderStatus == 'CANCELLED'
+                                         || order.orderStatus == 'PENDING'}">
+                                <form:option value="PAID">Đã thanh toán</form:option>
+                                <form:option value="UN_PAID">Chưa thanh toán</form:option>
+                            </form:select>
+                            <c:if test="${order.orderStatus == 'DELIVERED' || order.orderStatus == 'CANCELLED' || order.orderStatus == 'PENDING'}">
+                                <form:hidden path="paymentStatus" />
+                            </c:if>
                         </div>
 
                         <c:choose>

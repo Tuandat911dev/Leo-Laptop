@@ -1,5 +1,7 @@
 package com.shop.leolaptop.controller.client;
 
+import com.shop.leolaptop.constant.OrderStatus;
+import com.shop.leolaptop.constant.PaymentStatus;
 import com.shop.leolaptop.dto.order.OrderResponse;
 import com.shop.leolaptop.service.admin.OrderService;
 import jakarta.servlet.http.HttpSession;
@@ -44,7 +46,7 @@ public class OrderHistoryController {
     @PostMapping("/cancel/{id}")
     public String cancelOrder(Model model,
                               @PathVariable("id") long id) {
-        orderService.updateOrder(id, "CANCELLED");
+        orderService.updateOrder(id, String.valueOf(OrderStatus.CANCELLED), String.valueOf(PaymentStatus.UN_PAID));
 
         return "redirect:/history";
     }
