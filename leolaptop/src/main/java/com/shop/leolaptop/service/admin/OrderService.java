@@ -1,5 +1,6 @@
 package com.shop.leolaptop.service.admin;
 
+import com.shop.leolaptop.constant.OrderStatus;
 import com.shop.leolaptop.domain.Order;
 import com.shop.leolaptop.domain.OrderDetail;
 import com.shop.leolaptop.dto.order.OrderDetailResponse;
@@ -41,6 +42,7 @@ public class OrderService {
                 .orderStatus(String.valueOf(currentOrder.getOrderStatus()))
                 .receiverName(currentOrder.getReceiverName())
                 .receiverPhone(currentOrder.getReceiverPhone())
+                .receiverAddress(currentOrder.getReceiverAddress())
                 .orderNotes(currentOrder.getOrderNotes())
                 .orderDetails(orderDetailResponses)
                 .build();
@@ -62,5 +64,13 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Order Not Found"));
 
         return getOrderResponse(currentOrder);
+    }
+
+    public void updateOrder(long orderId, String status) {
+        Order currentOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order Not Found"));
+
+        currentOrder.setOrderStatus(OrderStatus.valueOf(status));
+        orderRepository.save(currentOrder);
     }
 }

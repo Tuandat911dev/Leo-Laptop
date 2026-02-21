@@ -8,9 +8,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,26 @@ public class OrderController {
         OrderResponse order = orderService.getOrderById(id);
 
         return ResponseEntity.ok(order);
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUpdateOrderPage(Model model,
+                                     @PathVariable("id") long id) {
+        OrderResponse order = orderService.getOrderById(id);
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/order/update.jsp");
+        model.addAttribute("order", order);
+
+        return "admin/layout/layout";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateOrder(Model model,
+                              @PathVariable("id") long id,
+                              @RequestParam("orderStatus") String orderStatus
+    ) {
+        orderService.updateOrder(id, orderStatus);
+        model.addAttribute("contentPage", "/WEB-INF/view/admin/order/table.jsp");
+
+        return "redirect:/admin/orders";
     }
 }
