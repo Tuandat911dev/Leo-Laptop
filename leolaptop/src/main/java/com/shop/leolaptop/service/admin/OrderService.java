@@ -3,10 +3,13 @@ package com.shop.leolaptop.service.admin;
 import com.shop.leolaptop.constant.OrderStatus;
 import com.shop.leolaptop.domain.Order;
 import com.shop.leolaptop.domain.OrderDetail;
+import com.shop.leolaptop.domain.User;
 import com.shop.leolaptop.dto.order.OrderDetailResponse;
 import com.shop.leolaptop.dto.order.OrderResponse;
 import com.shop.leolaptop.repository.OrderDetailRepository;
 import com.shop.leolaptop.repository.OrderRepository;
+import com.shop.leolaptop.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +24,7 @@ import java.util.List;
 public class OrderService {
     OrderRepository orderRepository;
     OrderDetailRepository orderDetailRepository;
+    UserRepository userRepository;
 
     private OrderResponse getOrderResponse(Order currentOrder) {
         List<OrderDetailResponse> orderDetailResponses = new ArrayList<>();
@@ -52,6 +56,20 @@ public class OrderService {
         List<OrderResponse> orderList = new ArrayList<>();
         List<Order> orders = orderRepository.findAll();
 
+        for (Order item : orders) {
+            orderList.add(getOrderResponse(item));
+        }
+
+        return orderList;
+    }
+
+    public List<OrderResponse> getOrderByUser(HttpSession session) {
+        long userId = (Long) session.getAttribute("userId");
+        List<OrderResponse> orderList = new ArrayList<>();
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        List<Order> orders = orderRepository.findAllByUser(currentUser);
         for (Order item : orders) {
             orderList.add(getOrderResponse(item));
         }
