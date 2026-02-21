@@ -30,4 +30,13 @@ public class OrderHistoryController {
         return "client/layout/clientLayout";
     }
 
+    @GetMapping("/detail/{id}")
+    public String getHistoryDetailPage(Model model,
+                                       @PathVariable("id") long id) {
+        OrderResponse order = orderService.getOrderById(id);
+        model.addAttribute("contentPage", "/WEB-INF/view/client/page/historyDetail.jsp");
+        model.addAttribute("order", order);
+
+        return "client/layout/clientLayout";
+    }
 }
