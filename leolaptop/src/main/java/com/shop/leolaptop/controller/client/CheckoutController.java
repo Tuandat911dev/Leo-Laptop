@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,13 @@ public class CheckoutController {
     CartService cartService;
     CheckoutService checkoutService;
     VNPayService vnPayService;
+
+    @GetMapping("/success")
+    public String getOrderSuccessPage(Model model) {
+        model.addAttribute("contentPage", "/WEB-INF/view/client/page/orderSuccess.jsp");
+
+        return "client/layout/clientLayout";
+    }
 
     @GetMapping
     public String getCheckoutPage(Model model, HttpSession session) {
@@ -64,7 +72,8 @@ public class CheckoutController {
 
                 return "redirect:" + vnpayUrl;
             }
-            return "redirect:/";
+
+            return "redirect:/checkout/success";
         }
     }
 
