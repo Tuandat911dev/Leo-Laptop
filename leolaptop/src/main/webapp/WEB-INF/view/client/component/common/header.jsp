@@ -23,8 +23,8 @@
                          5px" data-bs-toggle="dropdown">
                             <small class="d-flex align-items-center" style="gap: 5px">
                                 <img
-                                    style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%;"
-                                    src="
+                                        style="width: 35px; height: 35px; object-fit: cover; border-radius: 50%;"
+                                        src="
                                         <c:choose>
                                             <c:when test='${not empty sessionScope.avatar and sessionScope.avatar.startsWith("https")}'>
                                                 ${sessionScope.avatar}
@@ -33,7 +33,7 @@
                                                 /images/avatar/${sessionScope.avatar}
                                             </c:otherwise>
                                         </c:choose>"
-                                    alt="avatar"
+                                        alt="avatar"
                                 />
                                 <c:out value="${sessionScope.fullName}"/>
                             </small>
@@ -41,8 +41,8 @@
 
                         <div class="dropdown-menu rounded">
                             <a href="#" class="dropdown-item">Quản lý tài khoản</a>
-                            <a href="#" class="dropdown-item">Giỏ hàng</a>
-                            <a href="#" class="dropdown-item">Lịch sử mua hàng</a>
+                            <a href="/cart" class="dropdown-item">Giỏ hàng</a>
+                            <a href="/history" class="dropdown-item">Lịch sử mua hàng</a>
                             <form action="/logout" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <button type="submit" class="dropdown-item">Đăng xuất</button>
@@ -99,25 +99,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-3 text-center text-lg-end">
-            <div class="d-inline-flex align-items-center">
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
-                        <span class="rounded-circle btn-md-square border">
-                            <i class="fas fa-random"></i>
-                        </span>
-                </a>
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3">
-                        <span class="rounded-circle btn-md-square border">
-                            <i class="fas fa-heart"></i>
-                        </span>
-                </a>
-                <a href="#" class="text-muted d-flex align-items-center justify-content-center">
+
+        <c:if test="${not empty sessionScope.fullName}">
+            <div class="col-md-4 col-lg-3 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a href="/cart" class="text-muted d-flex align-items-center justify-content-center">
                         <span class="rounded-circle btn-md-square border">
                             <i class="fas fa-shopping-cart"></i>
                         </span>
-                    <span class="text-dark ms-2">$0.00</span>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
+        </c:if>
     </div>
 </div>
