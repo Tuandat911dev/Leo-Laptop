@@ -20,12 +20,21 @@
                     <span class="font-weight-bold text-primary">#ORD-${order.id}</span>
                 </div>
                 <div>
-                    <span class="badge badge-pill
-                        ${order.orderStatus == 'PENDING' ? 'badge-warning' :
-                          order.orderStatus == 'PROCESSING' ? 'badge-info' :
-                          order.orderStatus == 'DELIVERED' ? 'badge-success' : 'badge-secondary'}">
-                            ${order.orderStatus}
-                    </span>
+
+                    <c:choose>
+                        <c:when test="${order.orderStatus == 'PENDING'}">
+                            <span style="background: #ffc107" class="badge badge-pill badge-warning">Chờ xác nhận</span>
+                        </c:when>
+                        <c:when test="${order.orderStatus == 'PROCESSING'}">
+                            <span style="background: #0dcaf0" class="badge badge-pill badge-info">Đang xử lý</span>
+                        </c:when>
+                        <c:when test="${order.orderStatus == 'DELIVERED'}">
+                            <span style="background: #198754" class="badge badge-pill badge-success">Thành công</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span style="background: #F92400" class="badge badge-pill badge-danger">Đã huỷ</span>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
 
@@ -33,7 +42,8 @@
                 <div class="row">
                     <div class="col-md-8">
                         <p class="mb-1"><strong>Người nhận:</strong> ${order.receiverName}</p>
-                        <p class="mb-1 text-muted small"><i class="fas fa-map-marker-alt"></i> ${order.receiverAddress}</p>
+                        <p class="mb-1 text-muted small"><i class="fas fa-map-marker-alt"></i> ${order.receiverAddress}
+                        </p>
                         <p class="mb-0 text-muted small"><i class="fas fa-phone"></i> ${order.receiverPhone}</p>
                     </div>
                     <div class="col-md-4 text-md-right mt-3 mt-md-0">
