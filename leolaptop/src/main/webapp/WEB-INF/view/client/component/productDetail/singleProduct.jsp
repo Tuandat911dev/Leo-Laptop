@@ -60,22 +60,35 @@
         <small>Số lượng có sẵn: <strong class="text-primary">${product.quantity} sản phẩm</strong></small>
     </div>
     <p class="mb-4">${product.shortDesc}</p>
-    <div class="input-group quantity mb-5" style="width: 100px;">
-        <div class="input-group-btn">
-            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                <i class="fa fa-minus"></i>
-            </button>
+    <form action="/cart" method="post">
+        <div class="input-group quantity mb-5" style="width: 100px;">
+            <div class="input-group-btn">
+                <button class="btn btn-sm btn-minus-detail rounded-circle bg-light border" type="button">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <input name="quantity" type="text"
+                   class="cart-detail-quantity form-control form-control-sm text-center border-0"
+                   value="1"
+                   data-value="1"
+                   data-max="${product.quantity}"
+            >
+            <div class="input-group-btn">
+                <button class="btn btn-sm btn-plus-detail rounded-circle bg-light border" type="button">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+            <input type="text" name="userId" hidden value="${sessionScope.userId}">
+            <input type="text" name="productId" hidden value="${product.id}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </div>
-        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-        <div class="input-group-btn">
-            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
-    </div>
-    <a href="#"
-       class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-            class="fa fa-shopping-bag me-2 text-white"></i> Add to cart</a>
+        <button type="submit"
+                class="btn btn-primary border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+            <i class="fa fa-shopping-bag me-2 text-white"></i>
+            Add to cart
+        </button>
+    </form>
+
 </div>
 <div class="col-lg-12">
     <nav>
@@ -187,3 +200,28 @@
         </div>
     </div>
 </form>
+
+<script>
+    const btnMinus = document.querySelector(".btn-minus-detail");
+    const btnPlus = document.querySelector(".btn-plus-detail");
+    const inputQuantity = document.querySelector(".cart-detail-quantity");
+
+    btnMinus.addEventListener("click", () => {
+        let inputVal = Number(inputQuantity.dataset.value);
+        if (inputVal > 1) {
+            inputVal--;
+            inputQuantity.dataset.value = String(inputVal);
+            inputQuantity.value = inputVal;
+        }
+    })
+
+    btnPlus.addEventListener("click", () => {
+        let inputVal = Number(inputQuantity.dataset.value);
+        let maxQuantity = Number(inputQuantity.dataset.max);
+        if (inputVal < maxQuantity) {
+            inputVal++;
+            inputQuantity.dataset.value = String(inputVal);
+            inputQuantity.value = inputVal;
+        }
+    })
+</script>
