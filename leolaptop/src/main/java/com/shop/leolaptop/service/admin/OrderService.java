@@ -71,7 +71,7 @@ public class OrderService {
     }
 
     public Page<Order> getOrderWithPagination(int page) {
-        PageRequest pageRequest = PageRequest.of(page, 5);
+        PageRequest pageRequest = PageRequest.of(page - 1, 5);
 
         return orderRepository.findAll(pageRequest);
     }

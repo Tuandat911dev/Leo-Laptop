@@ -39,7 +39,7 @@ public class OrderController {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/order/table.jsp");
         model.addAttribute("orderList", orderList);
         model.addAttribute("totalPages", orders.getTotalPages());
-        model.addAttribute("page", orders.getNumber());
+        model.addAttribute("page", orders.getNumber() + 1);
 
         return "admin/layout/layout";
     }
