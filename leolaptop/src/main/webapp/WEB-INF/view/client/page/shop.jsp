@@ -108,6 +108,10 @@
                             <!-- Horizontal card end -->
 
                             <!-- Pagination start -->
+                            <c:set var="totalPages" value="${totalPages}"
+                                   scope="request"/>
+                            <c:set var="page" value="${page}"
+                                   scope="request"/>
                             <jsp:include page="/WEB-INF/view/client/component/common/pagination.jsp"/>
                             <!-- Pagination end -->
                         </div>
