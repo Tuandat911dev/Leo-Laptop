@@ -1,16 +1,19 @@
 package com.shop.leolaptop.controller.admin;
 
+import com.shop.leolaptop.domain.Order;
 import com.shop.leolaptop.dto.order.OrderResponse;
 import com.shop.leolaptop.service.admin.OrderService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/orders")
@@ -20,10 +23,23 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping
-    public String getOrderPage(Model model) {
-        List<OrderResponse> orderList = orderService.getOrderList();
+    public String getOrderPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
+        int page = 1;
+        try {
+            if (optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            }
+        } catch (Exception ignored) {}
+
+        Page<Order> orders = orderService.getOrderWithPagination(page);
+        List<OrderResponse> orderList = orders.stream()
+                .map(orderService::getOrderResponse)
+                .toList();
+
         model.addAttribute("contentPage", "/WEB-INF/view/admin/order/table.jsp");
         model.addAttribute("orderList", orderList);
+        model.addAttribute("totalPages", orders.getTotalPages());
+        model.addAttribute("page", orders.getNumber());
 
         return "admin/layout/layout";
     }

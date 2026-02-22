@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
@@ -31,7 +33,7 @@ public class OrderService {
     OrderDetailRepository orderDetailRepository;
     UserRepository userRepository;
 
-    private OrderResponse getOrderResponse(Order currentOrder) {
+    public OrderResponse getOrderResponse(Order currentOrder) {
         List<OrderDetailResponse> orderDetailResponses = new ArrayList<>();
         List<OrderDetail> orderDetails = orderDetailRepository.findAllByOrder(currentOrder);
         for (OrderDetail orderDetail : orderDetails) {
@@ -66,6 +68,12 @@ public class OrderService {
         }
 
         return orderList;
+    }
+
+    public Page<Order> getOrderWithPagination(int page) {
+        PageRequest pageRequest = PageRequest.of(page, 5);
+
+        return orderRepository.findAll(pageRequest);
     }
 
     public List<OrderResponse> getOrderByUser(HttpSession session) {
