@@ -11,6 +11,8 @@ import com.shop.leolaptop.service.common.FileUploadService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +46,12 @@ public class ProductService {
         return products.stream()
                 .map(productMapper::productToResponseProductDto)
                 .toList();
+    }
+
+    public Page<Product> getAllProductWithPaginate(int page) {
+        PageRequest pageRequest = PageRequest.of(page - 1, 5);
+
+        return productRepository.findAll(pageRequest);
     }
 
     public ResponseProductDTO getProductById(long id) {

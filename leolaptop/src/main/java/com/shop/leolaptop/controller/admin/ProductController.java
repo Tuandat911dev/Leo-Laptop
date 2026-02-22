@@ -1,5 +1,6 @@
 package com.shop.leolaptop.controller.admin;
 
+import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
 import com.shop.leolaptop.dto.product.UpdateProductDTO;
@@ -9,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +29,14 @@ public class ProductController {
     ProductMapper productMapper;
 
     @GetMapping
-    public String getProductPage(Model model) {
+    public String getProductPage(Model model, @RequestParam("page") int page) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/product/table.jsp");
-        List<ResponseProductDTO> productList = productService.getAllProduct();
-
+        Page<Product> products = productService.getAllProductWithPaginate(page);
+        List<ResponseProductDTO> productList = products.getContent().stream()
+                .map(productMapper::productToResponseProductDto)
+                .toList();
+        model.addAttribute("totalPage", products.getTotalPages());
+        model.addAttribute("page", products.getNumber() + 1);
         model.addAttribute("productList", productList);
 
         return "admin/layout/layout";
