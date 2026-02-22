@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -29,8 +30,16 @@ public class ProductController {
     ProductMapper productMapper;
 
     @GetMapping
-    public String getProductPage(Model model, @RequestParam("page") int page) {
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/product/table.jsp");
+        int page = 1;
+        try {
+            if(optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            }
+        } catch (Exception ignored) {
+        }
+
         Page<Product> products = productService.getAllProductWithPaginate(page);
         List<ResponseProductDTO> productList = products.getContent().stream()
                 .map(productMapper::productToResponseProductDto)
