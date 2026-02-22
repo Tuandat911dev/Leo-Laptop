@@ -25,4 +25,7 @@ public class ErrorMessage {
     public final static String CHECKOUT_RECEIVER_ADDRESS_NOT_BLANK = "Địa chỉ nhận hàng không được để trống";
     public final static String CHECKOUT_RECEIVER_PHONE_NOT_BLANK = "Số điện thoại không được để trống";
     public final static String CHECKOUT_PAYMENT_METHOD_NOT_BLANK = "Vui lòng chọn phương thức thanh toán";
+
+    // ORDER
+    public final static String ORDER_ACCESS_DENIED = "Bạn không có quyền chỉnh sửa đơn hàng này";
 }

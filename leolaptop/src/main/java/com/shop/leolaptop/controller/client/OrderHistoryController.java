@@ -2,19 +2,20 @@ package com.shop.leolaptop.controller.client;
 
 import com.shop.leolaptop.constant.OrderStatus;
 import com.shop.leolaptop.constant.PaymentStatus;
+import com.shop.leolaptop.dto.order.ClientOrderUpdate;
 import com.shop.leolaptop.dto.order.OrderResponse;
 import com.shop.leolaptop.service.admin.OrderService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RequestMapping("/history")
@@ -34,8 +35,7 @@ public class OrderHistoryController {
     }
 
     @GetMapping("/detail/{id}")
-    public String getHistoryDetailPage(Model model,
-                                       @PathVariable("id") long id) {
+    public String getHistoryDetailPage(Model model, @PathVariable("id") long id) {
         OrderResponse order = orderService.getOrderById(id);
         model.addAttribute("contentPage", "/WEB-INF/view/client/page/historyDetail.jsp");
         model.addAttribute("order", order);
@@ -44,9 +44,31 @@ public class OrderHistoryController {
     }
 
     @PostMapping("/cancel/{id}")
-    public String cancelOrder(Model model,
-                              @PathVariable("id") long id) {
+    public String cancelOrder(@PathVariable("id") long id) {
         orderService.updateOrder(id, String.valueOf(OrderStatus.CANCELLED), String.valueOf(PaymentStatus.UN_PAID));
+
+        return "redirect:/history";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String getEditOrderPage(Model model, @PathVariable("id") long id) {
+        OrderResponse currentOrder = orderService.getOrderById(id);
+        ClientOrderUpdate order = ClientOrderUpdate.builder().id(currentOrder.getId()).receiverName(currentOrder.getReceiverName()).receiverAddress(currentOrder.getReceiverAddress()).receiverPhone(currentOrder.getReceiverPhone()).orderNotes(currentOrder.getOrderNotes()).build();
+
+        model.addAttribute("contentPage", "/WEB-INF/view/client/page/editOrder.jsp");
+        model.addAttribute("order", order);
+
+        return "client/layout/clientLayout";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editOrder(Model model, @PathVariable("id") long id, @ModelAttribute("order") @Valid ClientOrderUpdate order, BindingResult bindingResult, HttpSession session) throws AccessDeniedException {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "/WEB-INF/view/client/page/editOrder.jsp");
+            return "client/layout/clientLayout";
+        } else {
+            orderService.clientUpdateOrderInfo(id, session, order);
+        }
 
         return "redirect:/history";
     }

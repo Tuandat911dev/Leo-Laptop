@@ -49,7 +49,7 @@
                 <a href="/history/detail/${order.id}" class="btn btn-sm btn-outline-secondary">Chi tiết</a>
 
                 <c:if test="${order.orderStatus == 'PENDING' || order.orderStatus == 'PROCESSING'}">
-                    <a href="/order/edit/${order.id}" class="btn btn-sm btn-outline-primary ml-2">
+                    <a href="/history/edit/${order.id}" class="btn btn-sm btn-outline-primary ml-2">
                         <i class="fas fa-edit"></i> Sửa thông tin
                     </a>
                     <button class="btn btn-sm btn-outline-danger ml-2"

@@ -1,10 +1,12 @@
 package com.shop.leolaptop.service.admin;
 
+import com.shop.leolaptop.constant.ErrorMessage;
 import com.shop.leolaptop.constant.OrderStatus;
 import com.shop.leolaptop.constant.PaymentStatus;
 import com.shop.leolaptop.domain.Order;
 import com.shop.leolaptop.domain.OrderDetail;
 import com.shop.leolaptop.domain.User;
+import com.shop.leolaptop.dto.order.ClientOrderUpdate;
 import com.shop.leolaptop.dto.order.OrderDetailResponse;
 import com.shop.leolaptop.dto.order.OrderResponse;
 import com.shop.leolaptop.repository.OrderDetailRepository;
@@ -16,8 +18,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -92,5 +96,26 @@ public class OrderService {
         currentOrder.setOrderStatus(OrderStatus.valueOf(status));
         currentOrder.setPaymentStatus(PaymentStatus.valueOf(paymentStatus));
         orderRepository.save(currentOrder);
+    }
+
+    public void clientUpdateOrderInfo(long orderId,
+                                      HttpSession session,
+                                      ClientOrderUpdate request) throws AccessDeniedException {
+        long userId = (Long) session.getAttribute("userId");
+        Order currentOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order Not Found"));
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        if (Objects.equals(currentUser, currentOrder.getUser())) {
+            currentOrder.setReceiverName(request.getReceiverName());
+            currentOrder.setReceiverAddress(request.getReceiverAddress());
+            currentOrder.setReceiverPhone(request.getReceiverPhone());
+            currentOrder.setOrderNotes(request.getOrderNotes());
+
+            orderRepository.save(currentOrder);
+        } else {
+            throw new AccessDeniedException(ErrorMessage.ORDER_ACCESS_DENIED);
+        }
     }
 }
