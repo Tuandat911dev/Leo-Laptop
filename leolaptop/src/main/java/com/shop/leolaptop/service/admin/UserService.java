@@ -13,6 +13,8 @@ import com.shop.leolaptop.service.common.FileUploadService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,6 +93,12 @@ public class UserService {
 
     public List<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    public Page<User> getUserWithPagination(int page) {
+        PageRequest pageRequest = PageRequest.of(page - 1, 5);
+
+        return userRepository.findAll(pageRequest);
     }
 
     public void deleteUser(long id) {

@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/users")
@@ -60,13 +62,24 @@ public class UserController {
     }
 
     @GetMapping
-    public String getUserPage(Model model) {
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
         model.addAttribute("contentPage", "/WEB-INF/view/admin/user/table.jsp");
-        List<User> users = userService.getAllUser();
-        List<UserDTO> listUserDTO = users.stream()
+        int page = 1;
+        try {
+            if (optionalPage.isPresent()) {
+                page = Integer.parseInt(optionalPage.get());
+            }
+        } catch (Exception ignored) {
+        }
+
+        Page<User> users = userService.getUserWithPagination(page);
+        List<UserDTO> listUserDTO = users.getContent().stream()
                 .map(UserMapper::toUserDTO)
                 .toList();
+
         model.addAttribute("userList", listUserDTO);
+        model.addAttribute("totalPages", users.getTotalPages());
+        model.addAttribute("page", users.getNumber() + 1);
 
         return "admin/layout/layout";
     }
