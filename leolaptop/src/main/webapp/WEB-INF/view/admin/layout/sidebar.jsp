@@ -41,7 +41,7 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="/admin/products">
+        <a class="nav-link" href="/admin/products?page=1">
             <i class="fas fa-laptop"></i>
             <span>Product</span></a
         >
