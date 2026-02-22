@@ -35,7 +35,7 @@ public class ProductController {
         List<ResponseProductDTO> productList = products.getContent().stream()
                 .map(productMapper::productToResponseProductDto)
                 .toList();
-        model.addAttribute("totalPage", products.getTotalPages());
+        model.addAttribute("totalPages", products.getTotalPages());
         model.addAttribute("page", products.getNumber() + 1);
         model.addAttribute("productList", productList);
 

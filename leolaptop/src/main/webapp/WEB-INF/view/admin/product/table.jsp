@@ -93,12 +93,12 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <c:forEach begin="1" end="${totalPage}" var="i">
+                    <c:forEach begin="1" end="${totalPages}" var="i">
                         <li class="page-item ${page == i ? 'active' : ''}">
                             <a class="page-link" href="/admin/products?page=${i}">${i}</a>
                         </li>
                     </c:forEach>
-                    <li class="page-item ${page == totalPage ? 'disabled' : ''}">
+                    <li class="page-item ${page == totalPages ? 'disabled' : ''}">
                         <a class="page-link" href="/admin/products?page=${page + 1}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
