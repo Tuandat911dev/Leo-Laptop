@@ -26,8 +26,20 @@ public class ShopController {
     ProductMapper productMapper;
 
     @GetMapping
-    public String getShopPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
+    public String getShopPage(Model model,
+                              @RequestParam("page") Optional<String> optionalPage,
+                              @RequestParam("name") Optional<String> optionalName,
+                              @RequestParam("minPrice") Optional<String> optionalMinPrice,
+                              @RequestParam("maxPrice") Optional<String> optionalMaxPrice,
+                              @RequestParam("factory") Optional<String> optionalFactory,
+                              @RequestParam("price") Optional<String> optionalPrice
+    ) {
         int page = 1;
+        String name = "";
+        double minPrice = 0;
+        double maxPrice = 0;
+        String factory = "";
+        String price = "";
         try {
             if (optionalPage.isPresent()) {
                 page = Integer.parseInt(optionalPage.get());
@@ -35,7 +47,33 @@ public class ShopController {
         } catch (Exception ignore) {
         }
 
-        Page<Product> products = productService.getAllProductWithPaginate(page);
+        if (optionalName.isPresent()) {
+            name = optionalName.get();
+        }
+
+        if (optionalFactory.isPresent()) {
+            factory = optionalFactory.get();
+        }
+
+        if (optionalPrice.isPresent()) {
+            price = optionalPrice.get();
+        }
+
+        try {
+            if (optionalMinPrice.isPresent()) {
+                minPrice = Double.parseDouble(optionalMinPrice.get());
+            }
+        } catch (Exception ignore) {
+        }
+
+        try {
+            if (optionalMaxPrice.isPresent()) {
+                maxPrice = Double.parseDouble(optionalMaxPrice.get());
+            }
+        } catch (Exception ignore) {
+        }
+
+        Page<Product> products = productService.getProductsWithSpec(page, name, minPrice, maxPrice, factory, price);
         List<ResponseProductDTO> productList = products.getContent().stream()
                 .map(productMapper::productToResponseProductDto)
                 .toList();

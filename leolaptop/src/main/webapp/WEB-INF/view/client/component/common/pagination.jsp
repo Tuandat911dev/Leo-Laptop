@@ -8,6 +8,6 @@
         </c:forEach>
 
         <a ${page == totalPages ? 'style="pointer-events: none"' : ''} href="/shop?page=${page + 1}" class="rounded">
-            &laquo;</a>
+            &raquo;</a>
     </div>
 </div>
