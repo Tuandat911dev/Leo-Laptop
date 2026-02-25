@@ -79,6 +79,7 @@ public class ProductService {
         double minPrice = 0;
         double maxPrice = 0;
         String factories = "";
+        String targets = "";
         String priceRange = "";
         int page = 1;
 
@@ -95,6 +96,10 @@ public class ProductService {
 
         if (productCriteriaDTO.getFactory() != null && productCriteriaDTO.getFactory().isPresent()) {
             factories = productCriteriaDTO.getFactory().get();
+        }
+
+        if (productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
+            targets = productCriteriaDTO.getTarget().get();
         }
 
         if (productCriteriaDTO.getPrice() != null && productCriteriaDTO.getPrice().isPresent()) {
@@ -148,6 +153,15 @@ public class ProductService {
                     .field(Product_.FACTORY)
                     .operator(QueryOperator.IN)
                     .values(factoryList)
+                    .build());
+        }
+
+        if (!targets.isEmpty()) {
+            List<String> targetList = Arrays.asList(targets.split(","));
+            filters.add(Filter.builder()
+                    .field(Product_.TARGET)
+                    .operator(QueryOperator.IN)
+                    .values(targetList)
                     .build());
         }
 

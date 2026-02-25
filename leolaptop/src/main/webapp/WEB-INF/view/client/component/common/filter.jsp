@@ -34,6 +34,16 @@
     </div>
 </div>
 
+<div class="target-tags my-4">
+    <h4 class="mb-3">Nhu Cầu Sử Dụng</h4>
+    <div class="target-tags-items bg-light rounded p-3 d-flex flex-wrap gap-2">
+        <a href="javascript:void(0)" data-target="gaming" class="target-item border rounded py-1 px-2">Gaming</a>
+        <a href="javascript:void(0)" data-target="văn phòng" class="target-item border rounded py-1 px-2">Văn phòng</a>
+        <a href="javascript:void(0)" data-target="lập trình" class="target-item border rounded py-1 px-2">Lập trình</a>
+        <a href="javascript:void(0)" data-target="đồ hoạ" class="target-item border rounded py-1 px-2">Đồ hoạ</a>
+    </div>
+</div>
+
 <div class="d-flex justify-content-center my-4">
     <button type="button" class="btn btn-primary px-4 py-3 rounded-pill w-100 searchBtnFilter">Tìm kiếm</button>
 </div>
@@ -45,11 +55,13 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const brandItems = document.querySelectorAll('.brand-item');
+        const targetItems = document.querySelectorAll('.target-item');
         const prices = document.querySelectorAll('input[name="priceRange"]');
         const params = new URLSearchParams(window.location.search);
 
         // display selected option
         const selectedBrandsFromUrl = params.get('factory') ? params.get('factory').split(',') : [];
+        const selectedTargetsFromUrl = params.get('target') ? params.get('target').split(',') : [];
         const selectedPrice = params.get('price') ?? '';
 
         prices.forEach(item => {
@@ -69,13 +81,32 @@
             });
         });
 
+        targetItems.forEach(item => {
+            if (selectedTargetsFromUrl.includes(item.getAttribute('data-target'))) {
+                item.classList.add('bg-primary', 'text-white');
+            }
+
+            item.addEventListener('click', function () {
+                this.classList.toggle('bg-primary');
+                this.classList.toggle('text-white');
+            });
+
+
+        });
+
         // handle submit btn
         document.querySelector('.searchBtnFilter').addEventListener('click', function () {
             const selectedRadio = document.querySelector('input[name="priceRange"]:checked');
 
             const selectedBrands = [];
+            const selectedTargets = [];
+
             document.querySelectorAll('.brand-item.bg-primary').forEach(item => {
                 selectedBrands.push(item.getAttribute('data-brand'));
+            });
+
+            document.querySelectorAll('.target-item.bg-primary').forEach(item => {
+                selectedTargets.push(item.getAttribute('data-target'));
             });
 
             // update url
@@ -84,6 +115,12 @@
                 params.set('factory', selectedBrands.join(','));
             } else {
                 params.delete('factory');
+            }
+
+            if (selectedTargets.length > 0) {
+                params.set('target', selectedTargets.join(','));
+            } else {
+                params.delete('target');
             }
 
             if (selectedRadio) {

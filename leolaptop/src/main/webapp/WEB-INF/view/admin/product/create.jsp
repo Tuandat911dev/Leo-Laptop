@@ -151,10 +151,10 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="font-weight-bold">Mục đích sử dụng</label>
                                     <form:select path="target" class="form-control">
-                                        <option value="Văn phòng">Văn phòng</option>
-                                        <option value="Gaming">Gaming</option>
-                                        <option value="Đồ hoạ">Đồ hoạ</option>
-                                        <option value="Lập trình">Lập trình</option>
+                                        <option value="văn phòng">Văn phòng</option>
+                                        <option value="gaming">Gaming</option>
+                                        <option value="đồ hoạ">Đồ hoạ</option>
+                                        <option value="lập trình">Lập trình<option>
                                     </form:select>
                                 </div>
                             </div>

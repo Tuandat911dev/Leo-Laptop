@@ -18,4 +18,5 @@ public class ProductCriteriaDTO {
     Optional<String> maxPrice;
     Optional<String> factory;
     Optional<String> price;
+    Optional<String> target;
 }
