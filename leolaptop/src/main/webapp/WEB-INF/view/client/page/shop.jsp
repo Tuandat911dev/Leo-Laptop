@@ -42,9 +42,10 @@
                 <div class="row g-4">
                     <div class="col-xl-7">
                         <div class="input-group w-100 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords"
+                            <input id="input-name-shop" type="search" class="form-control p-3"
+                                   placeholder="Tên sản phẩm"
                                    aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i
+                            <span id="search-icon-1" class="input-group-text p-3 search-btn-shop"><i
                                     class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -127,3 +128,28 @@
 <%-- Product Banner Start --%>
 <jsp:include page="/WEB-INF/view/client/component/common/productBanner.jsp"/>
 <%-- Product Banner End --%>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputSearch = document.getElementById('input-name-shop');
+        const searchBtn = document.querySelector('.search-btn-shop');
+        const params = new URLSearchParams(window.location.search);
+
+        // display selected option
+        const currentName = params.get('name') ?? '';
+        if(currentName) {
+            inputSearch.value = currentName;
+        }
+
+        // handle submit btn
+        searchBtn.addEventListener('click', function () {
+            // update url
+            if(inputSearch.value && inputSearch.value !== '' && inputSearch.value !== null) {
+                params.set('name', inputSearch.value);
+            } else {
+                params.delete('name');
+            }
+            window.location.href = window.location.pathname + '?' + params.toString();
+        });
+    });
+</script>
