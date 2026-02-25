@@ -5,6 +5,7 @@ import com.shop.leolaptop.constant.QueryOperator;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.domain.Product_;
 import com.shop.leolaptop.domain.specification.Filter;
+import com.shop.leolaptop.dto.product.ProductCriteriaDTO;
 import com.shop.leolaptop.dto.product.RequestProductDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
 import com.shop.leolaptop.dto.product.UpdateProductDTO;
@@ -73,13 +74,51 @@ public class ProductService {
         return true;
     }
 
-    public Page<Product> getProductsWithSpec(int page, String name, double minPrice, double maxPrice,
-                                             String factories,
-                                             String priceRange) {
+    public Page<Product> getProductsWithSpec(ProductCriteriaDTO productCriteriaDTO) {
+        String name = "";
+        double minPrice = 0;
+        double maxPrice = 0;
+        String factories = "";
+        String priceRange = "";
+        int page = 1;
+
+        try {
+            if (productCriteriaDTO.getPage() != null && productCriteriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
+            }
+        } catch (Exception ignore) {
+        }
+
+        if (productCriteriaDTO.getName() != null && productCriteriaDTO.getName().isPresent()) {
+            name = productCriteriaDTO.getName().get();
+        }
+
+        if (productCriteriaDTO.getFactory() != null && productCriteriaDTO.getFactory().isPresent()) {
+            factories = productCriteriaDTO.getFactory().get();
+        }
+
+        if (productCriteriaDTO.getPrice() != null && productCriteriaDTO.getPrice().isPresent()) {
+            priceRange = productCriteriaDTO.getPrice().get();
+        }
+
+        try {
+            if (productCriteriaDTO.getMinPrice() != null && productCriteriaDTO.getMinPrice().isPresent()) {
+                minPrice = Double.parseDouble(productCriteriaDTO.getMinPrice().get());
+            }
+        } catch (Exception ignore) {
+        }
+
+        try {
+            if (productCriteriaDTO.getMaxPrice() != null && productCriteriaDTO.getMaxPrice().isPresent()) {
+                maxPrice = Double.parseDouble(productCriteriaDTO.getMaxPrice().get());
+            }
+        } catch (Exception ignore) {
+        }
+
         PageRequest pageRequest = PageRequest.of(page - 1, 5);
         List<Filter> filters = new ArrayList<>();
 
-        if (name != null && !name.trim().isEmpty()) {
+        if (!name.trim().isEmpty()) {
             filters.add(Filter.builder()
                     .field(Product_.NAME)
                     .operator(QueryOperator.LIKE)
@@ -103,7 +142,7 @@ public class ProductService {
                     .build());
         }
 
-        if (factories != null && !factories.isEmpty()) {
+        if (!factories.isEmpty()) {
             List<String> factoryList = Arrays.asList(factories.split(","));
             filters.add(Filter.builder()
                     .field(Product_.FACTORY)
@@ -112,7 +151,7 @@ public class ProductService {
                     .build());
         }
 
-        if (priceRange != null && priceRange.contains("-")) {
+        if (priceRange.contains("-")) {
             String[] parts = priceRange.split("-");
             for (int i = 0; i < parts.length; i++) {
                 if (i == 0) {

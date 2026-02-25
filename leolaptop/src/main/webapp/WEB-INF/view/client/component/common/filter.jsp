@@ -29,7 +29,8 @@
         <a href="javascript:void(0)" data-brand="lg" class="brand-item border rounded py-1 px-2">LG</a>
         <a href="javascript:void(0)" data-brand="acer" class="brand-item border rounded py-1 px-2">Acer</a>
         <a href="javascript:void(0)" data-brand="lenovo" class="brand-item border rounded py-1 px-2">Lenovo</a>
-        <a href="javascript:void(0)" data-brand="huawei" class="brand-item border rounded py-1 px-2">Huawei</a>
+        <a href="javascript:void(0)" data-brand="hp" class="brand-item border rounded py-1 px-2">HP</a>
+        <a href="javascript:void(0)" data-brand="msi" class="brand-item border rounded py-1 px-2">MSI</a>
     </div>
 </div>
 
@@ -48,7 +49,7 @@
         const params = new URLSearchParams(window.location.search);
 
         // display selected option
-        const selectedBrandsFromUrl = params.get('brands') ? params.get('brands').split(',') : [];
+        const selectedBrandsFromUrl = params.get('factory') ? params.get('factory').split(',') : [];
         const selectedPrice = params.get('price') ?? '';
 
         prices.forEach(item => {
@@ -80,9 +81,9 @@
             // update url
 
             if (selectedBrands.length > 0) {
-                params.set('brands', selectedBrands.join(','));
+                params.set('factory', selectedBrands.join(','));
             } else {
-                params.delete('brands');
+                params.delete('factory');
             }
 
             if (selectedRadio) {
