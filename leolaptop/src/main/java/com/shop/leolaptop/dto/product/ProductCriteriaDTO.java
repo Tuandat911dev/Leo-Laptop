@@ -19,4 +19,5 @@ public class ProductCriteriaDTO {
     Optional<String> factory;
     Optional<String> price;
     Optional<String> target;
+    Optional<String> sort;
 }

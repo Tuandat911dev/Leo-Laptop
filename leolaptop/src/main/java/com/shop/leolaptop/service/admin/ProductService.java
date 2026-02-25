@@ -2,6 +2,7 @@ package com.shop.leolaptop.service.admin;
 
 import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.constant.QueryOperator;
+import com.shop.leolaptop.constant.SortProduct;
 import com.shop.leolaptop.domain.Product;
 import com.shop.leolaptop.domain.Product_;
 import com.shop.leolaptop.domain.specification.Filter;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,6 +83,7 @@ public class ProductService {
         String factories = "";
         String targets = "";
         String priceRange = "";
+        String sort = "";
         int page = 1;
 
         try {
@@ -88,6 +91,10 @@ public class ProductService {
                 page = Integer.parseInt(productCriteriaDTO.getPage().get());
             }
         } catch (Exception ignore) {
+        }
+
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            sort = productCriteriaDTO.getSort().get();
         }
 
         if (productCriteriaDTO.getName() != null && productCriteriaDTO.getName().isPresent()) {
@@ -120,7 +127,19 @@ public class ProductService {
         } catch (Exception ignore) {
         }
 
-        PageRequest pageRequest = PageRequest.of(page - 1, 5);
+        PageRequest pageRequest = null;
+        if (!sort.isEmpty()) {
+            pageRequest = switch (sort) {
+                case SortProduct.PRICE_DESC -> PageRequest.of(page - 1, 5, Sort.by(Product_.PRICE).descending());
+                case SortProduct.PRICE_ASC -> PageRequest.of(page - 1, 5, Sort.by(Product_.PRICE).ascending());
+                case SortProduct.NEW -> PageRequest.of(page - 1, 5, Sort.by(Product_.ID).descending());
+                case SortProduct.SOLD -> PageRequest.of(page - 1, 5, Sort.by(Product_.SOLD).descending());
+                default -> PageRequest.of(page - 1, 5);
+            };
+        } else {
+            pageRequest = PageRequest.of(page - 1, 5);
+        }
+
         List<Filter> filters = new ArrayList<>();
 
         if (!name.trim().isEmpty()) {

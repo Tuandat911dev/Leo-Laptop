@@ -44,6 +44,27 @@
     </div>
 </div>
 
+<div class="additional-product mb-4">
+    <h4 class="mb-3">Sắp Xếp Theo</h4>
+
+    <div class="additional-product-item mb-1">
+        <input type="radio" class="me-2" id="Price-1" name="sortProduct" value="priceAsc">
+        <label for="Price-1" class="text-dark">Giá từ thấp đến cao</label>
+    </div>
+    <div class="additional-product-item mb-1">
+        <input type="radio" class="me-2" id="Price-2" name="sortProduct" value="priceDesc">
+        <label for="Price-2" class="text-dark">Giá từ cao đến thấp</label>
+    </div>
+    <div class="additional-product-item mb-1">
+        <input type="radio" class="me-2" id="Price-3" name="sortProduct" value="new">
+        <label for="Price-3" class="text-dark">Sản phẩm mới nhất</label>
+    </div>
+    <div class="additional-product-item mb-1">
+        <input type="radio" class="me-2" id="Price-4" name="sortProduct" value="sold">
+        <label for="Price-4" class="text-dark">Sản phẩm bán chạy nhất</label>
+    </div>
+</div>
+
 <div class="d-flex justify-content-center my-4">
     <button type="button" class="btn btn-primary px-4 py-3 rounded-pill w-100 searchBtnFilter">Tìm kiếm</button>
 </div>
@@ -57,15 +78,23 @@
         const brandItems = document.querySelectorAll('.brand-item');
         const targetItems = document.querySelectorAll('.target-item');
         const prices = document.querySelectorAll('input[name="priceRange"]');
+        const sortList = document.querySelectorAll('input[name="sortProduct"]');
         const params = new URLSearchParams(window.location.search);
 
         // display selected option
         const selectedBrandsFromUrl = params.get('factory') ? params.get('factory').split(',') : [];
         const selectedTargetsFromUrl = params.get('target') ? params.get('target').split(',') : [];
         const selectedPrice = params.get('price') ?? '';
+        const selectedSort = params.get('sort') ?? '';
 
         prices.forEach(item => {
             if (item.value === selectedPrice) {
+                item.checked = true;
+            }
+        })
+
+        sortList.forEach(item => {
+            if (item.value === selectedSort) {
                 item.checked = true;
             }
         })
@@ -97,6 +126,7 @@
         // handle submit btn
         document.querySelector('.searchBtnFilter').addEventListener('click', function () {
             const selectedRadio = document.querySelector('input[name="priceRange"]:checked');
+            const selectedSort = document.querySelector('input[name="sortProduct"]:checked')
 
             const selectedBrands = [];
             const selectedTargets = [];
@@ -127,6 +157,12 @@
                 params.set('price', selectedRadio.value);
             } else {
                 params.delete('price');
+            }
+
+            if (selectedSort) {
+                params.set('sort', selectedSort.value);
+            } else {
+                params.delete('sort');
             }
 
             window.location.href = window.location.pathname + '?' + params.toString();
