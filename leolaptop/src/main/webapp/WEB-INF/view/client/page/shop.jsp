@@ -49,21 +49,6 @@
                                     class="fa fa-search"></i></span>
                         </div>
                     </div>
-                    <div class="col-xl-3 text-end">
-                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between">
-                            <label for="electronics">Sort By:</label>
-                            <select id="electronics" name="electronicslist"
-                                    class="border-0 form-select-sm bg-light me-3" form="electronicsform">
-                                <option value="volvo">Default Sorting</option>
-                                <option value="volv">Nothing</option>
-                                <option value="sab">Popularity</option>
-                                <option value="saab">Newness</option>
-                                <option value="opel">Average Rating</option>
-                                <option value="audio">Low to high</option>
-                                <option value="audi">High to low</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-lg-4 col-xl-2">
                         <ul class="nav nav-pills d-inline-flex text-center py-2 px-2 rounded bg-light mb-4">
                             <li class="nav-item me-4">
@@ -122,6 +107,8 @@
                             <c:set var="totalPages" value="${totalPages}"
                                    scope="request"/>
                             <c:set var="page" value="${page}"
+                                   scope="request"/>
+                            <c:set var="queryString" value="${queryString}"
                                    scope="request"/>
                             <jsp:include page="/WEB-INF/view/client/component/common/pagination.jsp"/>
                             <!-- Pagination end -->

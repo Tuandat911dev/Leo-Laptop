@@ -5,6 +5,7 @@ import com.shop.leolaptop.dto.product.ProductCriteriaDTO;
 import com.shop.leolaptop.dto.product.ResponseProductDTO;
 import com.shop.leolaptop.mapper.ProductMapper;
 import com.shop.leolaptop.service.admin.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,17 +27,25 @@ public class ShopController {
 
     @GetMapping
     public String getShopPage(Model model,
-                              ProductCriteriaDTO productCriteriaDTO
+                              ProductCriteriaDTO productCriteriaDTO,
+                              HttpServletRequest request
     ) {
         Page<Product> products = productService.getProductsWithSpec(productCriteriaDTO);
         List<ResponseProductDTO> productList = products.getContent().stream()
                 .map(productMapper::productToResponseProductDto)
                 .toList();
+        int page = products.getNumber() + 1;
+
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            qs = qs.replace("page=" + page, "");
+        }
 
         model.addAttribute("productList", productList);
         model.addAttribute("totalPages", products.getTotalPages());
-        model.addAttribute("page", products.getNumber() + 1);
+        model.addAttribute("page", page);
         model.addAttribute("contentPage", "/WEB-INF/view/client/page/shop.jsp");
+        model.addAttribute("queryString", qs);
 
         return "client/layout/clientLayout";
     }
