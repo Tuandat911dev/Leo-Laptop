@@ -82,18 +82,28 @@
                 <div class="tab-content">
                     <div id="tab-5" class="tab-pane fade show p-0 active">
                         <div class="row g-4 product">
-                            <!-- vertical product card start -->
-                            <c:forEach items="${productList}" var="item">
-                                <div class="col-lg-4">
-                                    <c:set var="product" value="${item}" scope="request"/>
-                                    <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
-                                </div>
-                            </c:forEach>
-                            <!-- vertical product card end -->
+                            <c:choose>
+                                <c:when test="${not empty productList}">
+                                    <div class="row">
+                                        <c:forEach items="${productList}" var="item">
+                                            <div class="col-lg-4">
+                                                <c:set var="product" value="${item}" scope="request"/>
+                                                <jsp:include page="/WEB-INF/view/client/component/common/verticalProductCard.jsp"/>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
 
-                            <!-- pagination start -->
-                            <jsp:include page="/WEB-INF/view/client/component/common/pagination.jsp"/>
-                            <!-- pagination end -->
+                                    <jsp:include page="/WEB-INF/view/client/component/common/pagination.jsp"/>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <div class="col-12 text-center my-5">
+                                        <h3 class="mt-4 text-muted">Rất tiếc, không tìm thấy sản phẩm nào phù hợp!</h3>
+                                        <p>Vui lòng thử lại với bộ lọc khác hoặc từ khóa khác.</p>
+                                        <a href="/shop" class="btn btn-outline-primary mt-2">Xóa tất cả bộ lọc</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div id="tab-6" class="products tab-pane fade show p-0">
