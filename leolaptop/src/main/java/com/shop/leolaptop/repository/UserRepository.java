@@ -1,6 +1,8 @@
 package com.shop.leolaptop.repository;
 
 import com.shop.leolaptop.constant.AuthProvider;
+import com.shop.leolaptop.constant.RoleName;
+import com.shop.leolaptop.domain.Role;
 import com.shop.leolaptop.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByProviderAndProviderId(AuthProvider provider, String providerId);
 
     Optional<User> findByProviderAndProviderId(AuthProvider provider, String providerId);
+
+    long countByRole(Role role);
 }
