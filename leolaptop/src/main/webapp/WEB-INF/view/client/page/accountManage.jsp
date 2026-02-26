@@ -61,7 +61,13 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="font-weight-bold">Số điện thoại</label>
-                                        <form:input path="phone" class="form-control" placeholder="Nhập số điện thoại"/>
+                                        <spring:bind path="user.phone">
+                                            <form:input path="phone"
+                                                        class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                        placeholder="090..."/>
+                                        </spring:bind>
+                                        <form:errors cssClass="invalid-feedback" path="phone"/>
+
                                     </div>
                                 </div>
                                 <div class="mb-3">
