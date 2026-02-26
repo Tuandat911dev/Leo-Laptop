@@ -57,19 +57,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="/shop" class="nav-item nav-link">Shop</a>
-                        <a href="single.html" class="nav-item nav-link">Single Page</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="bestseller.html" class="dropdown-item">Bestseller</a>
-                                <a href="cart.html" class="dropdown-item">Cart Page</a>
-                                <a href="cheackout.html" class="dropdown-item">Cheackout</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link me-2">Contact</a>
+                        <a href="/" class="nav-item nav-link active">Trang Chủ</a>
+                        <a href="/shop" class="nav-item nav-link">Cửa Hàng</a>
                         <div class="nav-item dropdown d-block d-lg-none mb-3">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
                             <div class="dropdown-menu m-0">

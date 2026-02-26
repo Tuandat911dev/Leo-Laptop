@@ -52,6 +52,8 @@ public class SecurityConfig {
                                 "/not-found",
                                 "/register",
                                 "/client/**",
+                                "/product/**",
+                                "/shop/**",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",

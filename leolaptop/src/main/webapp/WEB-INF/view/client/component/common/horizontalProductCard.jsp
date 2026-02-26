@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <div class="products-mini-item border">
     <div class="row g-0">
         <div class="col-5">
@@ -22,14 +23,16 @@
     </div>
     <div class="products-mini-add border p-3">
         <form action="/cart" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="number" name="productId" value="${product.id}" hidden>
             <input type="number" name="userId" value="${sessionScope.userId}" hidden>
             <input type="number" name="quantity" value="1" hidden>
 
-            <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
-                <i class="fas fa-shopping-cart me-2">Add To Cart</i>
-            </button>
+            <c:if test="${not empty sessionScope.fullName}">
+                <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
+                    <i class="fas fa-shopping-cart me-2">Add To Cart</i>
+                </button>
+            </c:if>
         </form>
 
         <div class="d-flex">
