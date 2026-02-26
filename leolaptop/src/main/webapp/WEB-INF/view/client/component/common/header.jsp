@@ -39,7 +39,7 @@
                         </a>
 
                         <div class="dropdown-menu rounded">
-                            <a href="#" class="dropdown-item">Quản lý tài khoản</a>
+                            <a href="/account" class="dropdown-item">Quản lý tài khoản</a>
                             <a href="/cart" class="dropdown-item">Giỏ hàng</a>
                             <a href="/history" class="dropdown-item">Lịch sử mua hàng</a>
                             <form action="/logout" method="post">

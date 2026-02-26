@@ -10,6 +10,7 @@ import com.shop.leolaptop.mapper.UserMapper;
 import com.shop.leolaptop.repository.RoleRepository;
 import com.shop.leolaptop.repository.UserRepository;
 import com.shop.leolaptop.service.common.FileUploadService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -79,6 +80,21 @@ public class UserService {
         }
 
         userRepository.save(currentUser);
+    }
+
+    public void clientUpdateInfo(HttpSession session, UpdateUserDTO userDTO, MultipartFile avatar) {
+        long userId = (Long) session.getAttribute("userId");
+        if (userId == userDTO.getId()) {
+            updateUser(userId, userDTO, avatar);
+
+            User userUpdated = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("User not found!"));
+
+            session.setAttribute("fullName", userUpdated.getFullName());
+            session.setAttribute("avatar", userUpdated.getAvatar());
+        } else {
+            throw new RuntimeException("You do not have permission to edit this account.");
+        }
     }
 
     public Optional<User> getUserByEmail(String email) {
