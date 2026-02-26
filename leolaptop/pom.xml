@@ -119,6 +119,7 @@
             <version>4.0.2</version>
         </dependency>
 
+        <!-- build -->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
