@@ -1,6 +1,7 @@
 package com.shop.leolaptop.service.admin;
 
 import com.shop.leolaptop.constant.AuthProvider;
+import com.shop.leolaptop.constant.ErrorMessage;
 import com.shop.leolaptop.constant.ImageFolder;
 import com.shop.leolaptop.constant.RoleName;
 import com.shop.leolaptop.domain.Role;
@@ -94,6 +95,25 @@ public class UserService {
             session.setAttribute("avatar", userUpdated.getAvatar());
         } else {
             throw new RuntimeException("You do not have permission to edit this account.");
+        }
+    }
+
+    public void clientChangePassword(HttpSession session, ChangePasswordDTO request) {
+        long userId = (Long) session.getAttribute("userId");
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
+
+        String currentPassword = currentUser.getPassword();
+        if(currentPassword == null) {
+            currentUser.setPassword(passwordEncoder.encode(request.getPassword()));
+            userRepository.save(currentUser);
+        } else {
+            if (passwordEncoder.matches(request.getOldPassword(), currentPassword)) {
+                currentUser.setPassword(passwordEncoder.encode(request.getPassword()));
+                userRepository.save(currentUser);
+            } else {
+                throw new IllegalArgumentException(ErrorMessage.OLD_PASSWORD_NOT_MATCH);
+            }
         }
     }
 

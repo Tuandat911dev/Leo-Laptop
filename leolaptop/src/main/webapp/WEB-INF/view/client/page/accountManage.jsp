@@ -30,13 +30,16 @@
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="accountTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab">
-                                <i class="fas fa-user-edit mr-2"></i>Thông tin cá nhân
+                            <a class="nav-link active d-flex align-items-center" id="info-tab" data-toggle="tab"
+                               href="#info" role="tab" style="gap: 5px">
+                                <i class="fas fa-user-edit mr-2"></i> Thông tin cá nhân
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab">
-                                <i class="fas fa-key mr-2"></i>Đổi mật khẩu
+                            <a class="nav-link d-flex align-items-center g-2" id="password-tab" data-toggle="tab"
+                               href="#password"
+                               role="tab" style="gap: 5px">
+                                <i class="fas fa-key mr-2"></i> Đổi mật khẩu
                             </a>
                         </li>
                     </ul>
@@ -45,7 +48,7 @@
                 <div class="card-body">
                     <div class="tab-content" id="accountTabContent">
                         <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-                            <form:form method="POST" action="/account/update-info" modelAttribute="user"
+                            <form:form method="POST" action="/account/update-info#info" modelAttribute="user"
                                        enctype="multipart/form-data">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <input type="hidden" name="id" value="${user.id}"/>
@@ -88,28 +91,44 @@
                         </div>
 
                         <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                            <form action="/account/change-password" method="POST" id="changePasswordForm">
+                            <form:form action="/account/change-password#password" method="POST" id="changePasswordForm"
+                                       modelAttribute="changePasswordDTO">
                                 <div class="mb-3">
                                     <label class="font-weight-bold">Mật khẩu hiện tại</label>
-                                    <input type="password" name="oldPassword" class="form-control"
-                                           placeholder="Xác nhận mật khẩu cũ" required>
+                                    <spring:bind path="oldPassword">
+                                        <form:password path="oldPassword"
+                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                    placeholder="Mật khẩu cũ"
+                                        />
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="oldPassword"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="font-weight-bold">Mật khẩu mới</label>
-                                    <input type="password" name="newPassword" id="newPassword" class="form-control"
-                                           placeholder="Tối thiểu 6 ký tự" required>
+
+                                    <spring:bind path="password">
+                                        <form:password path="password"
+                                                    class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                    placeholder="Mật khẩu mới"
+                                        />
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="password"/>
                                 </div>
                                 <div class="mb-3">
                                     <label class="font-weight-bold">Xác nhận mật khẩu mới</label>
-                                    <input type="password" name="rePassword" id="rePassword" class="form-control"
-                                           placeholder="Nhập lại mật khẩu mới" required>
-                                    <div class="invalid-feedback">Mật khẩu xác nhận không trùng khớp!</div>
+                                    <spring:bind path="rePassword">
+                                        <form:password path="rePassword"
+                                                       class="form-control ${status.error ? 'is-invalid' : ''}"
+                                                       placeholder="Nhập lại mật khẩu mới"
+                                        />
+                                    </spring:bind>
+                                    <form:errors cssClass="invalid-feedback" path="rePassword"/>
                                 </div>
                                 <hr>
                                 <button type="submit" class="btn btn-warning px-4 font-weight-bold text-white"><i
                                         class="fas fa-sync-alt mr-1"></i> Cập nhật mật khẩu
                                 </button>
-                            </form>
+                            </form:form>
                         </div>
                     </div>
                 </div>
@@ -136,41 +155,43 @@
             });
         }
 
-        const changePasswordForm = document.getElementById('changePasswordForm');
-        if (changePasswordForm) {
-            changePasswordForm.addEventListener('submit', function (e) {
-                const newPass = document.getElementById('newPassword').value;
-                const rePass = document.getElementById('rePassword').value;
-                const reInput = document.getElementById('rePassword');
+        const tabLinks = document.querySelectorAll('#accountTab a');
+        const tabContents = document.querySelectorAll('.tab-pane');
 
-                if (newPass !== rePass) {
-                    e.preventDefault();
-                    reInput.classList.add('is-invalid');
-                } else {
-                    reInput.classList.remove('is-invalid');
+        function activateTab(targetHash) {
+            if (!targetHash) return;
+
+            tabLinks.forEach(link => {
+                if (link.getAttribute('href') === targetHash) {
+                    if (window.jQuery && $.fn.tab) {
+                        $(link).tab('show');
+                    } else {
+                        tabLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+
+                        const targetId = targetHash.replace('#', '');
+                        tabContents.forEach(content => {
+                            content.classList.remove('show', 'active');
+                            if (content.id === targetId) {
+                                content.classList.add('show', 'active');
+                            }
+                        });
+                    }
                 }
             });
         }
 
-        var tabLinks = document.querySelectorAll('#accountTab a');
+        const currentHash = window.location.hash;
+        if (currentHash) {
+            activateTab(currentHash);
+        }
+
         tabLinks.forEach(function (link) {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                if (window.jQuery && $.fn.tab) {
-                    $(this).tab('show');
-                } else {
-                    tabLinks.forEach(item => item.classList.remove('active'));
-                    this.classList.add('active');
-
-                    const targetId = this.getAttribute('href');
-                    const contents = document.querySelectorAll('.tab-pane');
-                    contents.forEach(content => {
-                        content.classList.remove('show', 'active');
-                        if ('#' + content.id === targetId) {
-                            content.classList.add('show', 'active');
-                        }
-                    });
-                }
+                const targetHash = this.getAttribute('href');
+                history.pushState(null, null, targetHash);
+                activateTab(targetHash);
             });
         });
     });

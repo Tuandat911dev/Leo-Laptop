@@ -11,6 +11,7 @@ public class ErrorMessage {
     public final static String EMAIL_EXISTED = "Email đã tồn tại trong hệ thống";
     public final static String EMAIL_NOT_EXISTED = "Email không tồn tại trong hệ thống";
     public final static String RE_PASSWORD_NOT_MATCH = "Mật khẩu nhập lại không đúng";
+    public final static String OLD_PASSWORD_NOT_MATCH = "Mật khẩu cũ không đúng";
 
     // Product
     public final static String NAME_NOT_EMPTY = "Tên sản phẩm không được để trống";
