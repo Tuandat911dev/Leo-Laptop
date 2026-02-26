@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
     <div class="container py-5">
-        <div class="row g-4 rounded mb-5" style="background: rgba(255, 255, 255, .03);">
+        <div class="row g-4 rounded mb-5" style="background: rgba(255, 255, 255, .05);">
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="rounded p-4">
                     <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
@@ -9,8 +9,8 @@
                         <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Address</h4>
-                        <p class="mb-2">123 Street New York.USA</p>
+                        <h4 class="text-white">Địa chỉ</h4>
+                        <p class="mb-2 text-white-50">Cầu Giấy, Hà Nội</p>
                     </div>
                 </div>
             </div>
@@ -21,8 +21,8 @@
                         <i class="fas fa-envelope fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Mail Us</h4>
-                        <p class="mb-2">info@example.com</p>
+                        <h4 class="text-white">Email</h4>
+                        <p class="mb-2 text-white-50">support@leolaptop.com</p>
                     </div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                         <i class="fa fa-phone-alt fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Telephone</h4>
-                        <p class="mb-2">(+012) 3456 7890</p>
+                        <h4 class="text-white">Hotline</h4>
+                        <p class="mb-2 text-white-50">0123 456 789</p>
                     </div>
                 </div>
             </div>
@@ -42,65 +42,62 @@
                 <div class="rounded p-4">
                     <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-4"
                          style="width: 70px; height: 70px;">
-                        <i class="fab fa-firefox-browser fa-2x text-primary"></i>
+                        <i class="fab fa-facebook-f fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Yoursite@ex.com</h4>
-                        <p class="mb-2">(+012) 3456 7890</p>
+                        <h4 class="text-white">Fanpage</h4>
+                        <p class="mb-2 text-white-50">fb.com/leolaptop</p>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row g-5">
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <div class="footer-item">
-                        <h4 class="text-primary mb-4">Newsletter</h4>
-                        <p class="mb-3">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum dolor sit
-                            amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
-                        <div class="position-relative mx-auto rounded-pill">
-                            <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text"
-                                   placeholder="Enter your email">
-                            <button type="button"
-                                    class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
-                        </div>
+                    <h4 class="text-primary mb-4">LeoLaptop</h4>
+                    <p class="text-white-50 mb-3">Chuyên cung cấp các dòng Laptop Gaming, Văn phòng và Macbook chính hãng với giá tốt nhất thị trường.</p>
+                    <div class="position-relative mx-auto rounded-pill w-100">
+                        <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text"
+                               placeholder="Nhập email của bạn">
+                        <button type="button"
+                                class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">Gửi</button>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Customer Service</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Contact Us</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Returns</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Site Map</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Testimonials</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> My Account</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Unsubscribe Notification</a>
+                    <h4 class="text-primary mb-4">Hỗ trợ khách hàng</h4>
+                    <a href="/contact" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Liên hệ với chúng tôi</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Chính sách đổi trả</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Lịch sử đơn hàng</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Sơ đồ trang web</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Đánh giá khách hàng</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Tài khoản của tôi</a>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Information</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> About Us</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Delivery infomation</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Warranty</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> FAQ</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Seller Login</a>
+                    <h4 class="text-primary mb-4">Thông tin</h4>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Về LeoLaptop</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Thông tin giao hàng</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Chính sách bảo mật</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Điều khoản dịch vụ</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Chính sách bảo hành</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Câu hỏi thường gặp</a>
                 </div>
             </div>
+
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Extras</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Brands</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Gift Vouchers</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Affiliates</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Wishlist</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
+                    <h4 class="text-primary mb-4">Tiện ích</h4>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Thương hiệu</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Voucher quà tặng</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Cộng tác viên</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Sản phẩm yêu thích</a>
+                    <a href="#" class="text-white-50"><i class="fas fa-angle-right me-2"></i> Theo dõi đơn hàng</a>
                 </div>
             </div>
         </div>

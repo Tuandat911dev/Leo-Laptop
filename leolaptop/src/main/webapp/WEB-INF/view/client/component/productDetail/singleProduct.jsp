@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="d-flex flex-column mb-3">
-        <small>Product SKU: N/A</small>
+        <small>Hãng sản xuất: <strong class="text-primary">${product.factory}</strong></small>
         <small>Số lượng có sẵn: <strong class="text-primary">${product.quantity} sản phẩm</strong></small>
     </div>
     <p class="mb-4">${product.shortDesc}</p>

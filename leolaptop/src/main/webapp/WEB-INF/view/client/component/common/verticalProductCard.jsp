@@ -27,11 +27,20 @@
             <input type="number" name="userId" value="${sessionScope.userId}" hidden>
             <input type="number" name="quantity" value="1" hidden>
 
-            <c:if test="${not empty sessionScope.fullName}">
-                <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
-                    <i class="fas fa-shopping-cart me-2">Add To Cart</i>
-                </button>
-            </c:if>
+            <c:choose>
+                <c:when test="${not empty sessionScope.fullName}">
+                    <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
+                        <i class="fas fa-shopping-cart me-2">Add To Cart</i>
+                    </button>
+                </c:when>
+                <c:otherwise>
+                    <a href="/login"
+                       class="btn btn-outline-primary border border-primary rounded-pill px-4 py-2 mb-4">
+                        <i class="fa fa-user me-2"></i>
+                        Đăng nhập để mua hàng
+                    </a>
+                </c:otherwise>
+            </c:choose>
 
         </form>
         <div class="d-flex justify-content-between align-items-center">
