@@ -72,7 +72,7 @@
     </div>
 </div>
 <div class="container-fluid px-5 py-4 d-none d-lg-block">
-    <div class="row gx-0 align-items-center text-center">
+    <div class="row gx-0 d-flex justify-content-between align-items-center text-center">
         <div class="col-md-4 col-lg-3 text-center text-lg-start">
             <div class="d-inline-flex align-items-center">
                 <a href="/" class="navbar-brand p-0">

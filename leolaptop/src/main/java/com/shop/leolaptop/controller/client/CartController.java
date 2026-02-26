@@ -36,7 +36,7 @@ public class CartController {
 
         cartService.addToCart(productId, userId, quantity);
 
-        return "redirect:/";
+        return "redirect:/cart";
     }
 
     @PostMapping("/update")

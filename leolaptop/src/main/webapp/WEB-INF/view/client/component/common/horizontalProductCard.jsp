@@ -31,7 +31,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.fullName}">
                     <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
-                        <i class="fas fa-shopping-cart me-2">Thêm vào giỏ hàng</i>
+                        <i class="fas fa-shopping-cart me-2"> Thêm vào giỏ</i>
                     </button>
                 </c:when>
                 <c:otherwise>
