@@ -5,10 +5,7 @@ import com.shop.leolaptop.constant.PaymentStatus;
 import com.shop.leolaptop.domain.*;
 import com.shop.leolaptop.domain.custom_id.OrderDetailId;
 import com.shop.leolaptop.dto.checkout.CheckoutDTO;
-import com.shop.leolaptop.repository.CartDetailRepository;
-import com.shop.leolaptop.repository.OrderDetailRepository;
-import com.shop.leolaptop.repository.OrderRepository;
-import com.shop.leolaptop.repository.UserRepository;
+import com.shop.leolaptop.repository.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +20,7 @@ import java.util.List;
 public class CheckoutService {
     CartService cartService;
     OrderRepository orderRepository;
+    ProductRepository productRepository;
     CartDetailRepository cartDetailRepository;
     UserRepository userRepository;
     OrderDetailRepository orderDetailRepository;
@@ -48,6 +46,11 @@ public class CheckoutService {
             OrderDetailId orderDetailId = new OrderDetailId(newOrder.getId(), item.getProduct().getId());
             OrderDetail orderDetail = OrderDetail.builder().id(orderDetailId).order(newOrder).product(item.getProduct()).quantity(item.getQuantity()).build();
 
+            Product product = productRepository.findById(item.getProduct().getId())
+                            .orElseThrow(() -> new RuntimeException("Product Not Found"));
+            product.setSold(product.getSold() + item.getQuantity());
+            product.setQuantity(product.getQuantity() - item.getQuantity());
+            productRepository.save(product);
             orderDetailRepository.save(orderDetail);
         }
 
