@@ -16,7 +16,7 @@
 * [🌟 Các tính năng nổi bật](#-các-tính-năng-nổi-bật)
 * [🗂️ Cấu trúc thư mục](#-cấu-trúc-thư-mục)
 * [🚀 Hướng phát triển](#-hướng-phát-triển-trong-tương-lai)
-* [👨‍💻 Tác giả](#-tác-giả)
+* [👨‍💻 Hướng dẫn cài đặt với Docker](#-hướng-dẫn-cài-đặt-với-docker)
 
 ---
 
@@ -99,9 +99,25 @@ LeoLaptop
 
 ## 🚀 Hướng phát triển trong tương lai
 
-* [ ] Tích hợp cổng thanh toán trực tuyến (VNPay, PayPal).
+* [ ] Tích hợp cổng thanh toán trực tuyến (PayPal).
 * [ ] Xây dựng hệ thống gửi email xác nhận đơn hàng tự động.
 * [ ] Áp dụng REST API và xây dựng Frontend bằng ReactJS/Angular.
 * [ ] Deploy hệ thống lên nền tảng đám mây (AWS/Heroku).
 
+## 👨‍💻 Hướng dẫn cài đặt với Docker
+
+Dự án đã được cấu hình sẵn Docker để tự động hóa quy trình thiết lập Database và Server chỉ với một câu lệnh.
+
+### 1\. Yêu cầu hệ thống
+
+* Đã cài đặt **Docker** và **Docker Compose**.
+* Cổng `8080` và `3307` trên máy host đang trống.
+
+### 2\. Triển khai nhanh
+
+Mở Terminal tại thư mục gốc của dự án và chạy lệnh sau:
+
+```bash
+docker compose -p leo_laptop_spring_mvc up -d --build
+```
 ---
